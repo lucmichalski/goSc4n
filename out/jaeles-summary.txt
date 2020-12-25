@@ -1,0 +1,11 @@
+[sqli-param-fuzz-01][Tentative-High] - http://testphp.vulnweb.com/artists.php?artist=1%27 - out/testphp.vulnweb.com/sqli-param-fuzz-01-f25cfb97a3df7d4b0f87bb56d6f66f2e49b16690
+[sqli-param-fuzz-01][Tentative-High] - http://testphp.vulnweb.com/artists.php?artist=11e309 - out/testphp.vulnweb.com/sqli-param-fuzz-01-8a3b239d3678c91aa954f2a9826ec78a06640a4d
+[sqli-param-fuzz-01][Tentative-High] - http://testphp.vulnweb.com/artists.php?artist=1%25 - out/testphp.vulnweb.com/sqli-param-fuzz-01-0d2bca6a44e117ceb8e4572e56fa20c47890968e
+[sqli-param-fuzz-01][Tentative-High] - http://testphp.vulnweb.com/artists.php?artist=1%60 - out/testphp.vulnweb.com/sqli-param-fuzz-01-f315f13d7ad6ccabdfa0e788633af078b6d73bfb
+[sqli-param-fuzz-01][Tentative-High] - http://testphp.vulnweb.com/artists.php?artist=1%25u0027%25u0022 - out/testphp.vulnweb.com/sqli-param-fuzz-01-631d116eeec1a4705a3cdbccc43d488672ca0c11
+[sqli-param-fuzz-01][Tentative-High] - http://testphp.vulnweb.com/artists.php?artist=1%25c0%25a7 - out/testphp.vulnweb.com/sqli-param-fuzz-01-cd603c9f86b2f4eb9dc7f6cd4154f7725e37358e
+[sqli-param-fuzz-01][Tentative-High] - http://testphp.vulnweb.com/artists.php?artist=1%22 - out/testphp.vulnweb.com/sqli-param-fuzz-01-7390238663a46c1459f2f21df177fa6ec2c511aa
+[sqli-param-fuzz-01][Tentative-High] - http://testphp.vulnweb.com/artists.php?artist=1%250aa%250db - out/testphp.vulnweb.com/sqli-param-fuzz-01-ad378d7d0338f1de438a10d01fdda69bc50dc8cf
+[sqli-param-fuzz-01][Tentative-High] - http://testphp.vulnweb.com/artists.php?artist=1char%280x27%29char%280x27%29 - out/testphp.vulnweb.com/sqli-param-fuzz-01-9f03bef6fd55e8efb28da5e05451650d39a1a7ce
+[sqli-param-fuzz-01][Tentative-High] - http://testphp.vulnweb.com/artists.php?artist=1%2F%2A - out/testphp.vulnweb.com/sqli-param-fuzz-01-c86f03051e287516006eaa5f64ed2402cf8a30b4
+[sqli-param-fuzz-01][Tentative-High] - http://testphp.vulnweb.com/artists.php?artist=1%25u2018 - out/testphp.vulnweb.com/sqli-param-fuzz-01-e33ab2ee80c4145502834eea3010008c9341688e

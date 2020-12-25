@@ -1,0 +1,1 @@
+[sqli-param-fuzz-01][High] - http://testphp.vulnweb.com/artists.php?artist=1
