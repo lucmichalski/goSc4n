@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/jaeles-project/jaeles/utils"
+	"github.com/valyala/fasthttp/fasthttpproxy"
 	"io/ioutil"
 	"math/rand"
 	"net/http"
@@ -15,6 +16,7 @@ import (
 	"github.com/go-resty/resty/v2"
 	"github.com/jaeles-project/jaeles/libs"
 	"github.com/sirupsen/logrus"
+	"github.com/valyala/fasthttp"
 )
 
 // JustSend just sending request
@@ -38,10 +40,10 @@ func JustSend(options libs.Options, req libs.Request) (res libs.Response, err er
 		timeout = req.Timeout
 	}
 
-	disableCompress := false
-	if len(headers) > 0 && strings.Contains(headers["Accept-Encoding"], "gzip") {
-		disableCompress = true
-	}
+	//disableCompress := false
+	//if len(headers) > 0 && strings.Contains(headers["Accept-Encoding"], "gzip") {
+	//	disableCompress = true
+	//}
 
 	// update it again
 	var newHeader []map[string]string
@@ -58,8 +60,9 @@ func JustSend(options libs.Options, req libs.Request) (res libs.Response, err er
 		logger.Out = ioutil.Discard
 	}
 
-	client := resty.New()
-	client.SetLogger(logger)
+	request := fasthttp.AcquireRequest()
+	//client := resty.New()
+	//client.SetLogger(logger)
 	tlsCfg := &tls.Config{
 		Renegotiation:            tls.RenegotiateOnceAsClient,
 		PreferServerCipherSuites: true,
@@ -79,31 +82,42 @@ func JustSend(options libs.Options, req libs.Request) (res libs.Response, err er
 			InsecureSkipVerify:       true,
 		}
 	}
-
-	client.SetTransport(&http.Transport{
-		MaxIdleConns:          100,
-		MaxConnsPerHost:       1000,
-		IdleConnTimeout:       time.Duration(timeout) * time.Second,
-		ExpectContinueTimeout: time.Duration(timeout) * time.Second,
-		ResponseHeaderTimeout: time.Duration(timeout) * time.Second,
-		TLSHandshakeTimeout:   time.Duration(timeout) * time.Second,
-		DisableCompression:    disableCompress,
-		DisableKeepAlives:     true,
-		TLSClientConfig:       tlsCfg,
-	})
+	client := &fasthttp.Client{
+		MaxIdleConnDuration: time.Duration(timeout) * time.Second,
+		MaxConnsPerHost: 1000,
+		ReadTimeout: time.Duration(timeout) * time.Second,
+		WriteTimeout: time.Duration(timeout) * time.Second,
+		TLSConfig: tlsCfg,
+	}
+	//client.SetTransport(&http.Transport{
+	//	MaxIdleConns:          100,
+	//	MaxConnsPerHost:       1000,
+	//	IdleConnTimeout:       time.Duration(timeout) * time.Second,
+	//	ExpectContinueTimeout: time.Duration(timeout) * time.Second,
+	//	ResponseHeaderTimeout: time.Duration(timeout) * time.Second,
+	//	TLSHandshakeTimeout:   time.Duration(timeout) * time.Second,
+	//	DisableCompression:    disableCompress,
+	//	DisableKeepAlives:     true,
+	//	TLSClientConfig:       tlsCfg,
+	//})
 
 	if proxy != "" {
-		client.SetProxy(proxy)
+		client.Dial = fasthttpproxy.FasthttpSocksDialer(proxy)
 	}
-	client.SetHeaders(headers)
-	client.SetCloseConnection(true)
 
-	if options.Retry > 0 {
-		client.SetRetryCount(options.Retry)
+	for key,headerValue := range headers{
+		request.Header.Add(key,headerValue)
 	}
-	client.SetTimeout(time.Duration(timeout) * time.Second)
-	client.SetRetryWaitTime(time.Duration(timeout/2) * time.Second)
-	client.SetRetryMaxWaitTime(time.Duration(timeout) * time.Second)
+	//client.SetHeaders(headers)
+	request.Header.Set("Connection","close")
+
+	//no need anymore because that Client supports automatic retry on idempotent requests' failure. until ReadTimeout end
+	//if options.Retry > 0 {
+	//	client.SetRetryCount(options.Retry)
+	//}
+	//client.SetTimeout(time.Duration(timeout) * time.Second)
+	//client.SetRetryWaitTime(time.Duration(timeout/2) * time.Second)
+	//client.SetRetryMaxWaitTime(time.Duration(timeout) * time.Second)
 	timeStart := time.Now()
 	// redirect policy
 	if req.Redirect == false {
@@ -162,44 +176,74 @@ func JustSend(options libs.Options, req libs.Request) (res libs.Response, err er
 		}))
 	}
 
+
+	response := fasthttp.AcquireResponse()
 	var resp *resty.Response
 	// really sending things here
 	method = strings.ToLower(strings.TrimSpace(method))
 	switch method {
 	case "get":
-		resp, err = client.R().
-			SetBody([]byte(body)).
-			Get(url)
+		request.SetBody([]byte(body))
+		request.Header.SetMethod("GET")
+		request.SetRequestURI(url)
+		client.Do(request,response)
+		//resp, err = client.R().
+		//	SetBody([]byte(body)).
+		//	Get(url)
 		break
 	case "post":
-		resp, err = client.R().EnableTrace().
-			SetBody([]byte(body)).
-			Post(url)
+		request.SetBody([]byte(body))
+		request.Header.SetMethod("POST")
+		request.SetRequestURI(url)
+		client.Do(request,response)
+		//resp, err = client.R().EnableTrace().
+		//	SetBody([]byte(body)).
+		//	Post(url)
 		break
 	case "head":
-		resp, err = client.R().
-			SetBody([]byte(body)).
-			Head(url)
+		request.SetBody([]byte(body))
+		request.Header.SetMethod("HEAD")
+		request.SetRequestURI(url)
+		client.Do(request,response)
+		//resp, err = client.R().
+		//	SetBody([]byte(body)).
+		//	Head(url)
 		break
 	case "options":
-		resp, err = client.R().
-			SetBody([]byte(body)).
-			Options(url)
+		request.SetBody([]byte(body))
+		request.Header.SetMethod("OPTIONS")
+		request.SetRequestURI(url)
+		client.Do(request,response)
+		//resp, err = client.R().
+		//	SetBody([]byte(body)).
+		//	Options(url)
 		break
 	case "patch":
-		resp, err = client.R().
-			SetBody([]byte(body)).
-			Patch(url)
+		request.SetBody([]byte(body))
+		request.Header.SetMethod("PATCH")
+		request.SetRequestURI(url)
+		client.Do(request,response)
+		//resp, err = client.R().
+		//	SetBody([]byte(body)).
+		//	Patch(url)
 		break
 	case "put":
-		resp, err = client.R().
-			SetBody([]byte(body)).
-			Put(url)
+		request.SetBody([]byte(body))
+		request.Header.SetMethod("PUT")
+		request.SetRequestURI(url)
+		client.Do(request,response)
+		//resp, err = client.R().
+		//	SetBody([]byte(body)).
+		//	Put(url)
 		break
 	case "delete":
-		resp, err = client.R().
-			SetBody([]byte(body)).
-			Delete(url)
+		request.SetBody([]byte(body))
+		request.Header.SetMethod("DELETE")
+		request.SetRequestURI(url)
+		client.Do(request,response)
+		//resp, err = client.R().
+		//	SetBody([]byte(body)).
+		//	Delete(url)
 		break
 	}
 
