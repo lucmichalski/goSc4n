@@ -2,9 +2,6 @@ package sender
 
 import (
 	"crypto/tls"
-	"net/http"
-
-	"errors"
 	"fmt"
 	"github.com/jaeles-project/jaeles/utils"
 	"github.com/valyala/fasthttp/fasthttpproxy"
@@ -122,64 +119,7 @@ func JustSend(options libs.Options, req libs.Request) (res libs.Response, err er
 	//client.SetRetryMaxWaitTime(time.Duration(timeout) * time.Second)
 	//timeStart := time.Now()
 	// redirect policyfalse
-	if req.Redirect == false {
-		client.SetRedirectPolicy(resty.RedirectPolicyFunc(func(req *http.Request, via []*http.Request) error {
-			// keep the header the same
-			// client.SetHeaders(headers)
 
-			res.StatusCode = req.Response.StatusCode
-			res.Status = req.Response.Status
-			resp := req.Response
-			bodyBytes, err := ioutil.ReadAll(resp.Body)
-			if err != nil {
-				utils.ErrorF("%v", err)
-			}
-			bodyString := string(bodyBytes)
-			resLength := len(bodyString)
-			// format the headers
-			var resHeaders []map[string]string
-			for k, v := range resp.Header {
-				element := make(map[string]string)
-				//fmt.Printf("%v: %v\n", k, v)
-				element[k] = strings.Join(v[:], "")
-				resLength += len(fmt.Sprintf("%s: %s\n", k, strings.Join(v[:], "")))
-				resHeaders = append(resHeaders, element)
-			}
-
-			// response time in second
-			resTime := time.Since(timeStart).Seconds()
-			resHeaders = append(resHeaders,
-				map[string]string{"Total Length": strconv.Itoa(resLength)},
-				map[string]string{"Response Time": fmt.Sprintf("%f", resTime)},
-			)
-
-			// set some variable
-			res.Headers = resHeaders
-			res.StatusCode = resp.StatusCode
-			res.Status = fmt.Sprintf("%v %v", resp.Status, resp.Proto)
-			res.Body = bodyString
-			res.ResponseTime = resTime
-			res.Length = resLength
-			// beautify
-			res.Beautify = BeautifyResponse(res)
-			return errors.New("auto redirect is disabled")
-		}))
-
-		client.AddRetryCondition(
-			func(r *resty.Response, err error) bool {
-				return false
-			},
-		)
-	} else {
-		client.SetRedirectPolicy(resty.RedirectPolicyFunc(func(req *http.Request, via []*http.Request) error {
-			// keep the header the same
-			//client.SetHeaders(headers)
-			for key,headerValue := range headers{
-				request.Header.Add(key,headerValue)
-			}
-			return nil
-		}))
-	}
 
 	var requestTime time.Duration
 	response := fasthttp.AcquireResponse()
@@ -192,7 +132,7 @@ func JustSend(options libs.Options, req libs.Request) (res libs.Response, err er
 		request.Header.SetMethod("GET")
 		request.SetRequestURI(url)
 		startTime := time.Now()
-		client.Do(request,response)
+		err = client.Do(request,response)
 		endTime := time.Now()
 		requestTime = startTime.Sub(endTime)
 		//resp, err = client.R().
@@ -204,7 +144,7 @@ func JustSend(options libs.Options, req libs.Request) (res libs.Response, err er
 		request.Header.SetMethod("POST")
 		request.SetRequestURI(url)
 		startTime := time.Now()
-		client.Do(request,response)
+		err = client.Do(request,response)
 		endTime := time.Now()
 		requestTime = startTime.Sub(endTime)
 		//resp, err = client.R().EnableTrace().
@@ -216,7 +156,7 @@ func JustSend(options libs.Options, req libs.Request) (res libs.Response, err er
 		request.Header.SetMethod("HEAD")
 		request.SetRequestURI(url)
 		startTime := time.Now()
-		client.Do(request,response)
+		err = client.Do(request,response)
 		endTime := time.Now()
 		requestTime = startTime.Sub(endTime)
 		//resp, err = client.R().
@@ -228,7 +168,7 @@ func JustSend(options libs.Options, req libs.Request) (res libs.Response, err er
 		request.Header.SetMethod("OPTIONS")
 		request.SetRequestURI(url)
 		startTime := time.Now()
-		client.Do(request,response)
+		err = client.Do(request,response)
 		endTime := time.Now()
 		requestTime = startTime.Sub(endTime)
 		//resp, err = client.R().
@@ -240,7 +180,7 @@ func JustSend(options libs.Options, req libs.Request) (res libs.Response, err er
 		request.Header.SetMethod("PATCH")
 		request.SetRequestURI(url)
 		startTime := time.Now()
-		client.Do(request,response)
+		err = client.Do(request,response)
 		endTime := time.Now()
 		requestTime = startTime.Sub(endTime)
 		//resp, err = client.R().
@@ -252,7 +192,7 @@ func JustSend(options libs.Options, req libs.Request) (res libs.Response, err er
 		request.Header.SetMethod("PUT")
 		request.SetRequestURI(url)
 		startTime := time.Now()
-		client.Do(request,response)
+		err = client.Do(request,response)
 		endTime := time.Now()
 		requestTime = startTime.Sub(endTime)
 		//resp, err = client.R().
@@ -264,7 +204,7 @@ func JustSend(options libs.Options, req libs.Request) (res libs.Response, err er
 		request.Header.SetMethod("DELETE")
 		request.SetRequestURI(url)
 		startTime := time.Now()
-		client.Do(request,response)
+		err = client.Do(request,response)
 		endTime := time.Now()
 		requestTime = startTime.Sub(endTime)
 		//resp, err = client.R().
@@ -281,16 +221,16 @@ func JustSend(options libs.Options, req libs.Request) (res libs.Response, err er
 	if err != nil {
 		utils.ErrorF("%v %v", url, err)
 		if strings.Contains(err.Error(), "EOF") && resp.StatusCode() != 0 {
-			return ParseResponse(*resp,response,requestTime), nil
+			return ParseResponse(response,requestTime), nil
 		}
 		return libs.Response{}, err
 	}
 
-	return ParseResponse(*resp,response,requestTime), nil
+	return ParseResponse(response,requestTime), nil
 }
 
 // ParseResponse field to Response
-func ParseResponse(resp resty.Response,resp1 *fasthttp.Response,requestTime time.Duration) (res libs.Response) {
+func ParseResponse(resp1 *fasthttp.Response,requestTime time.Duration) (res libs.Response) {
 	// var res libs.Response
 	resLength := len(string(resp1.Body()))
 	// format the headers
@@ -317,9 +257,9 @@ func ParseResponse(resp resty.Response,resp1 *fasthttp.Response,requestTime time
 
 	// set some variable
 	res.Headers = resHeaders
-	res.StatusCode = resp.StatusCode()
-	res.Status = fmt.Sprintf("%v %v", resp.Status(), resp.RawResponse.Proto)
-	res.Body = string(resp.Body())
+	res.StatusCode = resp1.StatusCode()
+	res.Status = fmt.Sprintf("%v %v", resp1.StatusCode(), "resp1.RawResponse.Proto")
+	res.Body = string(resp1.Body())
 	res.ResponseTime = resTime
 	res.Length = resLength
 	// beautify
