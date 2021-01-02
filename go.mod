@@ -9,7 +9,6 @@ require (
 	github.com/appleboy/gin-jwt/v2 v2.6.4
 	github.com/chromedp/cdproto v0.0.0-20201009231348-1c6a710e77de
 	github.com/chromedp/chromedp v0.5.3
-	github.com/davecgh/go-spew v1.1.1
 	github.com/fatih/color v1.10.0
 	github.com/gin-contrib/cors v1.3.1
 	github.com/gin-contrib/static v0.0.0-20200916080430-d45d9a37d28e
@@ -31,8 +30,8 @@ require (
 	github.com/spf13/cobra v1.1.1
 	github.com/spf13/viper v1.7.1
 	github.com/thoas/go-funk v0.7.0
+	github.com/valyala/fasthttp v1.18.0
 	github.com/x-cray/logrus-prefixed-formatter v0.5.2
 	gopkg.in/sourcemap.v1 v1.0.5 // indirect
-	gopkg.in/src-d/go-git.v4 v4.13.1
 	gopkg.in/yaml.v2 v2.3.0
 )
