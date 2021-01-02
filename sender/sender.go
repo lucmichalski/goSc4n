@@ -258,7 +258,11 @@ func ParseResponse(resp1 *fasthttp.Response,requestTime time.Duration) (res libs
 	// set some variable
 	res.Headers = resHeaders
 	res.StatusCode = resp1.StatusCode()
-	res.Status = fmt.Sprintf("%v %v", resp1.StatusCode(), "resp1.RawResponse.Proto")
+	var Protocol string
+	if resp1.Header.IsHTTP11() {
+		Protocol = "HTTP/1.1"
+	}
+	res.Status = fmt.Sprintf("%v %v", resp1.StatusCode(),Protocol)
 	res.Body = string(resp1.Body())
 	res.ResponseTime = resTime
 	res.Length = resLength
