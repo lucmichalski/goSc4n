@@ -2,13 +2,15 @@ package sender
 
 import (
 	"crypto/tls"
+	"net/http"
+
 	"errors"
 	"fmt"
 	"github.com/jaeles-project/jaeles/utils"
 	"github.com/valyala/fasthttp/fasthttpproxy"
 	"io/ioutil"
 	"math/rand"
-	"net/http"
+	//"net/http"
 	"strconv"
 	"strings"
 	"time"
@@ -118,8 +120,8 @@ func JustSend(options libs.Options, req libs.Request) (res libs.Response, err er
 	//client.SetTimeout(time.Duration(timeout) * time.Second)
 	//client.SetRetryWaitTime(time.Duration(timeout/2) * time.Second)
 	//client.SetRetryMaxWaitTime(time.Duration(timeout) * time.Second)
-	timeStart := time.Now()
-	// redirect policy
+	//timeStart := time.Now()
+	// redirect policyfalse
 	if req.Redirect == false {
 		client.SetRedirectPolicy(resty.RedirectPolicyFunc(func(req *http.Request, via []*http.Request) error {
 			// keep the header the same
@@ -171,12 +173,15 @@ func JustSend(options libs.Options, req libs.Request) (res libs.Response, err er
 	} else {
 		client.SetRedirectPolicy(resty.RedirectPolicyFunc(func(req *http.Request, via []*http.Request) error {
 			// keep the header the same
-			client.SetHeaders(headers)
+			//client.SetHeaders(headers)
+			for key,headerValue := range headers{
+				request.Header.Add(key,headerValue)
+			}
 			return nil
 		}))
 	}
 
-
+	var requestTime time.Duration
 	response := fasthttp.AcquireResponse()
 	var resp *resty.Response
 	// really sending things here
@@ -186,7 +191,10 @@ func JustSend(options libs.Options, req libs.Request) (res libs.Response, err er
 		request.SetBody([]byte(body))
 		request.Header.SetMethod("GET")
 		request.SetRequestURI(url)
+		startTime := time.Now()
 		client.Do(request,response)
+		endTime := time.Now()
+		requestTime = startTime.Sub(endTime)
 		//resp, err = client.R().
 		//	SetBody([]byte(body)).
 		//	Get(url)
@@ -195,7 +203,10 @@ func JustSend(options libs.Options, req libs.Request) (res libs.Response, err er
 		request.SetBody([]byte(body))
 		request.Header.SetMethod("POST")
 		request.SetRequestURI(url)
+		startTime := time.Now()
 		client.Do(request,response)
+		endTime := time.Now()
+		requestTime = startTime.Sub(endTime)
 		//resp, err = client.R().EnableTrace().
 		//	SetBody([]byte(body)).
 		//	Post(url)
@@ -204,7 +215,10 @@ func JustSend(options libs.Options, req libs.Request) (res libs.Response, err er
 		request.SetBody([]byte(body))
 		request.Header.SetMethod("HEAD")
 		request.SetRequestURI(url)
+		startTime := time.Now()
 		client.Do(request,response)
+		endTime := time.Now()
+		requestTime = startTime.Sub(endTime)
 		//resp, err = client.R().
 		//	SetBody([]byte(body)).
 		//	Head(url)
@@ -213,7 +227,10 @@ func JustSend(options libs.Options, req libs.Request) (res libs.Response, err er
 		request.SetBody([]byte(body))
 		request.Header.SetMethod("OPTIONS")
 		request.SetRequestURI(url)
+		startTime := time.Now()
 		client.Do(request,response)
+		endTime := time.Now()
+		requestTime = startTime.Sub(endTime)
 		//resp, err = client.R().
 		//	SetBody([]byte(body)).
 		//	Options(url)
@@ -222,7 +239,10 @@ func JustSend(options libs.Options, req libs.Request) (res libs.Response, err er
 		request.SetBody([]byte(body))
 		request.Header.SetMethod("PATCH")
 		request.SetRequestURI(url)
+		startTime := time.Now()
 		client.Do(request,response)
+		endTime := time.Now()
+		requestTime = startTime.Sub(endTime)
 		//resp, err = client.R().
 		//	SetBody([]byte(body)).
 		//	Patch(url)
@@ -231,7 +251,10 @@ func JustSend(options libs.Options, req libs.Request) (res libs.Response, err er
 		request.SetBody([]byte(body))
 		request.Header.SetMethod("PUT")
 		request.SetRequestURI(url)
+		startTime := time.Now()
 		client.Do(request,response)
+		endTime := time.Now()
+		requestTime = startTime.Sub(endTime)
 		//resp, err = client.R().
 		//	SetBody([]byte(body)).
 		//	Put(url)
@@ -240,7 +263,10 @@ func JustSend(options libs.Options, req libs.Request) (res libs.Response, err er
 		request.SetBody([]byte(body))
 		request.Header.SetMethod("DELETE")
 		request.SetRequestURI(url)
+		startTime := time.Now()
 		client.Do(request,response)
+		endTime := time.Now()
+		requestTime = startTime.Sub(endTime)
 		//resp, err = client.R().
 		//	SetBody([]byte(body)).
 		//	Delete(url)
@@ -255,28 +281,35 @@ func JustSend(options libs.Options, req libs.Request) (res libs.Response, err er
 	if err != nil {
 		utils.ErrorF("%v %v", url, err)
 		if strings.Contains(err.Error(), "EOF") && resp.StatusCode() != 0 {
-			return ParseResponse(*resp), nil
+			return ParseResponse(*resp,response,requestTime), nil
 		}
 		return libs.Response{}, err
 	}
 
-	return ParseResponse(*resp), nil
+	return ParseResponse(*resp,response,requestTime), nil
 }
 
 // ParseResponse field to Response
-func ParseResponse(resp resty.Response) (res libs.Response) {
+func ParseResponse(resp resty.Response,resp1 *fasthttp.Response,requestTime time.Duration) (res libs.Response) {
 	// var res libs.Response
-	resLength := len(string(resp.Body()))
+	resLength := len(string(resp1.Body()))
 	// format the headers
 	var resHeaders []map[string]string
-	for k, v := range resp.RawResponse.Header {
+	resp1.Header.VisitAll(func(key, value []byte) {
 		element := make(map[string]string)
-		element[k] = strings.Join(v[:], "")
-		resLength += len(fmt.Sprintf("%s: %s\n", k, strings.Join(v[:], "")))
+		stringsValue := strings.Split(string(value),"\n")
+		element[string(key)] = strings.Join(stringsValue, "")
+		resLength += len(fmt.Sprintf("%s: %s\n", string(key), strings.Join(stringsValue, "")))
 		resHeaders = append(resHeaders, element)
-	}
+	})
+	//for k, v := range resp1.Header.String() {
+	//	element := make(map[string]string)
+	//	element[k] = strings.Join(v[:], "")
+	//	resLength += len(fmt.Sprintf("%s: %s\n", k, strings.Join(v[:], "")))
+	//	resHeaders = append(resHeaders, element)
+	//}
 	// response time in second
-	resTime := float64(resp.Time()) / float64(time.Second)
+	resTime := float64(requestTime) / float64(time.Second)
 	resHeaders = append(resHeaders,
 		map[string]string{"Total Length": strconv.Itoa(resLength)},
 		map[string]string{"Response Time": fmt.Sprintf("%f", resTime)},
