@@ -12,7 +12,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/go-resty/resty/v2"
 	"github.com/jaeles-project/jaeles/libs"
 	"github.com/sirupsen/logrus"
 	"github.com/valyala/fasthttp"
@@ -123,7 +122,7 @@ func JustSend(options libs.Options, req libs.Request) (res libs.Response, err er
 
 	var requestTime time.Duration
 	response := fasthttp.AcquireResponse()
-	var resp *resty.Response
+	//var resp *resty.Response
 	// really sending things here
 	method = strings.ToLower(strings.TrimSpace(method))
 	switch method {
@@ -220,7 +219,7 @@ func JustSend(options libs.Options, req libs.Request) (res libs.Response, err er
 
 	if err != nil {
 		utils.ErrorF("%v %v", url, err)
-		if strings.Contains(err.Error(), "EOF") && resp.StatusCode() != 0 {
+		if strings.Contains(err.Error(), "EOF") && response.StatusCode() != 0 {
 			return ParseResponse(response,requestTime), nil
 		}
 		return libs.Response{}, err
