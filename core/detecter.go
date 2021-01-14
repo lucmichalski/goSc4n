@@ -5,11 +5,12 @@ import (
 	"fmt"
 	"github.com/jaeles-project/jaeles/sender"
 	"github.com/jaeles-project/jaeles/utils"
+	//"github.com/robertkrimen/otto"
 	"regexp"
 	"strconv"
 	"strings"
 
-	"github.com/robertkrimen/otto"
+	"github.com/dop251/goja"
 )
 
 func (r *Record) Detector() {
@@ -31,33 +32,33 @@ func (r *Record) RequestScripts(scriptType string, scripts []string) bool {
 
 	record := *r
 	var extra string
-	vm := otto.New()
+	vm := goja.New()
 
 	// ExecCmd execute command command
-	vm.Set("ExecCmd", func(call otto.FunctionCall) otto.Value {
-		result, _ := vm.ToValue(Execution(call.Argument(0).String()))
+	vm.Set("ExecCmd", func(call goja.FunctionCall) goja.Value {
+		result := vm.ToValue(Execution(call.Argument(0).String()))
 		return result
 	})
 
 
 
-	vm.Set("StringGrepCmd", func(call otto.FunctionCall) otto.Value {
+	vm.Set("StringGrepCmd", func(call goja.FunctionCall) goja.Value {
 		command := call.Argument(0).String()
 		searchString := call.Argument(0).String()
-		result, _ := vm.ToValue(StringSearch(Execution(command), searchString))
+		result := vm.ToValue(StringSearch(Execution(command), searchString))
 		return result
 	})
 
-	vm.Set("RegexGrepCmd", func(call otto.FunctionCall) otto.Value {
+	vm.Set("RegexGrepCmd", func(call goja.FunctionCall) goja.Value {
 		command := call.Argument(0).String()
 		searchString := call.Argument(0).String()
 		_, validate := RegexSearch(Execution(command), searchString)
-		result, _ := vm.ToValue(validate)
+		result := vm.ToValue(validate)
 		return result
 	})
 
-	vm.Set("StringSearch", func(call otto.FunctionCall) otto.Value {
-		args := call.ArgumentList
+	vm.Set("StringSearch", func(call goja.FunctionCall) goja.Value {
+		args := call.Arguments
 		componentName := "response"
 		analyzeString := args[0].String()
 		if len(args) >= 2 {
@@ -66,12 +67,12 @@ func (r *Record) RequestScripts(scriptType string, scripts []string) bool {
 		}
 		component := GetComponent(record, componentName)
 		validate := StringSearch(component, analyzeString)
-		result, _ := vm.ToValue(validate)
+		result := vm.ToValue(validate)
 		return result
 	})
 
-	vm.Set("search", func(call otto.FunctionCall) otto.Value {
-		args := call.ArgumentList
+	vm.Set("search", func(call goja.FunctionCall) goja.Value {
+		args := call.Arguments
 		componentName := "response"
 		analyzeString := args[0].String()
 		if len(args) >= 2 {
@@ -80,21 +81,21 @@ func (r *Record) RequestScripts(scriptType string, scripts []string) bool {
 		}
 		component := GetComponent(record, componentName)
 		validate := StringSearch(component, analyzeString)
-		result, _ := vm.ToValue(validate)
+		result := vm.ToValue(validate)
 		return result
 	})
 
-	vm.Set("StringCount", func(call otto.FunctionCall) otto.Value {
+	vm.Set("StringCount", func(call goja.FunctionCall) goja.Value {
 		componentName := call.Argument(0).String()
 		analyzeString := call.Argument(1).String()
 		component := GetComponent(record, componentName)
 		validate := StringCount(component, analyzeString)
-		result, _ := vm.ToValue(validate)
+		result := vm.ToValue(validate)
 		return result
 	})
 
-	vm.Set("RegexSearch", func(call otto.FunctionCall) otto.Value {
-		args := call.ArgumentList
+	vm.Set("RegexSearch", func(call goja.FunctionCall) goja.Value {
+		args := call.Arguments
 		componentName := "response"
 		analyzeString := args[0].String()
 		if len(args) >= 2 {
@@ -103,76 +104,76 @@ func (r *Record) RequestScripts(scriptType string, scripts []string) bool {
 		}
 		component := GetComponent(record, componentName)
 		matches, validate := RegexSearch(component, analyzeString)
-		result, err := vm.ToValue(validate)
-		if err != nil {
-			utils.ErrorF("Error Regex: %v", analyzeString)
-			result, _ = vm.ToValue(false)
-		}
+		result := vm.ToValue(validate)
+		//if err != nil {
+		//	utils.ErrorF("Error Regex: %v", analyzeString)
+		//	result, _ = vm.ToValue(false)
+		//}
 		if matches != "" {
 			extra = matches
 		}
 		return result
 	})
 
-	vm.Set("RegexCount", func(call otto.FunctionCall) otto.Value {
+	vm.Set("RegexCount", func(call goja.FunctionCall) goja.Value {
 		componentName := call.Argument(0).String()
 		analyzeString := call.Argument(1).String()
 		component := GetComponent(record, componentName)
 		validate := RegexCount(component, analyzeString)
-		result, _ := vm.ToValue(validate)
+		result := vm.ToValue(validate)
 		return result
 	})
 
-	vm.Set("StatusCode", func(call otto.FunctionCall) otto.Value {
+	vm.Set("StatusCode", func(call goja.FunctionCall) goja.Value {
 		statusCode := record.Response.StatusCode
-		result, _ := vm.ToValue(statusCode)
+		result := vm.ToValue(statusCode)
 		return result
 	})
 
 
-	vm.Set("ResponseTime", func(call otto.FunctionCall) otto.Value {
+	vm.Set("ResponseTime", func(call goja.FunctionCall) goja.Value {
 		responseTime := record.Response.ResponseTime
-		result, _ := vm.ToValue(responseTime)
+		result := vm.ToValue(responseTime)
 		return result
 	})
 
-	vm.Set("time", func(call otto.FunctionCall) otto.Value {
+	vm.Set("time", func(call goja.FunctionCall) goja.Value {
 		responseTime := record.Response.ResponseTime
-		result, _ := vm.ToValue(responseTime)
+		result := vm.ToValue(responseTime)
 		return result
 	})
 
 
-	vm.Set("ContentLength", func(call otto.FunctionCall) otto.Value {
-		args := call.ArgumentList
+	vm.Set("ContentLength", func(call goja.FunctionCall) goja.Value {
+		args := call.Arguments
 		if len(args) == 0 {
 			ContentLength := record.Response.Length
-			result, _ := vm.ToValue(ContentLength)
+			result := vm.ToValue(ContentLength)
 			return result
 		}
 		componentName := args[0].String()
 		componentLength := len(GetComponent(record, componentName))
-		result, _ := vm.ToValue(componentLength)
+		result := vm.ToValue(componentLength)
 		return result
 	})
 
 
-	vm.Set("HasPopUp", func(call otto.FunctionCall) otto.Value {
-		result, _ := vm.ToValue(record.Response.HasPopUp)
+	vm.Set("HasPopUp", func(call goja.FunctionCall) goja.Value {
+		result := vm.ToValue(record.Response.HasPopUp)
 		return result
 	})
 
 
 	//  - RegexGrep("component", "regex")
 	//  - RegexGrep("component", "regex", "position")
-	vm.Set("RegexGrep", func(call otto.FunctionCall) otto.Value {
-		value := RegexGrep(record, call.ArgumentList)
-		result, _ := vm.ToValue(value)
+	vm.Set("RegexGrep", func(call goja.FunctionCall) goja.Value {
+		value := RegexGrep(record, call.Arguments)
+		result := vm.ToValue(value)
 		return result
 	})
 
 	// check if folder, file exist or not
-	vm.Set("Exist", func(call otto.FunctionCall) otto.Value {
+	vm.Set("Exist", func(call goja.FunctionCall) goja.Value {
 		input := utils.NormalizePath(call.Argument(0).String())
 		var exist bool
 		if utils.FileExists(input) {
@@ -181,19 +182,19 @@ func (r *Record) RequestScripts(scriptType string, scripts []string) bool {
 		if utils.FolderExists(input) {
 			exist = true
 		}
-		result, _ := vm.ToValue(exist)
+		result := vm.ToValue(exist)
 		return result
 	})
 
-	vm.Set("DirLength", func(call otto.FunctionCall) otto.Value {
+	vm.Set("DirLength", func(call goja.FunctionCall) goja.Value {
 		validate := utils.DirLength(call.Argument(0).String())
-		result, _ := vm.ToValue(validate)
+		result := vm.ToValue(validate)
 		return result
 	})
 
-	vm.Set("FileLength", func(call otto.FunctionCall) otto.Value {
+	vm.Set("FileLength", func(call goja.FunctionCall) goja.Value {
 		validate := utils.FileLength(call.Argument(0).String())
-		result, _ := vm.ToValue(validate)
+		result := vm.ToValue(validate)
 		return result
 	})
 
@@ -202,16 +203,16 @@ func (r *Record) RequestScripts(scriptType string, scripts []string) bool {
 	case "detect", "detections":
 		for _, analyze := range scripts {
 			// pass detection here
-			result, _ := vm.Run(analyze)
-			analyzeResult, err := result.Export()
+			result, _ := vm.RunString(analyze)
+			analyzeResult := result.Export()
 			// in case vm panic
-			if err != nil || analyzeResult == nil {
-				r.DetectString = analyze
-				r.IsVulnerable = false
-				r.DetectResult = ""
-				r.ExtraOutput = ""
-				continue
-			}
+			//if err != nil || analyzeResult == nil {
+			//	r.DetectString = analyze
+			//	r.IsVulnerable = false
+			//	r.DetectResult = ""
+			//	r.ExtraOutput = ""
+			//	continue
+			//}
 			r.DetectString = analyze
 			r.IsVulnerable = analyzeResult.(bool)
 			r.DetectResult = extra
@@ -228,13 +229,13 @@ func (r *Record) RequestScripts(scriptType string, scripts []string) bool {
 	case "condition", "conditions":
 		var valid bool
 		for _, analyze := range scripts {
-			result, _ := vm.Run(analyze)
-			analyzeResult, err := result.Export()
+			result, _ := vm.RunString(analyze)
+			analyzeResult := result.Export()
 			// in case vm panic
-			if err != nil || analyzeResult == nil {
-				r.PassCondition = false
-				continue
-			}
+			//if err != nil || analyzeResult == nil {
+			//	r.PassCondition = false
+			//	continue
+			//}
 			r.PassCondition = analyzeResult.(bool)
 			utils.DebugF("[Condition] %v -- %v", analyze, r.PassCondition)
 			valid = r.PassCondition
@@ -289,7 +290,7 @@ func RegexCount(component string, analyzeString string) int {
 }
 
 // RegexGrep grep regex string from component
-func RegexGrep(realRec Record, arguments []otto.Value) string {
+func RegexGrep(realRec Record, arguments []goja.Value) string {
 	componentName := arguments[0].String()
 	component := GetComponent(realRec, componentName)
 

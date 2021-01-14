@@ -15,7 +15,8 @@ import (
 
 	"github.com/jaeles-project/jaeles/libs"
 	"github.com/jaeles-project/jaeles/utils"
-	"github.com/robertkrimen/otto"
+	//"github.com/robertkrimen/otto"
+	"github.com/dop251/goja"
 )
 
 // ParseVariable parse variable in YAML signature file
@@ -157,86 +158,75 @@ func RunVariables(variableString string) []string {
 		return extra
 	}
 
-	vm := otto.New()
+	vm := goja.New()
 
 
-	vm.Set("Content", func(call otto.FunctionCall) otto.Value {
+	vm.Set("Content", func(call goja.FunctionCall) {
 		filename := call.Argument(0).String()
 		filename = utils.NormalizePath(filename)
 		data := utils.GetFileContent(filename)
 		if len(data) > 0 {
 			extra = append(extra, data)
 		}
-		return otto.Value{}
 	})
 
-	vm.Set("InputCmd", func(call otto.FunctionCall) otto.Value {
+	vm.Set("InputCmd", func(call goja.FunctionCall) {
 		cmd := call.Argument(0).String()
 		data := InputCmd(cmd)
 		if len(data) <= 0 {
-			return otto.Value{}
-		}
-		if !strings.Contains(data, "\n") {
+
+		}else if !strings.Contains(data, "\n") {
 			extra = append(extra, data)
-			return otto.Value{}
+		}else{
+			extra = append(extra, strings.Split(data, "\n")...)
 		}
-		extra = append(extra, strings.Split(data, "\n")...)
-		return otto.Value{}
 	})
 
-	vm.Set("Range", func(call otto.FunctionCall) otto.Value {
+	vm.Set("Range", func(call goja.FunctionCall) {
 		min, err := strconv.Atoi(call.Argument(0).String())
 		max, err := strconv.Atoi(call.Argument(1).String())
-		if err != nil {
-			return otto.Value{}
+		if err == nil {
+			for i := min; i < max; i++ {
+				extra = append(extra, fmt.Sprintf("%v", i))
+			}
 		}
-		for i := min; i < max; i++ {
-			extra = append(extra, fmt.Sprintf("%v", i))
-		}
-		return otto.Value{}
 	})
 
-	vm.Set("SplitLines", func(call otto.FunctionCall) otto.Value {
+	vm.Set("SplitLines", func(call goja.FunctionCall) {
 		data := call.Argument(0).String()
 		extra = append(extra, SplitLines(data)...)
-		return otto.Value{}
 	})
 
-	vm.Set("Base64Encode", func(call otto.FunctionCall) otto.Value {
+	vm.Set("Base64Encode", func(call goja.FunctionCall){
 		data := call.Argument(0).String()
 		extra = append(extra, Base64Encode(data))
-		return otto.Value{}
 	})
 
-	vm.Set("Base64Decode", func(call otto.FunctionCall) otto.Value {
+	vm.Set("Base64Decode", func(call goja.FunctionCall) {
 		raw := call.Argument(0).String()
 		data, err := base64.StdEncoding.DecodeString(raw)
 		if err == nil {
 			extra = append(extra, string(data))
 		}
-		return otto.Value{}
 	})
 
 
-	vm.Set("URLEncode", func(call otto.FunctionCall) otto.Value {
+	vm.Set("URLEncode", func(call goja.FunctionCall) {
 		data := call.Argument(0).String()
 		extra = append(extra, URLEncode(data))
-		return otto.Value{}
 	})
 
-	vm.Set("URLEncodeByLines", func(call otto.FunctionCall) otto.Value {
+	vm.Set("URLEncodeByLines", func(call goja.FunctionCall) {
 		data := SplitLines(call.Argument(0).String())
-		if len(data) == 0 {
-			return otto.Value{}
+		if len(data) != 0 {
+			for _, line := range data {
+				extra = append(extra, URLEncode(line))
+			}
 		}
-		for _, line := range data {
-			extra = append(extra, URLEncode(line))
-		}
-		return otto.Value{}
 	})
 
 	utils.DebugF("variableString: %v", variableString)
-	vm.Run(variableString)
+	vm.RunString(variableString)
 	return extra
 }
 

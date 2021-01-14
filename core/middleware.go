@@ -2,28 +2,29 @@ package core
 
 import (
 	"github.com/jaeles-project/jaeles/utils"
-	"github.com/robertkrimen/otto"
+
+	//"github.com/robertkrimen/otto"
 	"os/exec"
+	"github.com/dop251/goja"
 )
 
 // Conclude is main function for detections
 func (r *Record) MiddleWare() {
 	//record := *r
-	vm := otto.New()
+	vm := goja.New()
 	var middlewareOutput string
 
-	vm.Set("InvokeCmd", func(call otto.FunctionCall) otto.Value {
+	vm.Set("InvokeCmd", func(call goja.FunctionCall) {
 		rawCmd := call.Argument(0).String()
 		result := InvokeCmd(r, rawCmd)
 		middlewareOutput += result
 		utils.DebugF(result)
-		return otto.Value{}
 	})
 
 
 	for _, middleScript := range r.Request.Middlewares {
 		utils.DebugF("[MiddleWare]: %s", middleScript)
-		vm.Run(middleScript)
+		vm.RunString(middleScript)
 	}
 	r.Request.MiddlewareOutput = middlewareOutput
 }

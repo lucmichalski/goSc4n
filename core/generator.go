@@ -10,8 +10,9 @@ import (
 	"github.com/Jeffail/gabs/v2"
 	"github.com/jaeles-project/jaeles/libs"
 	"github.com/jaeles-project/jaeles/utils"
-	"github.com/robertkrimen/otto"
+	//"github.com/robertkrimen/otto"
 	"github.com/thoas/go-funk"
+	"github.com/dop251/goja"
 )
 
 // Generators run multiple generator
@@ -71,133 +72,125 @@ func Generators(req libs.Request, sign libs.Signature) []libs.Request {
 // RunGenerator is main function for generator
 func RunGenerator(req libs.Request, genString string) []libs.Request {
 	var reqs []libs.Request
-	vm := otto.New()
+	vm := goja.New()
 
-	vm.Set("Fuzz", func(call otto.FunctionCall) otto.Value {
+	vm.Set("Fuzz", func(call goja.FunctionCall) {
 		var injectedReq []libs.Request
 		if len(reqs) > 0 {
 			for _, req := range reqs {
-				injectedReq = Fuzz(req, call.ArgumentList)
+				injectedReq = Fuzz(req, call.Arguments)
 			}
 		} else {
-			injectedReq = Fuzz(req, call.ArgumentList)
+			injectedReq = Fuzz(req, call.Arguments)
 		}
 		if len(injectedReq) > 0 {
 			reqs = append(reqs, injectedReq...)
 		}
-		return otto.Value{}
 	})
 
-	vm.Set("Replace", func(call otto.FunctionCall) otto.Value {
+	vm.Set("Replace", func(call goja.FunctionCall) {
 		var injectedReq []libs.Request
 		if len(reqs) > 0 {
 			for _, req := range reqs {
-				injectedReq = ReplaceMe(req, call.ArgumentList)
+				injectedReq = ReplaceMe(req, call.Arguments)
 			}
 		} else {
-			injectedReq = ReplaceMe(req, call.ArgumentList)
+			injectedReq = ReplaceMe(req, call.Arguments)
 		}
 		if len(injectedReq) > 0 {
 			reqs = append(reqs, injectedReq...)
 		}
-		return otto.Value{}
 	})
 
-	vm.Set("Query", func(call otto.FunctionCall) otto.Value {
+	vm.Set("Query", func(call goja.FunctionCall) {
 		var injectedReq []libs.Request
 		if len(reqs) > 0 {
 			for _, req := range reqs {
-				injectedReq = Query(req, call.ArgumentList)
+				injectedReq = Query(req, call.Arguments)
 			}
 		} else {
-			injectedReq = Query(req, call.ArgumentList)
-		}
-
-		if len(injectedReq) > 0 {
-			reqs = append(reqs, injectedReq...)
-		}
-		return otto.Value{}
-	})
-
-	vm.Set("Body", func(call otto.FunctionCall) otto.Value {
-		var injectedReq []libs.Request
-		if len(reqs) > 0 {
-			for _, req := range reqs {
-				injectedReq = Body(req, call.ArgumentList)
-			}
-		} else {
-			injectedReq = Body(req, call.ArgumentList)
+			injectedReq = Query(req, call.Arguments)
 		}
 
 		if len(injectedReq) > 0 {
 			reqs = append(reqs, injectedReq...)
 		}
-		return otto.Value{}
 	})
 
-	vm.Set("Path", func(call otto.FunctionCall) otto.Value {
+	vm.Set("Body", func(call goja.FunctionCall) {
 		var injectedReq []libs.Request
 		if len(reqs) > 0 {
 			for _, req := range reqs {
-				injectedReq = Path(req, call.ArgumentList)
+				injectedReq = Body(req, call.Arguments)
 			}
 		} else {
-			injectedReq = Path(req, call.ArgumentList)
+			injectedReq = Body(req, call.Arguments)
 		}
 
 		if len(injectedReq) > 0 {
 			reqs = append(reqs, injectedReq...)
 		}
-		return otto.Value{}
 	})
 
-	vm.Set("Header", func(call otto.FunctionCall) otto.Value {
+	vm.Set("Path", func(call goja.FunctionCall) {
 		var injectedReq []libs.Request
 		if len(reqs) > 0 {
 			for _, req := range reqs {
-				injectedReq = Header(req, call.ArgumentList)
+				injectedReq = Path(req, call.Arguments)
 			}
 		} else {
-			injectedReq = Header(req, call.ArgumentList)
+			injectedReq = Path(req, call.Arguments)
 		}
 
 		if len(injectedReq) > 0 {
 			reqs = append(reqs, injectedReq...)
 		}
-		return otto.Value{}
 	})
 
-	vm.Set("Cookie", func(call otto.FunctionCall) otto.Value {
+	vm.Set("Header", func(call goja.FunctionCall) {
 		var injectedReq []libs.Request
 		if len(reqs) > 0 {
 			for _, req := range reqs {
-				injectedReq = Cookie(req, call.ArgumentList)
+				injectedReq = Header(req, call.Arguments)
+			}
+		} else {
+			injectedReq = Header(req, call.Arguments)
+		}
+
+		if len(injectedReq) > 0 {
+			reqs = append(reqs, injectedReq...)
+		}
+	})
+
+	vm.Set("Cookie", func(call goja.FunctionCall) {
+		var injectedReq []libs.Request
+		if len(reqs) > 0 {
+			for _, req := range reqs {
+				injectedReq = Cookie(req, call.Arguments)
 				reqs = append(reqs, injectedReq...)
 			}
 		} else {
-			injectedReq = Cookie(req, call.ArgumentList)
+			injectedReq = Cookie(req, call.Arguments)
 			reqs = append(reqs, injectedReq...)
 		}
 		if len(injectedReq) > 0 {
 			reqs = append(reqs, injectedReq...)
 		}
-		return otto.Value{}
 	})
 
-	vm.Set("Method", func(call otto.FunctionCall) otto.Value {
+	vm.Set("Method", func(call goja.FunctionCall){
 		if len(reqs) > 0 {
 			for _, req := range reqs {
-				injectedReq := Method(req, call.ArgumentList)
+				injectedReq := Method(req, call.Arguments)
 				reqs = append(reqs, injectedReq...)
 			}
 		} else {
-			injectedReq := Method(req, call.ArgumentList)
+			injectedReq := Method(req, call.Arguments)
 			reqs = append(reqs, injectedReq...)
 		}
-		return otto.Value{}
 	})
 
-	vm.Run(genString)
+	vm.RunString(genString)
 	return reqs
 }
 
@@ -207,20 +200,19 @@ func Encoder(encodeString string, data string) string {
 		return data
 	}
 	var result string
-	vm := otto.New()
+	vm := goja.New()
 
 	// Encode part
-	vm.Set("URL", func(call otto.FunctionCall) otto.Value {
+	vm.Set("URL", func(call goja.FunctionCall){
 		result = url.QueryEscape(data)
-		return otto.Value{}
 	})
 
-	vm.Run(encodeString)
+	vm.RunString(encodeString)
 	return result
 }
 
 // Method gen request with multiple method
-func Method(req libs.Request, arguments []otto.Value) []libs.Request {
+func Method(req libs.Request, arguments []goja.Value) []libs.Request {
 	methods := []string{"GET", "POST", "PUT", "HEAD", "PATCH"}
 	if len(arguments) > 0 {
 		methods = []string{strings.ToUpper(arguments[0].String())}
@@ -237,7 +229,7 @@ func Method(req libs.Request, arguments []otto.Value) []libs.Request {
 }
 
 // Query gen request with query string
-func Query(req libs.Request, arguments []otto.Value) []libs.Request {
+func Query(req libs.Request, arguments []goja.Value) []libs.Request {
 	injectedString := arguments[0].String()
 	paramName := "undefined"
 	if len(arguments) > 1 {
@@ -290,7 +282,7 @@ func Query(req libs.Request, arguments []otto.Value) []libs.Request {
 }
 
 // Body gen request with body
-func Body(req libs.Request, arguments []otto.Value) []libs.Request {
+func Body(req libs.Request, arguments []goja.Value) []libs.Request {
 	injectedString := arguments[0].String()
 	paramName := "undefined"
 	if len(arguments) > 1 {
@@ -388,7 +380,7 @@ func Body(req libs.Request, arguments []otto.Value) []libs.Request {
 }
 
 // Path gen request with path
-func Path(req libs.Request, arguments []otto.Value) []libs.Request {
+func Path(req libs.Request, arguments []goja.Value) []libs.Request {
 	injectedString := arguments[0].String()
 	paramName := "last"
 	if len(arguments) > 1 {
@@ -505,7 +497,7 @@ func Path(req libs.Request, arguments []otto.Value) []libs.Request {
 }
 
 // Cookie gen request with Cookie
-func Cookie(req libs.Request, arguments []otto.Value) []libs.Request {
+func Cookie(req libs.Request, arguments []goja.Value) []libs.Request {
 	var reqs []libs.Request
 	injectedString := arguments[0].String()
 	cookieName := "undefined"
@@ -636,7 +628,7 @@ func Cookie(req libs.Request, arguments []otto.Value) []libs.Request {
 }
 
 // Header gen request with header
-func Header(req libs.Request, arguments []otto.Value) []libs.Request {
+func Header(req libs.Request, arguments []goja.Value) []libs.Request {
 	var reqs []libs.Request
 	injectedString := arguments[0].String()
 	var headerNames []string
@@ -707,7 +699,7 @@ func Header(req libs.Request, arguments []otto.Value) []libs.Request {
 
 // // Usage: Fuzz('{{.payload}}'), Fuzz('{{.payload}}11', 'ANOTHER_FUZZ')
 // Fuzz gen request with fuzz keyword
-func Fuzz(req libs.Request, arguments []otto.Value) []libs.Request {
+func Fuzz(req libs.Request, arguments []goja.Value) []libs.Request {
 	injectedString := arguments[0].String()
 	utils.DebugF("injectedString: %v", injectedString)
 	replaceWord := "FUZZ"
@@ -738,7 +730,7 @@ func Fuzz(req libs.Request, arguments []otto.Value) []libs.Request {
 
 // Usage: Replace(), Replace('FUZZ')
 // ReplaceMe gen request with fuzz keyword
-func ReplaceMe(req libs.Request, arguments []otto.Value) []libs.Request {
+func ReplaceMe(req libs.Request, arguments []goja.Value) []libs.Request {
 	injectedString := req.Target["payload"]
 	replaceWord := "FUZZ"
 	if len(arguments) == 0 {

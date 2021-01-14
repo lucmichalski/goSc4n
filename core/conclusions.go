@@ -2,7 +2,9 @@ package core
 
 import (
 	"github.com/jaeles-project/jaeles/utils"
-	"github.com/robertkrimen/otto"
+
+	"github.com/dop251/goja"
+	//"github.com/robertkrimen/otto"
 	"os/exec"
 	"regexp"
 	"strings"
@@ -17,77 +19,76 @@ func (r *Record) Condition() bool {
 // Conclude is main function for detections
 func (r *Record) Conclude() {
 	record := *r
-	vm := otto.New()
+	vm := goja.New()
 
 	// ExecCmd execute command command
-	vm.Set("ExecCmd", func(call otto.FunctionCall) otto.Value {
-		result, _ := vm.ToValue(Execution(call.Argument(0).String()))
+	vm.Set("ExecCmd", func(call goja.FunctionCall) goja.Value {
+		result := vm.ToValue(Execution(call.Argument(0).String()))
 		return result
 	})
 
 	// write something to a file
-	vm.Set("WriteTo", func(call otto.FunctionCall) otto.Value {
+	vm.Set("WriteTo", func(call goja.FunctionCall) {
 		dest := utils.NormalizePath(call.Argument(0).String())
 		value := call.Argument(1).String()
 		utils.WriteToFile(dest, value)
-		return otto.Value{}
 	})
 
-	vm.Set("StringSearch", func(call otto.FunctionCall) otto.Value {
+	vm.Set("StringSearch", func(call goja.FunctionCall) goja.Value {
 		componentName := call.Argument(0).String()
 		analyzeString := call.Argument(1).String()
 		component := GetComponent(record, componentName)
 		validate := StringSearch(component, analyzeString)
-		result, _ := vm.ToValue(validate)
+		result := vm.ToValue(validate)
 		return result
 	})
 
-	vm.Set("StringCount", func(call otto.FunctionCall) otto.Value {
+	vm.Set("StringCount", func(call goja.FunctionCall) goja.Value {
 		componentName := call.Argument(0).String()
 		analyzeString := call.Argument(1).String()
 		component := GetComponent(record, componentName)
 		validate := StringCount(component, analyzeString)
-		result, _ := vm.ToValue(validate)
+		result := vm.ToValue(validate)
 		return result
 	})
 
-	vm.Set("RegexSearch", func(call otto.FunctionCall) otto.Value {
+	vm.Set("RegexSearch", func(call goja.FunctionCall) goja.Value {
 		componentName := call.Argument(0).String()
 		analyzeString := call.Argument(1).String()
 		component := GetComponent(record, componentName)
 		_, validate := RegexSearch(component, analyzeString)
-		result, _ := vm.ToValue(validate)
+		result := vm.ToValue(validate)
 		return result
 	})
 
-	vm.Set("RegexCount", func(call otto.FunctionCall) otto.Value {
+	vm.Set("RegexCount", func(call goja.FunctionCall) goja.Value {
 		componentName := call.Argument(0).String()
 		analyzeString := call.Argument(1).String()
 		component := GetComponent(record, componentName)
 		validate := RegexCount(component, analyzeString)
-		result, _ := vm.ToValue(validate)
+		result := vm.ToValue(validate)
 		return result
 	})
 
-	vm.Set("StatusCode", func(call otto.FunctionCall) otto.Value {
+	vm.Set("StatusCode", func(call goja.FunctionCall) goja.Value {
 		statusCode := record.Response.StatusCode
-		result, _ := vm.ToValue(statusCode)
+		result:= vm.ToValue(statusCode)
 		return result
 	})
-	vm.Set("ResponseTime", func(call otto.FunctionCall) otto.Value {
+	vm.Set("ResponseTime", func(call goja.FunctionCall) goja.Value {
 		responseTime := record.Response.ResponseTime
-		result, _ := vm.ToValue(responseTime)
+		result := vm.ToValue(responseTime)
 		return result
 	})
-	vm.Set("ContentLength", func(call otto.FunctionCall) otto.Value {
+	vm.Set("ContentLength", func(call goja.FunctionCall) goja.Value {
 		ContentLength := record.Response.Length
-		result, _ := vm.ToValue(ContentLength)
+		result := vm.ToValue(ContentLength)
 		return result
 	})
 
 	// StringSelect select a string from component
 	// e.g: StringSelect("component", "res1", "right", "left")
-	vm.Set("StringSelect", func(call otto.FunctionCall) otto.Value {
+	vm.Set("StringSelect", func(call goja.FunctionCall) {
 		componentName := call.Argument(0).String()
 		valueName := call.Argument(1).String()
 		left := call.Argument(2).String()
@@ -96,35 +97,32 @@ func (r *Record) Conclude() {
 		value := Between(component, left, right)
 		r.Request.Target[valueName] = value
 		utils.DebugF("StringSelect: %v --> %v", valueName, value)
-		return otto.Value{}
 	})
 
 	//  - RegexSelect("component", "regex")
 	//  - RegexSelect("component", "regex")
-	vm.Set("RegexSelect", func(call otto.FunctionCall) otto.Value {
-		result := RegexSelect(record, call.ArgumentList)
+	vm.Set("RegexSelect", func(call goja.FunctionCall) {
+		result := RegexSelect(record, call.Arguments)
 		if len(result) > 0 {
 			for k, value := range result {
 				utils.DebugF("New variales: %v -- %v", k, value)
 				r.Request.Target[k] = value
 			}
 		}
-		return otto.Value{}
 	})
 
 	// SetValue("var_name", StatusCode())
 	// SetValue("status", StringCount('middleware', '11'))
-	vm.Set("SetValue", func(call otto.FunctionCall) otto.Value {
+	vm.Set("SetValue", func(call goja.FunctionCall) {
 		valueName := call.Argument(0).String()
 		value := call.Argument(1).String()
 		utils.DebugF("SetValue: %v -- %v", valueName, value)
 		r.Request.Target[valueName] = value
-		return otto.Value{}
 	})
 
 	for _, concludeScript := range record.Request.Conclusions {
 		utils.DebugF("[Conclude]: %v", concludeScript)
-		vm.Run(concludeScript)
+		vm.RunString(concludeScript)
 	}
 }
 
@@ -147,7 +145,7 @@ func Between(value string, left string, right string) string {
 }
 
 // RegexSelect get regex string from component
-func RegexSelect(realRec Record, arguments []otto.Value) map[string]string {
+func RegexSelect(realRec Record, arguments []goja.Value) map[string]string {
 	result := make(map[string]string)
 	//  - RegexSelect("component", "var_name", "regex")
 	utils.DebugF("arguments -- %v", arguments)
