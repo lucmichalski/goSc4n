@@ -2,9 +2,9 @@ package core
 
 import (
 	"fmt"
-	"github.com/jaeles-project/jaeles/libs"
-	"github.com/jaeles-project/jaeles/sender"
-	"github.com/jaeles-project/jaeles/utils"
+	"github.com/goSc4n/goSc4n/tree/hoangnm/libs"
+	"github.com/goSc4n/goSc4n/tree/hoangnm/sender"
+	"github.com/goSc4n/goSc4n/tree/hoangnm/utils"
 	"strings"
 )
 

@@ -4,14 +4,14 @@ import (
 	"bufio"
 	"fmt"
 	"github.com/Jeffail/gabs/v2"
-	"github.com/jaeles-project/jaeles/utils"
+	"github.com/goSc4n/goSc4n/tree/hoangnm/libs"
+	"github.com/goSc4n/goSc4n/tree/hoangnm/utils"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"path/filepath"
 	"strings"
 
-	"github.com/jaeles-project/jaeles/libs"
 	"github.com/thoas/go-funk"
 	"gopkg.in/yaml.v2"
 )

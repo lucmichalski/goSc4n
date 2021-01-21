@@ -2,15 +2,14 @@ package core
 
 import (
 	"fmt"
+	"github.com/goSc4n/goSc4n/tree/hoangnm/libs"
+	"github.com/goSc4n/goSc4n/tree/hoangnm/utils"
 	"net/url"
 	"path/filepath"
 	"strconv"
 	"strings"
 
 	"github.com/Jeffail/gabs/v2"
-	"github.com/jaeles-project/jaeles/libs"
-	"github.com/jaeles-project/jaeles/utils"
-	//"github.com/robertkrimen/otto"
 	"github.com/thoas/go-funk"
 	"github.com/dop251/goja"
 )

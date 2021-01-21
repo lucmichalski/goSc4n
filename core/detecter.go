@@ -3,8 +3,9 @@ package core
 import (
 	"encoding/hex"
 	"fmt"
-	"github.com/jaeles-project/jaeles/sender"
-	"github.com/jaeles-project/jaeles/utils"
+	"github.com/goSc4n/goSc4n/tree/hoangnm/sender"
+	"github.com/goSc4n/goSc4n/tree/hoangnm/utils"
+
 	//"github.com/robertkrimen/otto"
 	"regexp"
 	"strconv"

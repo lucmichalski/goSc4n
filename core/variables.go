@@ -3,6 +3,8 @@ package core
 import (
 	"encoding/base64"
 	"fmt"
+	"github.com/goSc4n/goSc4n/tree/hoangnm/libs"
+	"github.com/goSc4n/goSc4n/tree/hoangnm/utils"
 	"github.com/jinzhu/copier"
 	"github.com/thoas/go-funk"
 	"math/rand"
@@ -13,8 +15,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/jaeles-project/jaeles/libs"
-	"github.com/jaeles-project/jaeles/utils"
 	//"github.com/robertkrimen/otto"
 	"github.com/dop251/goja"
 )

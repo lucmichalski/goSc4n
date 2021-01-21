@@ -2,7 +2,7 @@ package core
 
 import (
 	"fmt"
-	"github.com/jaeles-project/jaeles/utils"
+	"github.com/goSc4n/goSc4n/tree/hoangnm/utils"
 )
 
 func (r *Record) Analyze() {

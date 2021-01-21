@@ -3,6 +3,9 @@ package server
 import (
 	"fmt"
 	"github.com/fatih/color"
+	"github.com/goSc4n/goSc4n/tree/hoangnm/database"
+	"github.com/goSc4n/goSc4n/tree/hoangnm/libs"
+	"github.com/goSc4n/goSc4n/tree/hoangnm/utils"
 	"log"
 	"net/http"
 	"os"
@@ -10,9 +13,6 @@ import (
 	"time"
 
 	jwt "github.com/appleboy/gin-jwt/v2"
-	"github.com/jaeles-project/jaeles/database"
-	"github.com/jaeles-project/jaeles/libs"
-	"github.com/jaeles-project/jaeles/utils"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-contrib/static"

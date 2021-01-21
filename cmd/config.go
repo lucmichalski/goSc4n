@@ -3,6 +3,9 @@ package cmd
 import (
 	"fmt"
 	"github.com/fatih/color"
+	"github.com/goSc4n/goSc4n/tree/hoangnm/database"
+	"github.com/goSc4n/goSc4n/tree/hoangnm/libs"
+	"github.com/goSc4n/goSc4n/tree/hoangnm/utils"
 	"os"
 	"path"
 	"path/filepath"
@@ -10,9 +13,6 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/jaeles-project/jaeles/database"
-	"github.com/jaeles-project/jaeles/libs"
-	"github.com/jaeles-project/jaeles/utils"
 	"github.com/spf13/cobra"
 )
 

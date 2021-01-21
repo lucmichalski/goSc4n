@@ -3,7 +3,8 @@ package sender
 import (
 	"context"
 	"fmt"
-	"github.com/jaeles-project/jaeles/utils"
+	"github.com/goSc4n/goSc4n/tree/hoangnm/libs"
+	"github.com/goSc4n/goSc4n/tree/hoangnm/utils"
 	"log"
 	"time"
 
@@ -11,7 +12,6 @@ import (
 	"github.com/chromedp/cdproto/network"
 	"github.com/chromedp/cdproto/page"
 	"github.com/chromedp/chromedp"
-	"github.com/jaeles-project/jaeles/libs"
 )
 
 // SendWithChrome send request with real browser

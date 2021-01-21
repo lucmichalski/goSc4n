@@ -1,8 +1,8 @@
 package core
 
 import (
-	"github.com/jaeles-project/jaeles/libs"
-	"github.com/jaeles-project/jaeles/sender"
+	"github.com/goSc4n/goSc4n/tree/hoangnm/libs"
+	"github.com/goSc4n/goSc4n/tree/hoangnm/sender"
 	"github.com/panjf2000/ants"
 	"github.com/thoas/go-funk"
 	"sync"

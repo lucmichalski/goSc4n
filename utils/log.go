@@ -2,6 +2,7 @@ package utils
 
 import (
 	"fmt"
+	"github.com/goSc4n/goSc4n/tree/hoangnm/libs"
 	"io"
 	"io/ioutil"
 	"os"
@@ -10,7 +11,6 @@ import (
 	"strings"
 
 	"github.com/fatih/color"
-	"github.com/jaeles-project/jaeles/libs"
 	"github.com/sirupsen/logrus"
 	prefixed "github.com/x-cray/logrus-prefixed-formatter"
 )

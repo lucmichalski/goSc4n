@@ -3,9 +3,9 @@ package cmd
 import (
 	"bufio"
 	"fmt"
-	"github.com/jaeles-project/jaeles/core"
-	"github.com/jaeles-project/jaeles/libs"
-	"github.com/jaeles-project/jaeles/utils"
+	"github.com/goSc4n/goSc4n/tree/hoangnm/core"
+	"github.com/goSc4n/goSc4n/tree/hoangnm/libs"
+	"github.com/goSc4n/goSc4n/tree/hoangnm/utils"
 	"github.com/panjf2000/ants"
 	"github.com/spf13/cobra"
 	"os"
