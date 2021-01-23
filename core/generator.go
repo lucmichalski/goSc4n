@@ -73,7 +73,7 @@ func RunGenerator(req libs.Request, genString string) []libs.Request {
 	var reqs []libs.Request
 	vm := goja.New()
 
-	vm.Set("Fuzz", func(call goja.FunctionCall) {
+	vm.Set("Fuzz", func(call goja.FunctionCall) goja.Value{
 		var injectedReq []libs.Request
 		if len(reqs) > 0 {
 			for _, req := range reqs {
@@ -85,9 +85,10 @@ func RunGenerator(req libs.Request, genString string) []libs.Request {
 		if len(injectedReq) > 0 {
 			reqs = append(reqs, injectedReq...)
 		}
+		return vm.ToValue("")
 	})
 
-	vm.Set("Replace", func(call goja.FunctionCall) {
+	vm.Set("Replace", func(call goja.FunctionCall) goja.Value {
 		var injectedReq []libs.Request
 		if len(reqs) > 0 {
 			for _, req := range reqs {
@@ -99,9 +100,10 @@ func RunGenerator(req libs.Request, genString string) []libs.Request {
 		if len(injectedReq) > 0 {
 			reqs = append(reqs, injectedReq...)
 		}
+		return vm.ToValue("")
 	})
 
-	vm.Set("Query", func(call goja.FunctionCall) {
+	vm.Set("Query", func(call goja.FunctionCall) goja.Value{
 		var injectedReq []libs.Request
 		if len(reqs) > 0 {
 			for _, req := range reqs {
@@ -114,9 +116,10 @@ func RunGenerator(req libs.Request, genString string) []libs.Request {
 		if len(injectedReq) > 0 {
 			reqs = append(reqs, injectedReq...)
 		}
+		return vm.ToValue("")
 	})
 
-	vm.Set("Body", func(call goja.FunctionCall) {
+	vm.Set("Body", func(call goja.FunctionCall) goja.Value {
 		var injectedReq []libs.Request
 		if len(reqs) > 0 {
 			for _, req := range reqs {
@@ -129,9 +132,10 @@ func RunGenerator(req libs.Request, genString string) []libs.Request {
 		if len(injectedReq) > 0 {
 			reqs = append(reqs, injectedReq...)
 		}
+		return vm.ToValue("")
 	})
 
-	vm.Set("Path", func(call goja.FunctionCall) {
+	vm.Set("Path", func(call goja.FunctionCall) goja.Value {
 		var injectedReq []libs.Request
 		if len(reqs) > 0 {
 			for _, req := range reqs {
@@ -144,9 +148,10 @@ func RunGenerator(req libs.Request, genString string) []libs.Request {
 		if len(injectedReq) > 0 {
 			reqs = append(reqs, injectedReq...)
 		}
+		return vm.ToValue("")
 	})
 
-	vm.Set("Header", func(call goja.FunctionCall) {
+	vm.Set("Header", func(call goja.FunctionCall) goja.Value {
 		var injectedReq []libs.Request
 		if len(reqs) > 0 {
 			for _, req := range reqs {
@@ -159,9 +164,10 @@ func RunGenerator(req libs.Request, genString string) []libs.Request {
 		if len(injectedReq) > 0 {
 			reqs = append(reqs, injectedReq...)
 		}
+		return vm.ToValue("")
 	})
 
-	vm.Set("Cookie", func(call goja.FunctionCall) {
+	vm.Set("Cookie", func(call goja.FunctionCall) goja.Value {
 		var injectedReq []libs.Request
 		if len(reqs) > 0 {
 			for _, req := range reqs {
@@ -175,9 +181,10 @@ func RunGenerator(req libs.Request, genString string) []libs.Request {
 		if len(injectedReq) > 0 {
 			reqs = append(reqs, injectedReq...)
 		}
+		return vm.ToValue("")
 	})
 
-	vm.Set("Method", func(call goja.FunctionCall){
+	vm.Set("Method", func(call goja.FunctionCall) goja.Value {
 		if len(reqs) > 0 {
 			for _, req := range reqs {
 				injectedReq := Method(req, call.Arguments)
@@ -187,6 +194,7 @@ func RunGenerator(req libs.Request, genString string) []libs.Request {
 			injectedReq := Method(req, call.Arguments)
 			reqs = append(reqs, injectedReq...)
 		}
+		return vm.ToValue("")
 	})
 
 	vm.RunString(genString)

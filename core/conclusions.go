@@ -28,10 +28,11 @@ func (r *Record) Conclude() {
 	})
 
 	// write something to a file
-	vm.Set("WriteTo", func(call goja.FunctionCall) {
+	vm.Set("WriteTo", func(call goja.FunctionCall) goja.Value {
 		dest := utils.NormalizePath(call.Argument(0).String())
 		value := call.Argument(1).String()
 		utils.WriteToFile(dest, value)
+		return vm.ToValue("")
 	})
 
 	vm.Set("StringSearch", func(call goja.FunctionCall) goja.Value {
@@ -88,7 +89,7 @@ func (r *Record) Conclude() {
 
 	// StringSelect select a string from component
 	// e.g: StringSelect("component", "res1", "right", "left")
-	vm.Set("StringSelect", func(call goja.FunctionCall) {
+	vm.Set("StringSelect", func(call goja.FunctionCall) goja.Value {
 		componentName := call.Argument(0).String()
 		valueName := call.Argument(1).String()
 		left := call.Argument(2).String()
@@ -97,11 +98,12 @@ func (r *Record) Conclude() {
 		value := Between(component, left, right)
 		r.Request.Target[valueName] = value
 		utils.DebugF("StringSelect: %v --> %v", valueName, value)
+		return vm.ToValue("")
 	})
 
 	//  - RegexSelect("component", "regex")
 	//  - RegexSelect("component", "regex")
-	vm.Set("RegexSelect", func(call goja.FunctionCall) {
+	vm.Set("RegexSelect", func(call goja.FunctionCall) goja.Value {
 		result := RegexSelect(record, call.Arguments)
 		if len(result) > 0 {
 			for k, value := range result {
@@ -109,15 +111,17 @@ func (r *Record) Conclude() {
 				r.Request.Target[k] = value
 			}
 		}
+		return vm.ToValue("")
 	})
 
 	// SetValue("var_name", StatusCode())
 	// SetValue("status", StringCount('middleware', '11'))
-	vm.Set("SetValue", func(call goja.FunctionCall) {
+	vm.Set("SetValue", func(call goja.FunctionCall) goja.Value {
 		valueName := call.Argument(0).String()
 		value := call.Argument(1).String()
 		utils.DebugF("SetValue: %v -- %v", valueName, value)
 		r.Request.Target[valueName] = value
+		return vm.ToValue("")
 	})
 
 	for _, concludeScript := range record.Request.Conclusions {

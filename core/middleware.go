@@ -14,11 +14,12 @@ func (r *Record) MiddleWare() {
 	vm := goja.New()
 	var middlewareOutput string
 
-	vm.Set("InvokeCmd", func(call goja.FunctionCall) {
+	vm.Set("InvokeCmd", func(call goja.FunctionCall) goja.Value {
 		rawCmd := call.Argument(0).String()
 		result := InvokeCmd(r, rawCmd)
 		middlewareOutput += result
 		utils.DebugF(result)
+		return vm.ToValue("")
 	})
 
 

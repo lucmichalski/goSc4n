@@ -161,16 +161,17 @@ func RunVariables(variableString string) []string {
 	vm := goja.New()
 
 
-	vm.Set("Content", func(call goja.FunctionCall) {
+	vm.Set("Content", func(call goja.FunctionCall) goja.Value {
 		filename := call.Argument(0).String()
 		filename = utils.NormalizePath(filename)
 		data := utils.GetFileContent(filename)
 		if len(data) > 0 {
 			extra = append(extra, data)
 		}
+		return vm.ToValue("")
 	})
 
-	vm.Set("InputCmd", func(call goja.FunctionCall) {
+	vm.Set("InputCmd", func(call goja.FunctionCall) goja.Value {
 		cmd := call.Argument(0).String()
 		data := InputCmd(cmd)
 		if len(data) <= 0 {
@@ -180,9 +181,10 @@ func RunVariables(variableString string) []string {
 		}else{
 			extra = append(extra, strings.Split(data, "\n")...)
 		}
+		return vm.ToValue("")
 	})
 
-	vm.Set("Range", func(call goja.FunctionCall) {
+	vm.Set("Range", func(call goja.FunctionCall) goja.Value {
 		min, err := strconv.Atoi(call.Argument(0).String())
 		max, err := strconv.Atoi(call.Argument(1).String())
 		if err == nil {
@@ -190,39 +192,45 @@ func RunVariables(variableString string) []string {
 				extra = append(extra, fmt.Sprintf("%v", i))
 			}
 		}
+		return vm.ToValue("")
 	})
 
-	vm.Set("SplitLines", func(call goja.FunctionCall) {
+	vm.Set("SplitLines", func(call goja.FunctionCall) goja.Value {
 		data := call.Argument(0).String()
 		extra = append(extra, SplitLines(data)...)
+		return vm.ToValue("")
 	})
 
-	vm.Set("Base64Encode", func(call goja.FunctionCall){
+	vm.Set("Base64Encode", func(call goja.FunctionCall) goja.Value {
 		data := call.Argument(0).String()
 		extra = append(extra, Base64Encode(data))
+		return vm.ToValue("")
 	})
 
-	vm.Set("Base64Decode", func(call goja.FunctionCall) {
+	vm.Set("Base64Decode", func(call goja.FunctionCall) goja.Value {
 		raw := call.Argument(0).String()
 		data, err := base64.StdEncoding.DecodeString(raw)
 		if err == nil {
 			extra = append(extra, string(data))
 		}
+		return vm.ToValue("")
 	})
 
 
-	vm.Set("URLEncode", func(call goja.FunctionCall) {
+	vm.Set("URLEncode", func(call goja.FunctionCall) goja.Value {
 		data := call.Argument(0).String()
 		extra = append(extra, URLEncode(data))
+		return vm.ToValue("")
 	})
 
-	vm.Set("URLEncodeByLines", func(call goja.FunctionCall) {
+	vm.Set("URLEncodeByLines", func(call goja.FunctionCall) goja.Value {
 		data := SplitLines(call.Argument(0).String())
 		if len(data) != 0 {
 			for _, line := range data {
 				extra = append(extra, URLEncode(line))
 			}
 		}
+		return vm.ToValue("")
 	})
 
 	utils.DebugF("variableString: %v", variableString)
