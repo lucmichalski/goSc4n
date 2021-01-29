@@ -53,11 +53,33 @@ type Options struct {
 	ChunkSize    int
 	ChunkLimit   int
 
+	Fuzz   Fuzz
 	Mics   Mics
 	Scan   Scan
 	Server Server
 	Report Report
 	Config Config
+}
+
+type Fuzz struct {
+	Site       string
+	Sites      string
+	Proxy      string
+	Output     string
+	UserAgent  string
+	Header     []string
+	Threads    int
+	Concurrent int
+	Depth      int
+	Delay      int
+	RandomDelay	int
+	Timeout		int
+	Base		bool
+	OtherSource	bool
+	IncludeSubs	bool
+	IncludeOtherSource	bool
+	Verbose		bool
+	Quiet		bool
 }
 
 // Scan options for api server
