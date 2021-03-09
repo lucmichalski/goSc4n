@@ -1,12 +1,12 @@
 package libs
 
 const (
-	// VERSION current Jaeles version
+	// VERSION current goSc4n version
 	VERSION = "v1.0"
 	// AUTHOR author of this
-	AUTHOR = "@goSc4n"
+	AUTHOR = "goSc4n"
 	// DOCS link to official documentation
-	DOCS = "https://jaeles-project.github.io/"
+	DOCS = ""
 	// SIGNREPO default repo to get signature
 	SIGNREPO = ""
 	// UIREPO default repo to get UI

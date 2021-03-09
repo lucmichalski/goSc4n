@@ -2,12 +2,12 @@ package database
 
 import (
 	"fmt"
+	"github.com/goSc4n/goSc4n/tree/hoangnm/database/models"
 	"github.com/goSc4n/goSc4n/tree/hoangnm/libs"
 	"path/filepath"
 	"strings"
 
 	"github.com/google/uuid"
-	"github.com/jaeles-project/jaeles/database/models"
 )
 
 // CleanScans clean all scan

@@ -32,11 +32,11 @@ type ReportData struct {
 
 // GenActiveReport generate report file
 func GenActiveReport(options libs.Options) error {
-	title := "Jaeles Active Report"
+	title := "goSc4n Active Report"
 	if options.Report.Title != "" {
 		title = options.Report.Title
 	}
-	// parse vulns from out/jaeles-summary.txt
+	// parse vulns from out/goSc4n-summary.txt
 	vulns := ParseVuln(options)
 	if len(vulns) == 0 {
 		return errors.New(fmt.Sprintf("no Vulnerability found from %v", options.Output))

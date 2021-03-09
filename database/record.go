@@ -2,10 +2,11 @@ package database
 
 import (
 	"encoding/base64"
+	"github.com/goSc4n/goSc4n/tree/hoangnm/database/models"
+	"github.com/goSc4n/goSc4n/tree/hoangnm/libs"
 	"path/filepath"
 
-	"github.com/jaeles-project/jaeles/database/models"
-	"github.com/jaeles-project/jaeles/libs"
+
 )
 
 // CleanRecords clean all record

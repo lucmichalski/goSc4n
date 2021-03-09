@@ -7,10 +7,81 @@ import (
 	"github.com/goSc4n/goSc4n/tree/hoangnm/libs"
 	"github.com/goSc4n/goSc4n/tree/hoangnm/utils"
 	"github.com/spf13/viper"
+	"gopkg.in/src-d/go-git.v4"
+	"gopkg.in/src-d/go-git.v4/plumbing/transport/http"
 	"io/ioutil"
 	"os"
 	"path"
+	_ "path/filepath"
 )
+
+
+//func UpdatePlugins(options libs.Options) {
+//	pluginPath := path.Join(options.RootFolder, "plugins")
+//	url := libs.UIREPO
+//	utils.GoodF("Cloning Plugins from: %v", url)
+//	if utils.FolderExists(pluginPath) {
+//		utils.InforF("Remove: %v", pluginPath)
+//		os.RemoveAll(pluginPath)
+//	}
+//	_, err := git.PlainClone(pluginPath, false, &git.CloneOptions{
+//		URL:               url,
+//		RecurseSubmodules: git.DefaultSubmoduleRecursionDepth,
+//		Depth:             1,
+//	})
+//
+//	if err != nil {
+//		utils.ErrorF("Error to clone Plugins repo: %v - %v", url, err)
+//		return
+//	}
+//}
+
+func UpdateSignature(options libs.Options) {
+	signPath := path.Join(options.RootFolder, "base-signatures")
+	url := libs.SIGNREPO
+	// in case we want to in private repo
+	if options.Config.Repo != "" {
+		url = options.Config.Repo
+	}
+
+	utils.GoodF("Cloning Signature from: %v", url)
+	if utils.FolderExists(signPath) {
+		utils.InforF("Remove: %v", signPath)
+		os.RemoveAll(signPath)
+		os.RemoveAll(options.ResourcesFolder)
+		os.RemoveAll(options.ThirdPartyFolder)
+	}
+	if options.Config.PrivateKey != "" {
+		cmd := fmt.Sprintf("GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i %v' git clone --depth=1 %v %v", options.Config.PrivateKey, url, signPath)
+		Execution(cmd)
+	} else {
+		var err error
+		if options.Server.Username != "" && options.Server.Password != "" {
+			_, err = git.PlainClone(signPath, false, &git.CloneOptions{
+				Auth: &http.BasicAuth{
+					Username: options.Config.Username,
+					Password: options.Config.Password,
+				},
+				URL:               url,
+				RecurseSubmodules: git.DefaultSubmoduleRecursionDepth,
+				Depth:             1,
+				Progress:          os.Stdout,
+			})
+		} else {
+			_, err = git.PlainClone(signPath, false, &git.CloneOptions{
+				URL:               url,
+				RecurseSubmodules: git.DefaultSubmoduleRecursionDepth,
+				Depth:             1,
+				Progress:          os.Stdout,
+			})
+		}
+
+		if err != nil {
+			utils.ErrorF("Error to clone Signature repo: %v - %v", url, err)
+			return
+		}
+	}
+}
 
 // InitConfig init config
 func InitConfig(options *libs.Options) {
@@ -21,6 +92,8 @@ func InitConfig(options *libs.Options) {
 		utils.InforF("Init new config at %v", options.RootFolder)
 		os.MkdirAll(options.RootFolder, 0750)
 		// cloning default repo
+		//UpdatePlugins(*options)
+		UpdateSignature(*options)
 	}
 
 	configPath := path.Join(options.RootFolder, "config.yaml")
@@ -35,7 +108,7 @@ func InitConfig(options *libs.Options) {
 		v.SetDefault("defaultSign", "*")
 		v.SetDefault("cors", "*")
 		// default credential
-		v.SetDefault("username", "jaeles")
+		v.SetDefault("username", "goSc4n")
 		v.SetDefault("password", utils.GenHash(utils.GetTS())[:10])
 		v.SetDefault("secret", utils.GenHash(utils.GetTS()))
 		v.SetDefault("bind", bind)
@@ -74,6 +147,10 @@ func InitConfig(options *libs.Options) {
 		}
 	}
 
+	// set some default config
+	options.ResourcesFolder = path.Join(utils.NormalizePath(options.RootFolder), "resources")
+	options.ThirdPartyFolder = path.Join(utils.NormalizePath(options.RootFolder), "thirdparty")
+
 	// create output folder
 	var err error
 	err = os.MkdirAll(options.Output, 0750)
@@ -82,16 +159,17 @@ func InitConfig(options *libs.Options) {
 		os.Exit(1)
 	}
 	if options.SummaryOutput == "" {
-		options.SummaryOutput = path.Join(options.Output, "jaeles-summary.txt")
+		options.SummaryOutput = path.Join(options.Output, "goSc4n-summary.txt")
 	}
 	if options.SummaryVuln == "" {
 		options.SummaryVuln = path.Join(options.Output, "vuln-summary.txt")
 	}
 
+
 	dbSize := utils.GetFileSize(options.Server.DBPath)
 	if dbSize > 5.0 {
 		utils.WarningF("Your Database size look very big: %vGB", fmt.Sprintf("%.2f", dbSize))
-		utils.WarningF("Consider clean your db with this command: 'jaeles config -a clear' or just remove your '~/.jaeles/'")
+		utils.WarningF("Consider clean your db with this command: 'goSc4n config -a clear' or just remove your '~/.goSc4n/'")
 	}
 	utils.InforF("Summary output: %v", options.SummaryOutput)
 

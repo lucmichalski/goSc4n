@@ -10,6 +10,8 @@ import (
 	"net/http"
 	"os"
 	"path"
+	"path/filepath"
+	"runtime"
 	"time"
 
 	jwt "github.com/appleboy/gin-jwt/v2"
@@ -47,9 +49,9 @@ func InitRouter(options libs.Options, result chan libs.Record) {
 	if options.Server.NoAuth {
 		fmt.Fprintf(os.Stderr, "[Warning] You're running server with %v\n", color.RedString("NO AUTHENTICATION"))
 	}
-
-	// default is ~/.jaeles/ui/
-	uiPath := path.Join(options.RootFolder, "/plugins/ui")
+	_, b, _, _ := runtime.Caller(0)
+	basepath   := filepath.Dir(b)
+	uiPath := path.Join(basepath[:len(basepath)-7], "/plugins/ui")
 	r.Use(static.Serve("/", static.LocalFile(uiPath, true)))
 
 	allowOrigin := "*"
@@ -71,7 +73,7 @@ func InitRouter(options libs.Options, result chan libs.Record) {
 
 	// the jwt middleware
 	authMiddleware, err := jwt.New(&jwt.GinJWTMiddleware{
-		Realm:       "jaeles server",
+		Realm:       "goSc4n server",
 		Key:         []byte(secret),
 		Timeout:     time.Hour * 360,
 		MaxRefresh:  time.Hour * 720,
@@ -128,7 +130,7 @@ func InitRouter(options libs.Options, result chan libs.Record) {
 			})
 		},
 		TokenLookup:   "header: Authorization, query: token, cookie: jwt",
-		TokenHeadName: "Jaeles",
+		TokenHeadName: "goSc4n",
 		TimeFunc:      time.Now,
 	})
 

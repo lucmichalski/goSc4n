@@ -72,7 +72,7 @@ func runScan(cmd *cobra.Command, _ []string) error {
 
 	if len(urls) == 0 {
 		fmt.Fprintf(os.Stderr, "[Error] No input loaded\n")
-		fmt.Fprintf(os.Stderr, "Use 'jaeles -h' for more information about a command.\n")
+		fmt.Fprintf(os.Stderr, "Use 'goSc4n -h' for more information about a command.\n")
 		os.Exit(1)
 	}
 
@@ -81,7 +81,7 @@ func runScan(cmd *cobra.Command, _ []string) error {
 		utils.WarningF("Consider using --chunk options")
 	}
 	if len(urls) > options.ChunkLimit && options.ChunkRun {
-		utils.InforF("Running Jaeles in Chunk mode")
+		utils.InforF("Running goSc4n in Chunk mode")
 		rawCommand := strings.Join(os.Args, " ")
 
 		if strings.Contains(rawCommand, "-U ") {
@@ -235,3 +235,5 @@ func ExecutionWithStd(cmd string) (string, error) {
 	}
 	return output, nil
 }
+
+

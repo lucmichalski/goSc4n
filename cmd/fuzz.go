@@ -23,6 +23,7 @@ func init()  {
 	fuzzCmd.Flags().IntVar(&options.Fuzz.Concurrent,"concurrent",  5, "The number of the maximum allowed concurrent requests of the matching domains")
 	fuzzCmd.Flags().IntVar(&options.Fuzz.Depth,"depth", 1, "MaxDepth limits the recursion depth of visited URLs. (Set it to 0 for infinite recursion)")
 	fuzzCmd.Flags().BoolVar(&options.Fuzz.Quiet,"quiet", true, "Suppress all the output and only show URL")
+	fuzzCmd.SetHelpFunc(FuzzHelp)
 	RootCmd.AddCommand(fuzzCmd)
 }
 
@@ -58,11 +59,12 @@ func genCmd(cmd *cobra.Command) {
 func runSpider(cmd *cobra.Command, _ []string) error {
 	cmdInput = ""
 	genCmd(cmd)
-	spiderCmd := exec.Command("bash", "-c", "./gospider "+cmdInput +" >	input/test1.txt")
+	spiderCmd := exec.Command("bash", "-c", "./crawler/gospider "+cmdInput +" > input/fuzzOutput.txt")
 	out, err := spiderCmd.Output()
 	if err != nil {
 		fmt.Println("StdoutPipe: " + err.Error())
 	}
 	fmt.Println(string(out))
+	fmt.Println("You can get output in: ./input/fuzzOutput")
 	return nil
 }

@@ -98,7 +98,7 @@ func runConfig(cmd *cobra.Command, args []string) error {
 		SelectSign()
 		if len(options.SelectedSigns) == 0 {
 			fmt.Fprintf(os.Stderr, "[Error] No signature loaded\n")
-			fmt.Fprintf(os.Stderr, "Use 'jaeles -h' for more information about a command.\n")
+			fmt.Fprintf(os.Stderr, "Use 'goSc4n -h' for more information about a command.\n")
 		} else {
 			utils.GoodF("Signatures Loaded: %v", strings.Join(options.SelectedSigns, " "))
 		}
@@ -198,13 +198,15 @@ func rootHelp(cmd *cobra.Command, _ []string) {
 
 // RootMessage print help message
 func RootMessage() {
-	h := "\nUsage:\n jaeles scan|server|config [options]\n"
-	h += " jaeles scan|server|config|report -h -- Show usage message\n"
+	h := "\nUsage:\n goSc4n scan|server|config [options]\n"
+	h += " goSc4n scan|server|config|report -h -- Show usage message\n"
 	h += "\nSubcommands:\n"
-	h += "  jaeles scan   --  Scan list of URLs based on selected signatures\n"
-	h += "  jaeles server --  Start API server\n"
-	h += "  jaeles config --  Configuration CLI \n"
-	h += "  jaeles report --  Generate HTML report based on scanned output \n"
+	h += "  goSc4n scan   --  Scan list of URLs based on selected signatures\n"
+	h += "  goSc4n server --  Start API server\n"
+	h += "  goSc4n config --  Configuration CLI \n"
+	h += "  goSc4n report --  Generate HTML report based on scanned output \n"
+	h += "  goSc4n fuzz   --  fuzzing one or many sites \n"
+	h += "  goSc4n spider --  crawler one or many sites \n"
 	h += `
 Core Flags:
   -c, --concurrency int         Set the concurrency level (default 20)
@@ -223,7 +225,7 @@ Mics Flags:
   -S, --selectorFile string     Signature selector from file
   -J, --format-input            Enable special input format (default is false)
   -f, --found string            Run host OS command when vulnerable found
-  -O, --summaryOutput string    Summary output file (default is "jaeles-summary.txt")
+  -O, --summaryOutput string    Summary output file (default is "goSc4n-summary.txt")
       --single string           Forced running in single mode
       --sverbose bool           Store verbose info in summary file
   -N  --no-output bool          Disable store output
@@ -242,25 +244,25 @@ Mics Flags:
       --ba                      Shortcut for take raw input as '{{.BaseURL}}'
 `
 	h += "\n\nExamples Commands:\n"
-	h += "  jaeles scan -s <signature> -u <url>\n"
-	h += "  jaeles scan -c 50 -s <signature> -U <list_urls> -L <level-of-signatures>\n"
-	h += "  jaeles scan -c 50 -s <signature> -U <list_urls>\n"
-	h += "  jaeles scan -c 50 -s <signature> -U <list_urls> -p 'dest=xxx.burpcollaborator.net'\n"
-	h += "  jaeles scan -c 50 -s <signature> -U <list_urls> -f 'noti_slack \"{{.vulnInfo}}\"'\n"
-	h += "  jaeles scan -v -c 50 -s <signature> -U list_target.txt -o /tmp/output\n"
-	h += "  jaeles scan -s <signature> -s <another-selector> -u http://example.com\n"
-	h += "  echo '{\"BaseURL\":\"https://example.com/sub/\"}' | jaeles scan -s sign.yaml -J \n"
-	h += "  jaeles scan -G -s <signature> -s <another-selector> -x <exclude-selector> -u http://example.com\n"
-	h += "  cat list_target.txt | jaeles scan -c 100 -s <signature>\n"
+	h += "  goSc4n scan -s <signature> -u <url>\n"
+	h += "  goSc4n scan -c 50 -s <signature> -U <list_urls> -L <level-of-signatures>\n"
+	h += "  goSc4n scan -c 50 -s <signature> -U <list_urls>\n"
+	h += "  goSc4n scan -c 50 -s <signature> -U <list_urls> -p 'dest=xxx.burpcollaborator.net'\n"
+	h += "  goSc4n scan -c 50 -s <signature> -U <list_urls> -f 'noti_slack \"{{.vulnInfo}}\"'\n"
+	h += "  goSc4n scan -v -c 50 -s <signature> -U list_target.txt -o /tmp/output\n"
+	h += "  goSc4n scan -s <signature> -s <another-selector> -u http://example.com\n"
+	h += "  echo '{\"BaseURL\":\"https://example.com/sub/\"}' | goSc4n scan -s sign.yaml -J \n"
+	h += "  goSc4n scan -G -s <signature> -s <another-selector> -x <exclude-selector> -u http://example.com\n"
+	h += "  cat list_target.txt | goSc4n scan -c 100 -s <signature>\n"
 
 	h += "\nOthers Commands:\n"
-	h += "  jaeles server -s '/tmp/custom-signature/sensitive/.*' -L 2\n"
-	h += "  jaeles server --host 0.0.0.0 --port 5000 -s '/tmp/custom-signature/sensitive/.*' -L 2\n"
-	h += "  jaeles config reload --signDir /tmp/standard-signatures/\n"
-	h += "  jaeles config add -B /tmp/custom-active-signatures/\n"
-	h += "  jaeles config update --repo https://github.com/jaeles-project/jaeles-signatures\n"
-	h += "  jaeles report -o /tmp/scanned/out\n"
-	h += "  jaeles report -o /tmp/scanned/out --title 'Verbose Report' --sverbose\n"
+	h += "  goSc4n server -s '/tmp/custom-signature/sensitive/.*' -L 2\n"
+	h += "  goSc4n server --host 0.0.0.0 --port 5000 -s '/tmp/custom-signature/sensitive/.*' -L 2\n"
+	h += "  goSc4n config reload --signDir /tmp/standard-signatures/\n"
+	h += "  goSc4n config add -B /tmp/custom-active-signatures/\n"
+	h += "  goSc4n config update --repo https://github.com/goSc4n-project/goSc4n-signatures\n"
+	h += "  goSc4n report -o /tmp/scanned/out\n"
+	h += "  goSc4n report -o /tmp/scanned/out --title 'Verbose Report' --sverbose\n"
 	fmt.Println(h)
 	fmt.Printf("Official Documentation can be found here: %s\n", color.GreenString(libs.DOCS))
 
@@ -270,26 +272,26 @@ Mics Flags:
 func HelpMessage() {
 	h := `
 Usage:
-  jaeles config [action]
+  goSc4n config [action]
 
 Config Command examples:
   # Init default signatures
-  jaeles config init
+  goSc4n config init
 
   # Update latest signatures
-  jaeles config update
-  jaeles config update --repo http://github.com/jaeles-project/another-signatures --user admin --pass admin
-  jaeles config update --repo git@github.com/jaeles-project/another-signatures -K your_private_key
+  goSc4n config update
+  goSc4n config update --repo http://github.com/goSc4n-project/another-signatures --user admin --pass admin
+  goSc4n config update --repo git@github.com/goSc4n-project/another-signatures -K your_private_key
 
   # Add custom signatures from folder
-  jaeles config add --signDir ~/custom-signatures/
+  goSc4n config add --signDir ~/custom-signatures/
 
   # Clean old stuff
-  jaeles config clean
+  goSc4n config clean
 
   # More examples
-  jaeles config add --signDir /tmp/standard-signatures/
-  jaeles config cred --user sample --pass not123456
+  goSc4n config add --signDir /tmp/standard-signatures/
+  goSc4n config cred --user sample --pass not123456
 	`
 	fmt.Println(h)
 	fmt.Printf("Official Documentation can be found here: %s\n", color.GreenString(libs.DOCS))
@@ -302,26 +304,56 @@ func ScanHelp(cmd *cobra.Command, _ []string) {
 	ScanMessage()
 }
 
+func FuzzHelp(cmd *cobra.Command, _ []string) {
+	fmt.Println(libs.Banner())
+	fmt.Println(cmd.UsageString())
+	FuzzMessage()
+}
+
+func SpiderHelp(cmd *cobra.Command, _ []string)  {
+	fmt.Println(libs.Banner())
+	fmt.Println(cmd.UsageString())
+	SpiderMessage()
+}
+
+func SpiderMessage()  {
+
+}
+
+func FuzzMessage()  {
+	h := "\nFuzz Usage example:\n"
+	h += "Flags:\n"
+	h += "\t--site string            Site to crawl\n"
+	h += "\t--sites string           Site list to crawl\n"
+	h += "\t--output string          Output folder\n"
+	h += "\t--threads int            Number of threads (Run sites in parallel) (default 1)\n"
+	h += "\t--concurrent int         The number of the maximum allowed concurrent requests of the matching domains (default 5)\n"
+	h += "\t--depth int              MaxDepth limits the recursion depth of visited URLs. (Set it to 0 for infinite recursion) (default 1)\n"
+	h += "\t--quiet                  Suppress all the output and only show URL\n"
+	fmt.Println(h)
+	fmt.Printf("Official Documentation can be found here: %s\n", color.GreenString(libs.DOCS))
+}
+
 // ScanMessage print help message
 func ScanMessage() {
 	h := "\nScan Usage example:\n"
-	h += "  jaeles scan -s <signature> -u <url>\n"
-	h += "  jaeles scan -c 50 -s <signature> -U <list_urls> -L <level-of-signatures>\n"
-	h += "  jaeles scan -c 50 -s <signature> -U <list_urls>\n"
-	h += "  jaeles scan -c 50 -s <signature> -U <list_urls> -p 'dest=xxx.burpcollaborator.net'\n"
-	h += "  jaeles scan -c 50 -s <signature> -U <list_urls> -f 'noti_slack \"{{.vulnInfo}}\"'\n"
-	h += "  jaeles scan -v -c 50 -s <signature> -U list_target.txt -o /tmp/output\n"
-	h += "  jaeles scan -s <signature> -s <another-selector> -u http://example.com\n"
-	h += "  echo '{\"BaseURL\":\"https://example.com/sub/\"}' | jaeles scan -s sign.yaml -J \n"
-	h += "  jaeles scan -G -s <signature> -s <another-selector> -x <exclude-selector> -u http://example.com\n"
-	h += "  cat list_target.txt | jaeles scan -c 100 -s <signature>\n"
+	h += "  goSc4n scan -s <signature> -u <url>\n"
+	h += "  goSc4n scan -c 50 -s <signature> -U <list_urls> -L <level-of-signatures>\n"
+	h += "  goSc4n scan -c 50 -s <signature> -U <list_urls>\n"
+	h += "  goSc4n scan -c 50 -s <signature> -U <list_urls> -p 'dest=xxx.burpcollaborator.net'\n"
+	h += "  goSc4n scan -c 50 -s <signature> -U <list_urls> -f 'noti_slack \"{{.vulnInfo}}\"'\n"
+	h += "  goSc4n scan -v -c 50 -s <signature> -U list_target.txt -o /tmp/output\n"
+	h += "  goSc4n scan -s <signature> -s <another-selector> -u http://example.com\n"
+	h += "  echo '{\"BaseURL\":\"https://example.com/sub/\"}' | goSc4n scan -s sign.yaml -J \n"
+	h += "  goSc4n scan -G -s <signature> -s <another-selector> -x <exclude-selector> -u http://example.com\n"
+	h += "  cat list_target.txt | goSc4n scan -c 100 -s <signature>\n"
 
 	h += "\n\nExamples:\n"
-	h += "  jaeles scan -s 'jira' -s 'ruby' -u target.com\n"
-	h += "  jaeles scan -c 50 -s 'java' -x 'tomcat' -U list_of_urls.txt\n"
-	h += "  jaeles scan -G -c 50 -s '/tmp/custom-signature/.*' -U list_of_urls.txt\n"
-	h += "  jaeles scan -v -s '~/my-signatures/products/wordpress/.*' -u 'https://wp.example.com' -p 'root=[[.URL]]'\n"
-	h += "  cat urls.txt | grep 'interesting' | jaeles scan -L 5 -c 50 -s 'fuzz/.*' -U list_of_urls.txt --proxy http://127.0.0.1:8080\n"
+	h += "  goSc4n scan -s 'jira' -s 'ruby' -u target.com\n"
+	h += "  goSc4n scan -c 50 -s 'java' -x 'tomcat' -U list_of_urls.txt\n"
+	h += "  goSc4n scan -G -c 50 -s '/tmp/custom-signature/.*' -U list_of_urls.txt\n"
+	h += "  goSc4n scan -v -s '~/my-signatures/products/wordpress/.*' -u 'https://wp.example.com' -p 'root=[[.URL]]'\n"
+	h += "  cat urls.txt | grep 'interesting' | goSc4n scan -L 5 -c 50 -s 'fuzz/.*' -U list_of_urls.txt --proxy http://127.0.0.1:8080\n"
 	h += "\n"
 	fmt.Println(h)
 	fmt.Printf("Official Documentation can be found here: %s\n", color.GreenString(libs.DOCS))

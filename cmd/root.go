@@ -16,12 +16,14 @@ import (
 
 var options = libs.Options{}
 
+var SpiderOp = libs.Spider{}
+
 // DB database variables
 var _ *gorm.DB
 
 var RootCmd = &cobra.Command{
-	Use:   "jaeles",
-	Short: "Jaeles Scanner",
+	Use:   "goSc4n",
+	Short: "goSc4n Scanner",
 	Long:  libs.Banner(),
 }
 
@@ -36,10 +38,10 @@ func Execute() {
 func init() {
 	cobra.OnInitialize(initConfig)
 	// config options
-	RootCmd.PersistentFlags().StringVar(&options.ConfigFile, "config", "", "config file (default is $HOME/.jaeles/config.yaml)")
-	//RootCmd.PersistentFlags().StringVar(&options.RootFolder, "rootDir", "~/.jaeles/", "root Project")
-	//RootCmd.PersistentFlags().StringVarP(&options.SignFolder, "signDir", "B", "~/.jaeles/base-signatures/", "Folder contain default signatures")
-	//RootCmd.PersistentFlags().StringVar(&options.ScanID, "scanID", "", "Scan ID")
+	RootCmd.PersistentFlags().StringVar(&options.ConfigFile, "config", "", "config file (default is $HOME/.goSc4n/config.yaml)")
+	RootCmd.PersistentFlags().StringVar(&options.RootFolder, "rootDir", "~/.goSc4n/", "root Project")
+	RootCmd.PersistentFlags().StringVarP(&options.SignFolder, "signDir", "B", "~/.goSc4n/base-signatures/", "Folder contain default signatures")
+	RootCmd.PersistentFlags().StringVar(&options.ScanID, "scanID", "", "Scan ID")
 
 	// http options
 	RootCmd.PersistentFlags().StringVar(&options.Proxy, "proxy", "", "proxy")
@@ -80,7 +82,7 @@ func init() {
 	RootCmd.PersistentFlags().StringVarP(&options.QuietFormat, "quietFormat", "Q", "{{.VulnURL}}", "Format for quiet output")
 	RootCmd.PersistentFlags().BoolVarP(&options.Quiet, "quiet", "q", false, "Quiet Output")
 	RootCmd.PersistentFlags().BoolVarP(&options.Verbose, "verbose", "v", false, "Verbose output")
-	RootCmd.PersistentFlags().BoolVarP(&options.Version, "version", "V", false, "Print version of Jaeles")
+	RootCmd.PersistentFlags().BoolVarP(&options.Version, "version", "V", false, "Print version of goSc4n")
 	RootCmd.PersistentFlags().BoolVar(&options.Debug, "debug", false, "Debug")
 	// chunk options
 	RootCmd.PersistentFlags().BoolVar(&options.ChunkRun, "chunk", false, "Enable chunk running against big input")
@@ -177,7 +179,7 @@ func SelectSign() {
 
 	if len(selectedSigns) == 0 {
 		fmt.Fprintf(os.Stderr, "[Error] No signature loaded\n")
-		fmt.Fprintf(os.Stderr, "Try '%s' to init default signatures\n", color.GreenString("jaeles config init"))
+		fmt.Fprintf(os.Stderr, "Try '%s' to init default signatures\n", color.GreenString("goSc4n config init"))
 		os.Exit(1)
 	}
 	selectedSigns = funk.UniqString(selectedSigns)

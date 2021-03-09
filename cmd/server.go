@@ -33,7 +33,7 @@ func init() {
 
 func runServer(cmd *cobra.Command, _ []string) error {
 	if options.NoDB {
-		fmt.Fprintf(os.Stderr, "Can't run Jaeles Server without DB\n")
+		fmt.Fprintf(os.Stderr, "Can't run goSc4n Server without DB\n")
 		os.Exit(-1)
 	}
 	SelectSign()

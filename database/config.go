@@ -3,7 +3,8 @@ package database
 import (
 	"fmt"
 	"github.com/go-resty/resty/v2"
-	"github.com/jaeles-project/jaeles/database/models"
+	"github.com/goSc4n/goSc4n/tree/hoangnm/database/models"
+
 	"strings"
 )
 

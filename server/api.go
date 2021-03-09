@@ -1,11 +1,11 @@
 package server
 
 import (
+	"github.com/goSc4n/goSc4n/tree/hoangnm/database"
+	"github.com/goSc4n/goSc4n/tree/hoangnm/database/models"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/jaeles-project/jaeles/database"
-	"github.com/jaeles-project/jaeles/database/models"
 )
 
 // Ping testing authenticated connection

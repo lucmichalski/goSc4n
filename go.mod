@@ -32,5 +32,6 @@ require (
 	github.com/thoas/go-funk v0.7.0
 	github.com/valyala/fasthttp v1.18.0
 	github.com/x-cray/logrus-prefixed-formatter v0.5.2
+	gopkg.in/src-d/go-git.v4 v4.13.1
 	gopkg.in/yaml.v2 v2.3.0
 )

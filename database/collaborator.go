@@ -2,13 +2,14 @@ package database
 
 import (
 	"fmt"
+	"github.com/goSc4n/goSc4n/tree/hoangnm/database/models"
+	"github.com/goSc4n/goSc4n/tree/hoangnm/libs"
 	"math/rand"
 	"time"
 
-	"github.com/jaeles-project/jaeles/libs"
+
 
 	"github.com/Jeffail/gabs/v2"
-	"github.com/jaeles-project/jaeles/database/models"
 )
 
 // GetCollab get random collab to test

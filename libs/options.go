@@ -61,6 +61,18 @@ type Options struct {
 	Config Config
 }
 
+type Spider struct {
+	Domain 		string
+	Sub 		bool
+	Level		string
+	Exclude 	string
+	Output		string
+	Placeholder	string
+	Quiet		bool
+}
+
+
+
 type Fuzz struct {
 	Site       string
 	Sites      string
