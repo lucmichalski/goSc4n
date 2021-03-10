@@ -203,46 +203,46 @@ func RootMessage() {
 	h += "\nSubcommands:\n"
 	h += "  goSc4n scan   --  Scan list of URLs based on selected signatures\n"
 	h += "  goSc4n server --  Start API server\n"
-	h += "  goSc4n config --  Configuration CLI \n"
-	h += "  goSc4n report --  Generate HTML report based on scanned output \n"
+	//h += "  goSc4n config --  Configuration CLI \n"
+	//h += "  goSc4n report --  Generate HTML report based on scanned output \n"
 	h += "  goSc4n fuzz   --  fuzzing one or many sites \n"
 	h += "  goSc4n spider --  crawler one or many sites \n"
-	h += `
-Core Flags:
-  -c, --concurrency int         Set the concurrency level (default 20)
-  -o, --output string           Output folder name (default "out")
-  -s, --signs strings           Signature selector (Multiple -s flags are accepted)
-  -L, --level int               Filter signatures by level (default 1)
-  -p, --params strings          Custom params -p='foo=bar' (Multiple -p flags are accepted)
-  -H, --headers strings         Custom headers (e.g: -H 'Referer: {{.BaseURL}}') (Multiple -H flags are accepted)
-
-Mics Flags:
-      --proxy string            proxy
-      --timeout int             HTTP timeout (default 20)
-      --debug                   Debug
-  -v, --verbose                 Verbose
-      --no-db                   Disable Database
-  -S, --selectorFile string     Signature selector from file
-  -J, --format-input            Enable special input format (default is false)
-  -f, --found string            Run host OS command when vulnerable found
-  -O, --summaryOutput string    Summary output file (default is "goSc4n-summary.txt")
-      --single string           Forced running in single mode
-      --sverbose bool           Store verbose info in summary file
-  -N  --no-output bool          Disable store output
-      --json bool               Store output as JSON format
-      --chunk bool              Enable chunk running against big input
-  -I, --inline string           Inline Detections
-  -q, --quiet                   Enable Quiet Output
-  -Q, --quietFormat string      Format for quiet output (default "{{.VulnURL}}")
-  -R, --report string           HTML report file name
-      --title string            HTML report title
-      --html string             Enable generate HTML reports after the scan done 
-      --hh string               Full help message
-      --re                      Shortcut for disable replicate request (avoid sending many request to timeout)
-      --at                      Enable Always True Detection for observe response
-      --lc                      Shortcut for '--proxy http://127.0.0.1:8080'
-      --ba                      Shortcut for take raw input as '{{.BaseURL}}'
-`
+//	h += `
+//Core Flags:
+//  -c, --concurrency int         Set the concurrency level (default 20)
+//  -o, --output string           Output folder name (default "out")
+//  -s, --signs strings           Signature selector (Multiple -s flags are accepted)
+//  -L, --level int               Filter signatures by level (default 1)
+//  -p, --params strings          Custom params -p='foo=bar' (Multiple -p flags are accepted)
+//  -H, --headers strings         Custom headers (e.g: -H 'Referer: {{.BaseURL}}') (Multiple -H flags are accepted)
+//
+//Mics Flags:
+//      --proxy string            proxy
+//      --timeout int             HTTP timeout (default 20)
+//      --debug                   Debug
+//  -v, --verbose                 Verbose
+//      --no-db                   Disable Database
+//  -S, --selectorFile string     Signature selector from file
+//  -J, --format-input            Enable special input format (default is false)
+//  -f, --found string            Run host OS command when vulnerable found
+//  -O, --summaryOutput string    Summary output file (default is "goSc4n-summary.txt")
+//      --single string           Forced running in single mode
+//      --sverbose bool           Store verbose info in summary file
+//  -N  --no-output bool          Disable store output
+//      --json bool               Store output as JSON format
+//      --chunk bool              Enable chunk running against big input
+//  -I, --inline string           Inline Detections
+//  -q, --quiet                   Enable Quiet Output
+//  -Q, --quietFormat string      Format for quiet output (default "{{.VulnURL}}")
+//  -R, --report string           HTML report file name
+//      --title string            HTML report title
+//      --html string             Enable generate HTML reports after the scan done
+//      --hh string               Full help message
+//      --re                      Shortcut for disable replicate request (avoid sending many request to timeout)
+//      --at                      Enable Always True Detection for observe response
+//      --lc                      Shortcut for '--proxy http://127.0.0.1:8080'
+//      --ba                      Shortcut for take raw input as '{{.BaseURL}}'
+//`
 	h += "\n\nExamples Commands:\n"
 	h += "  goSc4n scan -s <signature> -u <url>\n"
 	h += "  goSc4n scan -c 50 -s <signature> -U <list_urls> -L <level-of-signatures>\n"
@@ -255,14 +255,14 @@ Mics Flags:
 	h += "  goSc4n scan -G -s <signature> -s <another-selector> -x <exclude-selector> -u http://example.com\n"
 	h += "  cat list_target.txt | goSc4n scan -c 100 -s <signature>\n"
 
-	h += "\nOthers Commands:\n"
-	h += "  goSc4n server -s '/tmp/custom-signature/sensitive/.*' -L 2\n"
-	h += "  goSc4n server --host 0.0.0.0 --port 5000 -s '/tmp/custom-signature/sensitive/.*' -L 2\n"
-	h += "  goSc4n config reload --signDir /tmp/standard-signatures/\n"
-	h += "  goSc4n config add -B /tmp/custom-active-signatures/\n"
-	h += "  goSc4n config update --repo https://github.com/goSc4n-project/goSc4n-signatures\n"
-	h += "  goSc4n report -o /tmp/scanned/out\n"
-	h += "  goSc4n report -o /tmp/scanned/out --title 'Verbose Report' --sverbose\n"
+	//h += "\nOthers Commands:\n"
+	//h += "  goSc4n server -s '/tmp/custom-signature/sensitive/.*' -L 2\n"
+	//h += "  goSc4n server --host 0.0.0.0 --port 5000 -s '/tmp/custom-signature/sensitive/.*' -L 2\n"
+	//h += "  goSc4n config reload --signDir /tmp/standard-signatures/\n"
+	//h += "  goSc4n config add -B /tmp/custom-active-signatures/\n"
+	//h += "  goSc4n config update --repo https://github.com/goSc4n-project/goSc4n-signatures\n"
+	//h += "  goSc4n report -o /tmp/scanned/out\n"
+	//h += "  goSc4n report -o /tmp/scanned/out --title 'Verbose Report' --sverbose\n"
 	fmt.Println(h)
 	fmt.Printf("Official Documentation can be found here: %s\n", color.GreenString(libs.DOCS))
 
@@ -317,19 +317,37 @@ func SpiderHelp(cmd *cobra.Command, _ []string)  {
 }
 
 func SpiderMessage()  {
-
+	h := "\noptional arguments:\n"
+	h += "  --help            show this help message and exit\n"
+	h += "  --domain DOMAIN\n"
+	h += "                        Domain name of the taget [ex : hackerone.com]\n"
+	h += "  --subs SUBS  Set False for no subs [ex : --subs False ]\n"
+	h += "  --level LEVEL\n"
+	h += "                        For nested parameters [ex : --level high]\n"
+	h += "  --exclude EXCLUDE\n"
+	h += "                        extensions to exclude [ex --exclude php,aspx]\n"
+	h += "  --output OUTPUT\n"
+	h += "                        Output file name [by default it is 'domain.txt']\n"
+	h += "  --placeholder PLACEHOLDER\n"
+	h += "                        The string to add as a placeholder after the parameter\n"
+	h += "                        name.\n"
+	h += "  --quiet           Do not print the results to the screen\n"
+	h += "  --retries RETRIES\n"
+	h += "                        Specify number of retries for 4xx and 5xx errors\n"
+	h += "\n\nspider --domain http://testphp.vulnweb.com/\n"
+	fmt.Println(h)
 }
 
 func FuzzMessage()  {
-	h := "\nFuzz Usage example:\n"
-	h += "Flags:\n"
+	h := "Flags:\n"
 	h += "\t--site string            Site to crawl\n"
 	h += "\t--sites string           Site list to crawl\n"
 	h += "\t--output string          Output folder\n"
 	h += "\t--threads int            Number of threads (Run sites in parallel) (default 1)\n"
 	h += "\t--concurrent int         The number of the maximum allowed concurrent requests of the matching domains (default 5)\n"
 	h += "\t--depth int              MaxDepth limits the recursion depth of visited URLs. (Set it to 0 for infinite recursion) (default 1)\n"
-	h += "\t--quiet                  Suppress all the output and only show URL\n"
+	h += "\t--quiet                  Suppress all the output and only show URL\n\n"
+	h += "\tExample: fuzz --site \"http://testphp.vulnweb.com/\" --concurrent 10 --depth 10\n"
 	fmt.Println(h)
 	fmt.Printf("Official Documentation can be found here: %s\n", color.GreenString(libs.DOCS))
 }
