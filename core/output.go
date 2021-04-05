@@ -4,6 +4,7 @@ import (
 	"crypto/sha1"
 	"fmt"
 	"github.com/fatih/color"
+	"github.com/goSc4n/goSc4n/tree/hoangnm/database"
 	"github.com/goSc4n/goSc4n/tree/hoangnm/libs"
 	"github.com/goSc4n/goSc4n/tree/hoangnm/utils"
 	jsoniter "github.com/json-iterator/go"
@@ -28,10 +29,25 @@ func (r *Record) Output() string {
 		r.StoreOutput()
 		outputName = r.RawOutput
 
+		var rec libs.Record
+		rec.Response=r.Response
+		rec.DetectResult=r.DetectResult
+		rec.DetectString=r.DetectString
+		rec.ExtraOutput=r.ExtraOutput
+		rec.IsVulnerable=r.IsVulnerable
+		rec.Opt=r.Opt
+		rec.OriginReq=r.OriginReq
+		rec.OriginRes=r.OriginRes
+		rec.Origins=r.Origins
+		rec.RawOutput=r.RawOutput
+		rec.Request=r.Request
+		rec.ScanID=r.ScanID
+		rec.Sign=r.Sign
+
 		// @NOTE: Disable viewing from UI from v0.14
-		//if !r.Opt.NoDB {
-		//	database.ImportRecord(*r)
-		//}
+		if !r.Opt.NoDB {
+			database.ImportRecord(rec)
+		}
 	}
 
 	vulnInfo := fmt.Sprintf("[%v][%v] %v", r.Sign.ID, r.Sign.Info.Risk, r.Request.URL)

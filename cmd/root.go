@@ -40,7 +40,7 @@ func init() {
 	// config options
 	RootCmd.PersistentFlags().StringVar(&options.ConfigFile, "config", "", "config file (default is $HOME/.goSc4n/config.yaml)")
 	RootCmd.PersistentFlags().StringVar(&options.RootFolder, "rootDir", "~/.goSc4n/", "root Project")
-	RootCmd.PersistentFlags().StringVarP(&options.SignFolder, "signDir", "B", "~/.goSc4n/base-signatures/", "Folder contain default signatures")
+	RootCmd.PersistentFlags().StringVarP(&options.SignFolder, "signDir", "B", "./base-signatures/", "Folder contain default signatures")
 	RootCmd.PersistentFlags().StringVar(&options.ScanID, "scanID", "", "Scan ID")
 
 	// http options

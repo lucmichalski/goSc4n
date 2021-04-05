@@ -90,9 +90,9 @@ func GetAllScan(c *gin.Context) {
 	for _, scan := range scans {
 		var rec models.Record
 		database.DB.First(&rec, "scan_id = ?", scan.ScanID)
-		if rec.ScanID != "" {
+		//if rec.ScanID != "" {
 			realScans = append(realScans, scan)
-		}
+		//}
 	}
 
 	c.JSON(200, gin.H{
@@ -146,4 +146,9 @@ func UpdateDefaultSign(c *gin.Context) {
 		"status":  "200",
 		"message": "Update Defeult sign success",
 	})
+}
+
+func addScan(c *gin.Context)  {
+	scanDetail:=c.PostForm("newScan")
+	print(scanDetail)
 }

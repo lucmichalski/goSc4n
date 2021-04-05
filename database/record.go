@@ -43,7 +43,7 @@ func ImportRecord(rec libs.Record) {
 		ExtraOutput: extraOutput,
 		Issues:      rec.Sign.ID,
 		Risk:        rec.Sign.Info.Risk,
-		ScanID:      rec.ScanID,
+		ScanID:      rec.Opt.ScanID,
 	}
 	DB.Create(&recObj)
 

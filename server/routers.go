@@ -54,22 +54,23 @@ func InitRouter(options libs.Options, result chan libs.Record) {
 	uiPath := path.Join(basepath[:len(basepath)-7], "/plugins/ui")
 	r.Use(static.Serve("/", static.LocalFile(uiPath, true)))
 
-	allowOrigin := "*"
+	//allowOrigin := "*"
 	secret := "something you have to change"
 	if options.Server.JWTSecret != "" {
 		secret = options.Server.JWTSecret
 	}
 	if options.Server.Cors != "" {
-		allowOrigin = options.Server.Cors
+		//allowOrigin = options.Server.Cors
 	}
 
-	r.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{allowOrigin},
-		AllowMethods:     []string{"POST", "GET", "OPTIONS"},
-		AllowHeaders:     []string{"Authorization"},
-		AllowCredentials: true,
-		MaxAge:           24 * time.Hour,
-	}))
+	r.Use(cors.Default())
+	//r.Use(cors.New(cors.Config{
+	//	AllowOrigins:     []string{allowOrigin},
+	//	AllowMethods:     []string{"POST", "GET", "OPTIONS"},
+	//	AllowHeaders:     []string{"Authorization"},
+	//	AllowCredentials: true,
+	//	MaxAge:           24 * time.Hour,
+	//}))
 
 	// the jwt middleware
 	authMiddleware, err := jwt.New(&jwt.GinJWTMiddleware{
@@ -139,11 +140,11 @@ func InitRouter(options libs.Options, result chan libs.Record) {
 	}
 
 	r.POST("/auth/login", authMiddleware.LoginHandler)
-	r.NoRoute(authMiddleware.MiddlewareFunc(), func(c *gin.Context) {
-		claims := jwt.ExtractClaims(c)
-		utils.InforF("NoRoute claims: %#v\n", claims)
-		c.JSON(404, gin.H{"code": "404", "message": "Page not found"})
-	})
+	//r.NoRoute(authMiddleware.MiddlewareFunc(), func(c *gin.Context) {
+	//	claims := jwt.ExtractClaims(c)
+	//	utils.InforF("NoRoute claims: %#v\n", claims)
+	//	c.JSON(404, gin.H{"code": "404", "message": "Page not found"})
+	//})
 	auth := r.Group("/api")
 
 	// Refresh time can be longer than token timeout
@@ -161,6 +162,7 @@ func InitRouter(options libs.Options, result chan libs.Record) {
 		auth.GET("/scans", GetAllScan)
 		auth.GET("/scan/:sid/", GetRecords)
 		auth.GET("/record/:rid/", GetRecord)
+		auth.POST("/addScan",addScan)
 	}
 
 	if err := http.ListenAndServe(options.Server.Bind, r); err != nil {
