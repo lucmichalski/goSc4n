@@ -162,7 +162,7 @@ func InitRouter(options libs.Options, result chan libs.Record) {
 		auth.GET("/scans", GetAllScan)
 		auth.GET("/scan/:sid/", GetRecords)
 		auth.GET("/record/:rid/", GetRecord)
-		auth.POST("/addScan",addScan)
+		auth.POST("/addScan",addScan(options))
 	}
 
 	if err := http.ListenAndServe(options.Server.Bind, r); err != nil {
