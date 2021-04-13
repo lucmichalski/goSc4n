@@ -19,11 +19,11 @@ require (
 	github.com/go-sourcemap/sourcemap v2.1.3+incompatible // indirect
 	github.com/google/uuid v1.1.2
 	github.com/gorilla/websocket v1.4.2
-	github.com/jaeles-project/jaeles v0.0.0-20210113065309-f9ca5a0f044f
 	github.com/jinzhu/copier v0.0.0-20201025035756-632e723a6687
 	github.com/jinzhu/gorm v1.9.16
 	github.com/json-iterator/go v1.1.10
 	github.com/logrusorgru/aurora/v3 v3.0.0
+	github.com/mgutz/ansi v0.0.0-20200706080929-d51e80ef957d // indirect
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/panjf2000/ants v1.3.0
 	github.com/sirupsen/logrus v1.7.0

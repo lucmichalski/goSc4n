@@ -17,7 +17,7 @@ func init() {
 		Long:  libs.Banner(),
 		RunE:  runReport,
 	}
-	reportCmd.Flags().String("template", "~/.jaeles/plugins/report/index.html", "Report Template File")
+	reportCmd.Flags().String("template", "./report/index.html", "Report Template File")
 	reportCmd.SetHelpFunc(ReportHelp)
 	RootCmd.AddCommand(reportCmd)
 }
@@ -32,14 +32,14 @@ func runReport(cmd *cobra.Command, _ []string) error {
 // DoGenReport generate report from scanned result
 func DoGenReport(options libs.Options) error {
 	if options.Report.TemplateFile == "" {
-		options.Report.TemplateFile = "~/.jaeles/plugins/report/index.html"
+		options.Report.TemplateFile = "./report/index.html"
 	}
 	if options.VerboseSummary {
-		options.Report.TemplateFile = "~/.jaeles/plugins/report/verbose.html"
+		options.Report.TemplateFile = "./report/verbose.html"
 	}
 
 	if options.Report.ReportName == "" {
-		options.Report.ReportName = "jaeles-report.html"
+		options.Report.ReportName = "goSc4n-report.html"
 	}
 
 	// get template file

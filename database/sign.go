@@ -2,15 +2,15 @@ package database
 
 import (
 	"fmt"
-	"github.com/jaeles-project/jaeles/utils"
+	"github.com/goSc4n/goSc4n/tree/hoangnm/database/models"
+	"github.com/goSc4n/goSc4n/tree/hoangnm/utils"
 	"io/ioutil"
 	"os"
 	"regexp"
 	"strings"
 
 	"github.com/Shopify/yaml"
-	"github.com/jaeles-project/jaeles/database/models"
-	"github.com/jaeles-project/jaeles/libs"
+	"github.com/goSc4n/goSc4n/tree/hoangnm/libs"
 )
 
 // CleanSigns clean all signature

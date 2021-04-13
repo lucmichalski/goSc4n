@@ -1,0 +1,32 @@
+[36m
+
+         ___                               _    __       
+        / _ \___ ________ ___ _  ___ ___  (_)__/ /__ ____
+       / ___/ _ `/ __/ _ `/  ' \(_-</ _ \/ / _  / -_) __/
+      /_/   \_,_/_/  \_,_/_/_/_/___/ .__/_/\_,_/\__/_/   
+                                  /_/     [0m               
+                            
+                           [32m - coded with <3 by Devansh Batham[0m 
+    
+usage: paramspider.py [-h] -d DOMAIN [-s SUBS] [-l LEVEL] [-e EXCLUDE]
+                      [-o OUTPUT] [-p PLACEHOLDER] [-q] [-r RETRIES]
+
+ParamSpider a parameter discovery suite
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d DOMAIN, --domain DOMAIN
+                        Domain name of the taget [ex : hackerone.com]
+  -s SUBS, --subs SUBS  Set False for no subs [ex : --subs False ]
+  -l LEVEL, --level LEVEL
+                        For nested parameters [ex : --level high]
+  -e EXCLUDE, --exclude EXCLUDE
+                        extensions to exclude [ex --exclude php,aspx]
+  -o OUTPUT, --output OUTPUT
+                        Output file name [by default it is 'domain.txt']
+  -p PLACEHOLDER, --placeholder PLACEHOLDER
+                        The string to add as a placeholder after the parameter
+                        name.
+  -q, --quiet           Do not print the results to the screen
+  -r RETRIES, --retries RETRIES
+                        Specify number of retries for 4xx and 5xx errors

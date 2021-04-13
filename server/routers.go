@@ -51,8 +51,14 @@ func InitRouter(options libs.Options, result chan libs.Record) {
 	}
 	_, b, _, _ := runtime.Caller(0)
 	basepath   := filepath.Dir(b)
-	uiPath := path.Join(basepath[:len(basepath)-7], "/plugins/ui")
+	uiPath := path.Join(basepath[:len(basepath)-7], "/plugins/build")
 	r.Use(static.Serve("/", static.LocalFile(uiPath, true)))
+	r.Use(static.Serve("/summary",static.LocalFile(uiPath,true)))
+	r.Use(static.Serve("/scans",static.LocalFile(uiPath,true)))
+	r.Use(static.Serve("/signatures",static.LocalFile(uiPath,true)))
+	r.Use(static.Serve("/listScan",static.LocalFile(uiPath,true)))
+	r.Use(static.Serve("/addScan",static.LocalFile(uiPath,true)))
+
 
 	//allowOrigin := "*"
 	secret := "something you have to change"

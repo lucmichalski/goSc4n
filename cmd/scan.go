@@ -22,7 +22,7 @@ func init() {
 		Long:  libs.Banner(),
 		RunE:  runScan,
 	}
-
+	scanCmd.PersistentFlags().StringVar(&options.ScanID, "scanID", "", "Scan ID")
 	scanCmd.Flags().StringP("url", "u", "", "URL of target")
 	scanCmd.Flags().StringP("urls", "U", "", "URLs file of target")
 	scanCmd.Flags().StringVarP(&options.Scan.RawRequest, "raw", "r", "", "Raw request from Burp for origin")

@@ -180,12 +180,12 @@ func addScan(options libs.Options) gin.HandlerFunc {
 			log.Fatalln(err)
 			c.Status(http.StatusBadRequest)
 		}else{
-			SelectSign(options)
 			var urls []string
+			options.Signs = dataDTO.ScanDto.Signatures
 			if dataDTO.ScanDto.Url != "" {
 				urls = append(urls, dataDTO.ScanDto.Url)
 			}
-			options.Signs = dataDTO.ScanDto.Signatures
+			SelectSign(options)
 			var wg sync.WaitGroup
 			p, _ := ants.NewPoolWithFunc(options.Concurrency, func(i interface{}) {
 				CreateRunner(i,options)

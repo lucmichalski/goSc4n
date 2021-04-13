@@ -1,0 +1,7 @@
+[liferay-cve][high] - http://demo35.vnpttiengiang.vn
+[liferay-cve][high] - https://noibo.vnptit.vn
+[liferay-cve][high] - https://vnptit.vn
+[sqli-param-fuzz-01][High] - http://testphp.vulnweb.com/search.php?test=
+[sqli-param-fuzz-01][High] - http://testphp.vulnweb.com/search.php?test=1
+[sqli-param-fuzz-01][High] - http://testphp.vulnweb.com/search.php?test=query
+[sqli-param-fuzz-01][High] - http://testphp.vulnweb.com/search.php?test=query%27
