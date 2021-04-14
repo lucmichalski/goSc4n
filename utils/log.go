@@ -31,7 +31,7 @@ func InitLog(options *libs.Options) {
 	if options.LogFile != "" {
 		options.LogFile = NormalizePath(options.LogFile)
 		dir := path.Dir(options.LogFile)
-		tmpFile, _ := ioutil.TempFile(dir, "jaeles-*.log")
+		tmpFile, _ := ioutil.TempFile(dir, "goSc4n-*.log")
 		options.LogFile = tmpFile.Name()
 		dir = filepath.Dir(options.LogFile)
 		if !FolderExists(dir) {

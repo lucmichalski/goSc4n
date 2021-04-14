@@ -16,30 +16,10 @@ import (
 )
 
 
-//func UpdatePlugins(options libs.Options) {
-//	pluginPath := path.Join(options.RootFolder, "plugins")
-//	url := libs.UIREPO
-//	utils.GoodF("Cloning Plugins from: %v", url)
-//	if utils.FolderExists(pluginPath) {
-//		utils.InforF("Remove: %v", pluginPath)
-//		os.RemoveAll(pluginPath)
-//	}
-//	_, err := git.PlainClone(pluginPath, false, &git.CloneOptions{
-//		URL:               url,
-//		RecurseSubmodules: git.DefaultSubmoduleRecursionDepth,
-//		Depth:             1,
-//	})
-//
-//	if err != nil {
-//		utils.ErrorF("Error to clone Plugins repo: %v - %v", url, err)
-//		return
-//	}
-//}
-
 func UpdateSignature(options libs.Options) {
 	signPath := path.Join(options.RootFolder, "base-signatures")
 	url := libs.SIGNREPO
-	// in case we want to in private repo
+
 	if options.Config.Repo != "" {
 		url = options.Config.Repo
 	}
@@ -175,7 +155,7 @@ func InitConfig(options *libs.Options) {
 
 	if options.ChunkRun {
 		if options.ChunkDir == "" {
-			options.ChunkDir = path.Join(os.TempDir(), "jaeles-chunk-data")
+			options.ChunkDir = path.Join(os.TempDir(), "goSc4n-chunk-data")
 		}
 		os.MkdirAll(options.ChunkDir, 0755)
 	}

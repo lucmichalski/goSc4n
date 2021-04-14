@@ -55,7 +55,7 @@ func runConfig(cmd *cobra.Command, args []string) error {
 	if action == "" && len(args) > 0 {
 		action = args[0]
 	}
-	getJaelesEnv(&options)
+	getEnv(&options)
 
 	switch action {
 	case "init":
@@ -247,7 +247,6 @@ func RootMessage() {
 	h += "  goSc4n scan -s <signature> -u <url>\n"
 	h += "  goSc4n scan -c 50 -s <signature> -U <list_urls> -L <level-of-signatures>\n"
 	h += "  goSc4n scan -c 50 -s <signature> -U <list_urls>\n"
-	h += "  goSc4n scan -c 50 -s <signature> -U <list_urls> -p 'dest=xxx.burpcollaborator.net'\n"
 	h += "  goSc4n scan -c 50 -s <signature> -U <list_urls> -f 'noti_slack \"{{.vulnInfo}}\"'\n"
 	h += "  goSc4n scan -v -c 50 -s <signature> -U list_target.txt -o /tmp/output\n"
 	h += "  goSc4n scan -s <signature> -s <another-selector> -u http://example.com\n"
@@ -358,7 +357,6 @@ func ScanMessage() {
 	h += "  goSc4n scan -s <signature> -u <url>\n"
 	h += "  goSc4n scan -c 50 -s <signature> -U <list_urls> -L <level-of-signatures>\n"
 	h += "  goSc4n scan -c 50 -s <signature> -U <list_urls>\n"
-	h += "  goSc4n scan -c 50 -s <signature> -U <list_urls> -p 'dest=xxx.burpcollaborator.net'\n"
 	h += "  goSc4n scan -c 50 -s <signature> -U <list_urls> -f 'noti_slack \"{{.vulnInfo}}\"'\n"
 	h += "  goSc4n scan -v -c 50 -s <signature> -U list_target.txt -o /tmp/output\n"
 	h += "  goSc4n scan -s <signature> -s <another-selector> -u http://example.com\n"
@@ -392,12 +390,12 @@ func ReportHelp(cmd *cobra.Command, _ []string) {
 	fmt.Printf("Official Documentation can be found here: %s\n", color.GreenString(libs.DOCS))
 }
 
-func getJaelesEnv(options *libs.Options) {
-	if utils.GetOSEnv("JAELES_REPO") != "JAELES_REPO" {
-		options.Config.Repo = utils.GetOSEnv("JAELES_REPO")
+func getEnv(options *libs.Options) {
+	if utils.GetOSEnv("GOSC4N_REPO") != "GOSC4N_REPO" {
+		options.Config.Repo = utils.GetOSEnv("GOSC4N_REPO")
 	}
-	if utils.GetOSEnv("JAELES_KEY") != "JAELES_KEY" {
-		options.Config.PrivateKey = utils.GetOSEnv("JAELES_KEY")
+	if utils.GetOSEnv("GOSC4N_KEY") != "GOSC4N_KEY" {
+		options.Config.PrivateKey = utils.GetOSEnv("GOSC4N_KEY")
 	}
 }
 
