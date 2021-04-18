@@ -198,13 +198,13 @@ func rootHelp(cmd *cobra.Command, _ []string) {
 
 // RootMessage print help message
 func RootMessage() {
-	h := "\nUsage:\n goSc4n scan|server|config [options]\n"
-	h += " goSc4n scan|server|config|report -h -- Show usage message\n"
+	h := "\nUsage:\n goSc4n scan|server|config|fuzz|spider [options]\n"
+	h += " goSc4n scan|server|config|report|fuzz|spider -h -- Show usage message\n"
 	h += "\nSubcommands:\n"
 	h += "  goSc4n scan   --  Scan list of URLs based on selected signatures\n"
 	h += "  goSc4n server --  Start API server\n"
-	//h += "  goSc4n config --  Configuration CLI \n"
-	//h += "  goSc4n report --  Generate HTML report based on scanned output \n"
+	h += "  goSc4n config --  Configuration CLI \n"
+	h += "  goSc4n report --  Generate HTML report based on scanned output \n"
 	h += "  goSc4n fuzz   --  fuzzing one or many sites \n"
 	h += "  goSc4n spider --  crawler one or many sites \n"
 //	h += `
@@ -245,14 +245,18 @@ func RootMessage() {
 //`
 	h += "\n\nExamples Commands:\n"
 	h += "  goSc4n scan -s <signature> -u <url>\n"
-	h += "  goSc4n scan -c 50 -s <signature> -U <list_urls> -L <level-of-signatures>\n"
+	//h += "  goSc4n scan -c 50 -s <signature> -U <list_urls> -L <level-of-signatures>\n"
 	h += "  goSc4n scan -c 50 -s <signature> -U <list_urls>\n"
-	h += "  goSc4n scan -c 50 -s <signature> -U <list_urls> -f 'noti_slack \"{{.vulnInfo}}\"'\n"
+	//h += "  goSc4n scan -c 50 -s <signature> -U <list_urls> -f 'noti_slack \"{{.vulnInfo}}\"'\n"
 	h += "  goSc4n scan -v -c 50 -s <signature> -U list_target.txt -o /tmp/output\n"
 	h += "  goSc4n scan -s <signature> -s <another-selector> -u http://example.com\n"
-	h += "  echo '{\"BaseURL\":\"https://example.com/sub/\"}' | goSc4n scan -s sign.yaml -J \n"
-	h += "  goSc4n scan -G -s <signature> -s <another-selector> -x <exclude-selector> -u http://example.com\n"
-	h += "  cat list_target.txt | goSc4n scan -c 100 -s <signature>\n"
+	h += "  goSc4n server -s <signature> -c -v"
+	h += "  goSc4n report -o <output directory> --report <Name File>"
+	h += "  goSc4n fuzz --site <target> --concurrent <number of threads> --depth 10\n"
+	h += "  goSc4n spider --domain <target>\n"
+	//h += "  echo '{\"BaseURL\":\"https://example.com/sub/\"}' | goSc4n scan -s sign.yaml -J \n"
+	//h += "  goSc4n scan -G -s <signature> -s <another-selector> -x <exclude-selector> -u http://example.com\n"
+	//h += "  cat list_target.txt | goSc4n scan -c 100 -s <signature>\n"
 
 	//h += "\nOthers Commands:\n"
 	//h += "  goSc4n server -s '/tmp/custom-signature/sensitive/.*' -L 2\n"
@@ -276,11 +280,6 @@ Usage:
 Config Command examples:
   # Init default signatures
   goSc4n config init
-
-  # Update latest signatures
-  goSc4n config update
-  goSc4n config update --repo http://github.com/goSc4n-project/another-signatures --user admin --pass admin
-  goSc4n config update --repo git@github.com/goSc4n-project/another-signatures -K your_private_key
 
   # Add custom signatures from folder
   goSc4n config add --signDir ~/custom-signatures/
@@ -355,14 +354,14 @@ func FuzzMessage()  {
 func ScanMessage() {
 	h := "\nScan Usage example:\n"
 	h += "  goSc4n scan -s <signature> -u <url>\n"
-	h += "  goSc4n scan -c 50 -s <signature> -U <list_urls> -L <level-of-signatures>\n"
+	//h += "  goSc4n scan -c 50 -s <signature> -U <list_urls> -L <level-of-signatures>\n"
 	h += "  goSc4n scan -c 50 -s <signature> -U <list_urls>\n"
-	h += "  goSc4n scan -c 50 -s <signature> -U <list_urls> -f 'noti_slack \"{{.vulnInfo}}\"'\n"
+	//h += "  goSc4n scan -c 50 -s <signature> -U <list_urls> -f 'noti_slack \"{{.vulnInfo}}\"'\n"
 	h += "  goSc4n scan -v -c 50 -s <signature> -U list_target.txt -o /tmp/output\n"
 	h += "  goSc4n scan -s <signature> -s <another-selector> -u http://example.com\n"
-	h += "  echo '{\"BaseURL\":\"https://example.com/sub/\"}' | goSc4n scan -s sign.yaml -J \n"
-	h += "  goSc4n scan -G -s <signature> -s <another-selector> -x <exclude-selector> -u http://example.com\n"
-	h += "  cat list_target.txt | goSc4n scan -c 100 -s <signature>\n"
+	//h += "  echo '{\"BaseURL\":\"https://example.com/sub/\"}' | goSc4n scan -s sign.yaml -J \n"
+	//h += "  goSc4n scan -G -s <signature> -s <another-selector> -x <exclude-selector> -u http://example.com\n"
+	//h += "  cat list_target.txt | goSc4n scan -c 100 -s <signature>\n"
 
 	h += "\n\nExamples:\n"
 	h += "  goSc4n scan -s 'jira' -s 'ruby' -u target.com\n"

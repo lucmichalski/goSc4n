@@ -25,11 +25,11 @@ func InitDB(DBPath string) (*gorm.DB, error) {
 		db.AutoMigrate(&models.Signature{})
 		db.AutoMigrate(&models.User{})
 		db.AutoMigrate(&models.Configuration{})
-		db.AutoMigrate(&models.Dummy{})
+		//db.AutoMigrate(&models.Dummy{})
 		// table for Out of band stuff
-		db.AutoMigrate(&models.Collab{})
-		db.AutoMigrate(&models.OutOfBand{})
-		db.AutoMigrate(&models.ReqLog{})
+		//db.AutoMigrate(&models.Collab{})
+		//db.AutoMigrate(&models.OutOfBand{})
+		//db.AutoMigrate(&models.ReqLog{})
 		return db, err
 	}
 	return nil, err

@@ -1,14 +1,11 @@
 package server
 
 import (
-	"fmt"
-	"github.com/fatih/color"
 	"github.com/goSc4n/goSc4n/tree/hoangnm/database"
 	"github.com/goSc4n/goSc4n/tree/hoangnm/libs"
 	"github.com/goSc4n/goSc4n/tree/hoangnm/utils"
 	"log"
 	"net/http"
-	"os"
 	"path"
 	"path/filepath"
 	"runtime"
@@ -27,7 +24,6 @@ type login struct {
 }
 
 var identityKey = "id"
-
 // User struct
 type User struct {
 	UserName string
@@ -47,7 +43,7 @@ func InitRouter(options libs.Options, result chan libs.Record) {
 	r.Use(gin.Recovery())
 
 	if options.Server.NoAuth {
-		fmt.Fprintf(os.Stderr, "[Warning] You're running server with %v\n", color.RedString("NO AUTHENTICATION"))
+		//fmt.Fprintf(os.Stderr, "[Warning] You're running server with %v\n", color.RedString("NO AUTHENTICATION"))
 	}
 	_, b, _, _ := runtime.Caller(0)
 	basepath   := filepath.Dir(b)
