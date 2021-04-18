@@ -26,7 +26,7 @@ func init() {
 	}
 	serverCmd.Flags().String("host", "127.0.0.1", "IP address to bind the server")
 	serverCmd.Flags().String("port", "5000", "Port")
-	serverCmd.Flags().BoolP("no-auth", "A", false, "Turn off authenticated on API server")
+	serverCmd.Flags().BoolP("no-auth", "A", true, "Turn off authenticated on API server")
 	serverCmd.SetHelpFunc(ServerHelp)
 	RootCmd.AddCommand(serverCmd)
 }
