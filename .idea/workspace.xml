@@ -19,44 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47cec80d-fc48-44dd-b439-ec312a049ac9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/config.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/report.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/report.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/root.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/root.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/scan.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/scan.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/server.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/analyze.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/analyze.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/background.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/background.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/conclusions.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/conclusions.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/config.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/detecter.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/detecter.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/generator.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/generator.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/middleware.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/middleware.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/output.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/output.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/parser.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/parser.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/report.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/report.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/runner.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/runner.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/sending.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/sending.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/signature.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/signature.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/template.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/template.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/variables.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/variables.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/collaborator.go" beforeDir="false" afterPath="$PROJECT_DIR$/database/collaborator.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/database/config.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/connect.go" beforeDir="false" afterPath="$PROJECT_DIR$/database/connect.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/record.go" beforeDir="false" afterPath="$PROJECT_DIR$/database/record.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/scan.go" beforeDir="false" afterPath="$PROJECT_DIR$/database/scan.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/sign.go" beforeDir="false" afterPath="$PROJECT_DIR$/database/sign.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/database/user.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sender/chrome.go" beforeDir="false" afterPath="$PROJECT_DIR$/sender/chrome.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sender/sender.go" beforeDir="false" afterPath="$PROJECT_DIR$/sender/sender.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/api.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/api.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/routers.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/routers.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/log.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/log.go" afterDir="false" />
-    </list>
+    <list default="true" id="47cec80d-fc48-44dd-b439-ec312a049ac9" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -202,26 +165,26 @@
     </state>
     <state x="549" y="187" key="FileChooserDialogImpl/0.0.1536.864/1920.0.1280.1024@0.0.1536.864" timestamp="1613984389040" />
     <state x="549" y="187" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1617351589428" />
-    <state width="1493" height="201" key="GridCell.Tab.0.bottom" timestamp="1618329485214">
+    <state width="1493" height="213" key="GridCell.Tab.0.bottom" timestamp="1618850312704">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state width="1493" height="294" key="GridCell.Tab.0.bottom/0.0.1536.864/1920.0.1280.1024@0.0.1536.864" timestamp="1618240323346" />
-    <state width="1493" height="201" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1618329485214" />
-    <state width="1493" height="201" key="GridCell.Tab.0.center" timestamp="1618329485214">
+    <state width="1493" height="213" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1618850312704" />
+    <state width="1493" height="213" key="GridCell.Tab.0.center" timestamp="1618850312704">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state width="1493" height="294" key="GridCell.Tab.0.center/0.0.1536.864/1920.0.1280.1024@0.0.1536.864" timestamp="1618240323345" />
-    <state width="1493" height="201" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1618329485214" />
-    <state width="1493" height="201" key="GridCell.Tab.0.left" timestamp="1618329485214">
+    <state width="1493" height="213" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1618850312704" />
+    <state width="1493" height="213" key="GridCell.Tab.0.left" timestamp="1618850312703">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state width="1493" height="294" key="GridCell.Tab.0.left/0.0.1536.864/1920.0.1280.1024@0.0.1536.864" timestamp="1618240323345" />
-    <state width="1493" height="201" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1618329485214" />
-    <state width="1493" height="201" key="GridCell.Tab.0.right" timestamp="1618329485214">
+    <state width="1493" height="213" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1618850312703" />
+    <state width="1493" height="213" key="GridCell.Tab.0.right" timestamp="1618850312704">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state width="1493" height="294" key="GridCell.Tab.0.right/0.0.1536.864/1920.0.1280.1024@0.0.1536.864" timestamp="1618240323346" />
-    <state width="1493" height="201" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1618329485214" />
+    <state width="1493" height="213" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1618850312704" />
     <state width="1493" height="294" key="GridCell.Tab.1.bottom" timestamp="1618325013715">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
