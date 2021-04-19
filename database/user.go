@@ -3,8 +3,8 @@ package database
 import (
 	"crypto/sha1"
 	"fmt"
-	"github.com/goSc4n/goSc4n/tree/hoangnm/database/models"
-	"github.com/goSc4n/goSc4n/tree/hoangnm/utils"
+	"github.com/goSc4n/goSc4n/database/models"
+	"github.com/goSc4n/goSc4n/utils"
 	"strconv"
 	"time"
 

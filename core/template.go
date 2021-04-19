@@ -3,7 +3,7 @@ package core
 import (
 	"bytes"
 	"github.com/Masterminds/sprig/v3"
-	"github.com/goSc4n/goSc4n/tree/hoangnm/utils"
+	"github.com/goSc4n/goSc4n/utils"
 	"regexp"
 	"strings"
 	"text/template"

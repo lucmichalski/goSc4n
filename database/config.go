@@ -3,7 +3,7 @@ package database
 import (
 	"fmt"
 	"github.com/go-resty/resty/v2"
-	"github.com/goSc4n/goSc4n/tree/hoangnm/database/models"
+	"github.com/goSc4n/goSc4n/database/models"
 
 	"strings"
 )

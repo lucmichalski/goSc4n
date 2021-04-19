@@ -3,9 +3,9 @@ package cmd
 import (
 	"fmt"
 	"github.com/fatih/color"
-	"github.com/goSc4n/goSc4n/tree/hoangnm/database"
-	"github.com/goSc4n/goSc4n/tree/hoangnm/libs"
-	"github.com/goSc4n/goSc4n/tree/hoangnm/utils"
+	"github.com/goSc4n/goSc4n/database"
+	"github.com/goSc4n/goSc4n/libs"
+	"github.com/goSc4n/goSc4n/utils"
 	"os"
 	"path"
 	"path/filepath"

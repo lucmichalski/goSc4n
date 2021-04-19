@@ -20,16 +20,42 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="47cec80d-fc48-44dd-b439-ec312a049ac9" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/config.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmd/report.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/report.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmd/root.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/root.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmd/scan.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/scan.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/analyze.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/analyze.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/background.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/background.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/conclusions.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/conclusions.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/config.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/detecter.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/detecter.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/generator.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/generator.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/middleware.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/middleware.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/output.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/output.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/parser.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/parser.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/report.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/report.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/runner.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/runner.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/sending.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/sending.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/signature.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/signature.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/template.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/template.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/variables.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/variables.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/collaborator.go" beforeDir="false" afterPath="$PROJECT_DIR$/database/collaborator.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/database/config.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/connect.go" beforeDir="false" afterPath="$PROJECT_DIR$/database/connect.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/record.go" beforeDir="false" afterPath="$PROJECT_DIR$/database/record.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/scan.go" beforeDir="false" afterPath="$PROJECT_DIR$/database/scan.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/sign.go" beforeDir="false" afterPath="$PROJECT_DIR$/database/sign.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/database/user.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/version.go" beforeDir="false" afterPath="$PROJECT_DIR$/libs/version.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sender/chrome.go" beforeDir="false" afterPath="$PROJECT_DIR$/sender/chrome.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sender/sender.go" beforeDir="false" afterPath="$PROJECT_DIR$/sender/sender.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/api.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/api.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/routers.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/routers.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/log.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/log.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +116,7 @@
       <module name="NewStart" />
       <working_directory value="$PROJECT_DIR$" />
       <go_parameters value="-i" />
-      <parameters value="server -s sql-error.yaml -v -c 50 -A" />
+      <parameters value="scan -s sql-error.yaml -u http://testphp.vulnweb.com/search.php?test=q -v -c 50" />
       <envs>
         <env name="GOROOT" value="C:\Go" />
       </envs>
@@ -144,11 +170,11 @@
     <integration-enabled>true</integration-enabled>
   </component>
   <component name="WindowStateProjectService">
-    <state x="302" y="66" width="1089" height="784" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1618324579587">
+    <state x="302" y="66" width="1089" height="784" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1618850303498">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="327" y="63" width="1089" height="784" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.864/1920.0.1280.1024@0.0.1536.864" timestamp="1618226048317" />
-    <state x="302" y="66" width="1089" height="685" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.864@0.0.1536.864" timestamp="1618324579587" />
+    <state x="302" y="66" width="1089" height="685" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.864@0.0.1536.864" timestamp="1618850303498" />
     <state x="529" y="234" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1617044853808">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -233,11 +259,11 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="320" y="161" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1536.864/1920.0.1280.1024@0.0.1536.864" timestamp="1618224952228" />
-    <state x="257" y="54" width="1091" height="689" key="find.popup" timestamp="1618324495323">
+    <state x="257" y="54" width="1091" height="689" key="find.popup" timestamp="1618849781330">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="478" y="165" width="579" height="534" key="find.popup/0.0.1536.864/1920.0.1280.1024@0.0.1536.864" timestamp="1618223202815" />
-    <state x="257" y="54" width="1091" height="689" key="find.popup/0.0.1536.864@0.0.1536.864" timestamp="1618324495323" />
+    <state x="257" y="54" width="1091" height="689" key="find.popup/0.0.1536.864@0.0.1536.864" timestamp="1618849781330" />
     <state x="431" y="181" width="672" height="160" key="search.everywhere.popup" timestamp="1615286329009">
       <screen x="0" y="0" width="1536" height="864" />
     </state>

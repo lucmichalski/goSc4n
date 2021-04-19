@@ -1,4 +1,4 @@
-module github.com/goSc4n/goSc4n/tree/hoangnm
+module github.com/goSc4n/goSc4n
 
 go 1.15
 

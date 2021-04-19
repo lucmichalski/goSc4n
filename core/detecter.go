@@ -3,8 +3,8 @@ package core
 import (
 	"encoding/hex"
 	"fmt"
-	"github.com/goSc4n/goSc4n/tree/hoangnm/sender"
-	"github.com/goSc4n/goSc4n/tree/hoangnm/utils"
+	"github.com/goSc4n/goSc4n/sender"
+	"github.com/goSc4n/goSc4n/utils"
 
 	//"github.com/robertkrimen/otto"
 	"regexp"

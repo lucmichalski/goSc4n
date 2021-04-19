@@ -3,8 +3,8 @@ package core
 import (
 	"encoding/base64"
 	"fmt"
-	"github.com/goSc4n/goSc4n/tree/hoangnm/libs"
-	"github.com/goSc4n/goSc4n/tree/hoangnm/utils"
+	"github.com/goSc4n/goSc4n/libs"
+	"github.com/goSc4n/goSc4n/utils"
 	"github.com/jinzhu/copier"
 	"github.com/thoas/go-funk"
 	"math/rand"

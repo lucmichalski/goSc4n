@@ -2,7 +2,7 @@ package utils
 
 import (
 	"fmt"
-	"github.com/goSc4n/goSc4n/tree/hoangnm/libs"
+	"github.com/goSc4n/goSc4n/libs"
 	"io"
 	"io/ioutil"
 	"os"

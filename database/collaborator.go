@@ -2,8 +2,8 @@ package database
 
 import (
 	"fmt"
-	"github.com/goSc4n/goSc4n/tree/hoangnm/database/models"
-	"github.com/goSc4n/goSc4n/tree/hoangnm/libs"
+	"github.com/goSc4n/goSc4n/database/models"
+	"github.com/goSc4n/goSc4n/libs"
 	"math/rand"
 	"time"
 

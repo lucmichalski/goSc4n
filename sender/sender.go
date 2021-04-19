@@ -3,8 +3,8 @@ package sender
 import (
 	"crypto/tls"
 	"fmt"
-	"github.com/goSc4n/goSc4n/tree/hoangnm/libs"
-	"github.com/goSc4n/goSc4n/tree/hoangnm/utils"
+	"github.com/goSc4n/goSc4n/libs"
+	"github.com/goSc4n/goSc4n/utils"
 	"github.com/valyala/fasthttp/fasthttpproxy"
 	"io/ioutil"
 	"math/rand"

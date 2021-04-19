@@ -1,10 +1,10 @@
 package cmd
 
 import (
-	"github.com/goSc4n/goSc4n/tree/hoangnm/core"
-	"github.com/goSc4n/goSc4n/tree/hoangnm/libs"
-	"github.com/goSc4n/goSc4n/tree/hoangnm/sender"
-	"github.com/goSc4n/goSc4n/tree/hoangnm/utils"
+	"github.com/goSc4n/goSc4n/core"
+	"github.com/goSc4n/goSc4n/libs"
+	"github.com/goSc4n/goSc4n/sender"
+	"github.com/goSc4n/goSc4n/utils"
 	"github.com/spf13/cobra"
 	"os"
 	"path"

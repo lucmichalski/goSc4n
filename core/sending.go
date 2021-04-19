@@ -1,8 +1,8 @@
 package core
 
 import (
-	"github.com/goSc4n/goSc4n/tree/hoangnm/libs"
-	"github.com/goSc4n/goSc4n/tree/hoangnm/sender"
+	"github.com/goSc4n/goSc4n/libs"
+	"github.com/goSc4n/goSc4n/sender"
 	"github.com/panjf2000/ants"
 	"github.com/thoas/go-funk"
 	"sync"

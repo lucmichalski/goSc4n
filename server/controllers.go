@@ -3,9 +3,9 @@ package server
 import (
 	"encoding/base64"
 	"fmt"
-	"github.com/goSc4n/goSc4n/tree/hoangnm/core"
-	"github.com/goSc4n/goSc4n/tree/hoangnm/libs"
-	"github.com/goSc4n/goSc4n/tree/hoangnm/utils"
+	"github.com/goSc4n/goSc4n/core"
+	"github.com/goSc4n/goSc4n/libs"
+	"github.com/goSc4n/goSc4n/utils"
 	"net/http"
 
 

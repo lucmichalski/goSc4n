@@ -2,15 +2,15 @@ package database
 
 import (
 	"fmt"
-	"github.com/goSc4n/goSc4n/tree/hoangnm/database/models"
-	"github.com/goSc4n/goSc4n/tree/hoangnm/utils"
+	"github.com/goSc4n/goSc4n/database/models"
+	"github.com/goSc4n/goSc4n/utils"
 	"io/ioutil"
 	"os"
 	"regexp"
 	"strings"
 
 	"github.com/Shopify/yaml"
-	"github.com/goSc4n/goSc4n/tree/hoangnm/libs"
+	"github.com/goSc4n/goSc4n/libs"
 )
 
 // CleanSigns clean all signature
