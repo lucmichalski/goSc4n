@@ -14,8 +14,6 @@ import (
 	"strconv"
 	"strings"
 	"time"
-
-	//"github.com/robertkrimen/otto"
 	"github.com/dop251/goja"
 )
 

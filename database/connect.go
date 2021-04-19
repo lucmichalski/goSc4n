@@ -14,8 +14,6 @@ var DB *gorm.DB
 // InitDB init DB connection
 func InitDB(DBPath string) (*gorm.DB, error) {
 	db, err := gorm.Open("sqlite3", DBPath)
-	// turn this on when we go live
-	// Disable Logger, don't show any log even errors
 	db.LogMode(false)
 
 	if err == nil {
@@ -25,11 +23,6 @@ func InitDB(DBPath string) (*gorm.DB, error) {
 		db.AutoMigrate(&models.Signature{})
 		db.AutoMigrate(&models.User{})
 		db.AutoMigrate(&models.Configuration{})
-		//db.AutoMigrate(&models.Dummy{})
-		// table for Out of band stuff
-		//db.AutoMigrate(&models.Collab{})
-		//db.AutoMigrate(&models.OutOfBand{})
-		//db.AutoMigrate(&models.ReqLog{})
 		return db, err
 	}
 	return nil, err

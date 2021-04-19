@@ -8,7 +8,6 @@ import (
 	"path/filepath"
 	"strconv"
 	"strings"
-
 	"github.com/Jeffail/gabs/v2"
 	"github.com/thoas/go-funk"
 	"github.com/dop251/goja"
@@ -23,10 +22,8 @@ func Generators(req libs.Request, sign libs.Signature) []libs.Request {
 		// prepare something so we can access variable in generator string too
 		payload = ResolveVariable(payload, fuzzReq.Target)
 		fuzzReq.Target["payload"] = payload
-		// set original to blank first
 		fuzzReq.Target["original"] = ""
 		fuzzReq.Detections = ResolveDetection(fuzzReq.Detections, fuzzReq.Target)
-		//fuzzReq.Middlewares = ResolveDetection(fuzzReq.Middlewares, fuzzReq.Target)
 		fuzzReq.Generators = funk.UniqString(ResolveDetection(fuzzReq.Generators, fuzzReq.Target))
 
 		// in case we want to send normal request with no generator

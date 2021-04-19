@@ -2,7 +2,6 @@ package core
 
 import (
 	"github.com/goSc4n/goSc4n/utils"
-	//"github.com/robertkrimen/otto"
 	"os/exec"
 	"github.com/dop251/goja"
 )

@@ -5,8 +5,6 @@ import (
 
 	"github.com/dop251/goja"
 	"github.com/goSc4n/goSc4n/utils"
-
-	//"github.com/robertkrimen/otto"
 	"os/exec"
 	"regexp"
 	"strings"

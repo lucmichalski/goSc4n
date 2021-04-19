@@ -5,8 +5,6 @@ import (
 	"fmt"
 	"github.com/goSc4n/goSc4n/sender"
 	"github.com/goSc4n/goSc4n/utils"
-
-	//"github.com/robertkrimen/otto"
 	"regexp"
 	"strconv"
 	"strings"

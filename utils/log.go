@@ -79,17 +79,6 @@ func GoodF(format string, args ...interface{}) {
 	fmt.Fprintf(os.Stderr, "%s %s\n", good, fmt.Sprintf(format, args...))
 }
 
-// BannerF print info message
-func BannerF(format string, data string) {
-	banner := fmt.Sprintf("%v%v%v ", color.WhiteString("["), color.BlueString(format), color.WhiteString("]"))
-	fmt.Printf("%v%v\n", banner, color.HiGreenString(data))
-}
-
-// BlockF print info message
-func BlockF(name string, data string) {
-	banner := fmt.Sprintf("%v%v%v ", color.WhiteString("["), color.GreenString(name), color.WhiteString("]"))
-	fmt.Printf(fmt.Sprintf("%v%v\n", banner, data))
-}
 
 // InforF print info message
 func InforF(format string, args ...interface{}) {

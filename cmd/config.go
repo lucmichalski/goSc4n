@@ -39,16 +39,16 @@ func runConfig(cmd *cobra.Command, args []string) error {
 	}
 	// turn on verbose by default
 	options.Verbose = true
-	polling, _ := cmd.Flags().GetBool("poll")
+	//polling, _ := cmd.Flags().GetBool("poll")
 	// polling all oob
-	if polling == true {
-		secret, _ := cmd.Flags().GetString("secret")
-		collabFile, _ := cmd.Flags().GetString("collab")
-		collabs := utils.ReadingLines(collabFile)
-		for _, collab := range collabs {
-			database.ImportCollab(secret, collab)
-		}
-	}
+	//if polling == true {
+	//	secret, _ := cmd.Flags().GetString("secret")
+	//	collabFile, _ := cmd.Flags().GetString("collab")
+	//	collabs := utils.ReadingLines(collabFile)
+	//	for _, collab := range collabs {
+	//		database.ImportCollab(secret, collab)
+	//	}
+	//}
 
 	action, _ := cmd.Flags().GetString("action")
 	// backward compatible
@@ -74,18 +74,10 @@ func runConfig(cmd *cobra.Command, args []string) error {
 		utils.InforF("Cleaning root folder: %v", options.RootFolder)
 		os.RemoveAll(options.RootFolder)
 		break
-	case "cred":
-		database.CreateUser(options.Config.Username, options.Config.Password)
-		utils.GoodF("Create new credentials %v:%v \n", options.Config.Username, options.Config.Password)
-		break
-	case "oob":
-		secret, _ := cmd.Flags().GetString("secret")
-		collabFile, _ := cmd.Flags().GetString("collab")
-		collabs := utils.ReadingLines(collabFile)
-		for _, collab := range collabs {
-			database.ImportCollab(secret, collab)
-		}
-		break
+	//case "cred":
+	//	database.CreateUser(options.Config.Username, options.Config.Password)
+	//	utils.GoodF("Create new credentials %v:%v \n", options.Config.Username, options.Config.Password)
+	//	break
 	case "reload":
 		os.RemoveAll(path.Join(options.RootFolder, "base-signatures"))
 		InitDB()
@@ -207,41 +199,7 @@ func RootMessage() {
 	h += "  goSc4n report --  Generate HTML report based on scanned output \n"
 	h += "  goSc4n fuzz   --  fuzzing one or many sites \n"
 	h += "  goSc4n spider --  crawler one or many sites \n"
-//	h += `
-//Core Flags:
-//  -c, --concurrency int         Set the concurrency level (default 20)
-//  -o, --output string           Output folder name (default "out")
-//  -s, --signs strings           Signature selector (Multiple -s flags are accepted)
-//  -L, --level int               Filter signatures by level (default 1)
-//  -p, --params strings          Custom params -p='foo=bar' (Multiple -p flags are accepted)
-//  -H, --headers strings         Custom headers (e.g: -H 'Referer: {{.BaseURL}}') (Multiple -H flags are accepted)
-//
-//Mics Flags:
-//      --proxy string            proxy
-//      --timeout int             HTTP timeout (default 20)
-//      --debug                   Debug
-//  -v, --verbose                 Verbose
-//      --no-db                   Disable Database
-//  -S, --selectorFile string     Signature selector from file
-//  -J, --format-input            Enable special input format (default is false)
-//  -f, --found string            Run host OS command when vulnerable found
-//  -O, --summaryOutput string    Summary output file (default is "goSc4n-summary.txt")
-//      --single string           Forced running in single mode
-//      --sverbose bool           Store verbose info in summary file
-//  -N  --no-output bool          Disable store output
-//      --json bool               Store output as JSON format
-//      --chunk bool              Enable chunk running against big input
-//  -I, --inline string           Inline Detections
-//  -q, --quiet                   Enable Quiet Output
-//  -Q, --quietFormat string      Format for quiet output (default "{{.VulnURL}}")
-//  -R, --report string           HTML report file name
-//      --title string            HTML report title
-//      --html string             Enable generate HTML reports after the scan done
-//      --hh string               Full help message
-//      --re                      Shortcut for disable replicate request (avoid sending many request to timeout)
-//      --at                      Enable Always True Detection for observe response
-//      --lc                      Shortcut for '--proxy http://127.0.0.1:8080'
-//      --ba                      Shortcut for take raw input as '{{.BaseURL}}'
+
 //`
 	h += "\n\nExamples Commands:\n"
 	h += "  goSc4n scan -s <signature> -u <url>\n"

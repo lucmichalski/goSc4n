@@ -58,13 +58,11 @@ func init() {
 	RootCmd.PersistentFlags().StringVarP(&options.Report.ReportName, "report", "R", "", "Report name")
 	RootCmd.PersistentFlags().StringVar(&options.Report.Title, "title", "", "Report title name")
 	// core options
-	//RootCmd.PersistentFlags().IntVarP(&options.Level, "level", "L", 1, "Filter signature by level")
 	options.Level = 1
 	RootCmd.PersistentFlags().IntVarP(&options.Concurrency, "concurrency", "c", 20, "Set the concurrency level")
 	RootCmd.PersistentFlags().IntVarP(&options.Threads, "threads", "t", 10, "Set the concurrency level inside single signature")
 	RootCmd.PersistentFlags().StringVarP(&options.Selectors, "selectorFile", "S", "", "Signature selector from file")
 	RootCmd.PersistentFlags().StringSliceVarP(&options.Signs, "signs", "s", []string{}, "Signature selector (Multiple -s flags are accepted)")
-	//RootCmd.PersistentFlags().StringSliceVarP(&options.Excludes, "exclude", "x", []string{}, "Exclude Signature selector (Multiple -x flags are accepted)")
 
 	// custom params from cli
 	RootCmd.PersistentFlags().StringSliceVarP(&options.Params, "params", "p", []string{}, "Custom params -p='foo=bar' (Multiple -p flags are accepted)")
@@ -72,18 +70,13 @@ func init() {
 	// misc options
 	RootCmd.PersistentFlags().StringVarP(&options.LogFile, "log", "l", "", "log file")
 	RootCmd.PersistentFlags().StringVarP(&options.FoundCmd, "found", "f", "", "Run host OS command when vulnerable found")
-	//RootCmd.PersistentFlags().BoolVarP(&options.EnableFormatInput, "format-input", "J", false, "Enable special input format")
-	//RootCmd.PersistentFlags().BoolVar(&options.SaveRaw, "save-raw", false, "save raw request")
 	options.EnableFormatInput = false
 	options.SaveRaw = false
 	RootCmd.PersistentFlags().BoolVarP(&options.NoOutput, "no-output", "N", false, "Do not store output")
 	RootCmd.PersistentFlags().BoolVar(&options.NoBackGround, "no-background", true, "Do not run background task")
-	//RootCmd.PersistentFlags().IntVar(&options.Refresh, "refresh", 10, "Refresh time for background task")
-	//RootCmd.PersistentFlags().BoolVar(&options.NoDB, "no-db", false, "Disable Database")
 	options.Refresh = 10
 	options.NoDB = false
 	RootCmd.PersistentFlags().BoolVar(&options.DisableParallel, "single", false, "Disable parallel mode (use this when you need logic in single signature")
-	//RootCmd.PersistentFlags().StringVarP(&options.QuietFormat, "quietFormat", "Q", "{{.VulnURL}}", "Format for quiet output")
 	options.QuietFormat = "{{.VulnURL}}"
 	RootCmd.PersistentFlags().BoolVarP(&options.Quiet, "quiet", "q", false, "Quiet Output")
 	RootCmd.PersistentFlags().BoolVarP(&options.Verbose, "verbose", "v", false, "Verbose output")
@@ -97,13 +90,9 @@ func init() {
 	RootCmd.PersistentFlags().IntVar(&options.ChunkLimit, "chunk-limit", 200000, "Limit size to trigger chunk run")
 	// some shortcuts
 	RootCmd.PersistentFlags().StringVarP(&options.InlineDetection, "inline", "I", "", "Inline Detections")
-	//RootCmd.PersistentFlags().BoolVar(&options.Mics.DisableReplicate, "re", false, "Shortcut for disable replicate request (avoid sending many request to timeout)")
 	options.Mics.DisableReplicate = false
-	//RootCmd.PersistentFlags().BoolVar(&options.Mics.BaseRoot, "ba", false, "Shortcut for take raw input as {{.BaseURL}}'")
 	options.Mics.BaseRoot = false
-	//RootCmd.PersistentFlags().BoolVar(&options.Mics.BurpProxy, "lc", false, "Shortcut for '--proxy http://127.0.0.1:8080'")
 	options.Mics.BurpProxy = false
-	//RootCmd.PersistentFlags().BoolVar(&options.Mics.AlwaysTrue, "at", false, "Enable Always True Detection for observe response")
 	options.Mics.AlwaysTrue = false
 	RootCmd.PersistentFlags().BoolVar(&options.Mics.FullHelp, "hh", false, "Show full help message")
 	RootCmd.SetHelpFunc(rootHelp)
@@ -167,23 +156,6 @@ func SelectSign() {
 		}
 	}
 
-	// exclude some signature
-	//if len(options.Excludes) > 0 {
-	//	for _, exclude := range options.Excludes {
-	//		for index, sign := range selectedSigns {
-	//			if strings.Contains(sign, exclude) {
-	//				selectedSigns = append(selectedSigns[:index], selectedSigns[index+1:]...)
-	//			}
-	//			r, err := regexp.Compile(exclude)
-	//			if err != nil {
-	//				continue
-	//			}
-	//			if r.MatchString(sign) {
-	//				selectedSigns = append(selectedSigns[:index], selectedSigns[index+1:]...)
-	//			}
-	//		}
-	//	}
-	//}
 	options.SelectedSigns = selectedSigns
 
 	if len(selectedSigns) == 0 {

@@ -19,7 +19,32 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47cec80d-fc48-44dd-b439-ec312a049ac9" name="Default Changelist" comment="" />
+    <list default="true" id="47cec80d-fc48-44dd-b439-ec312a049ac9" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base-signatures/default/Cross Site Scripting/XSS-Via-Header.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/base-signatures/default/Cross Site Scripting/XSS-Via-Header.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base-signatures/default/Open Redirect/open-redirect.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/base-signatures/default/Open Redirect/open-redirect.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base-signatures/default/SSRF/ssrf.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/base-signatures/default/SSRF/ssrf.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/config.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/root.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/root.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/scan.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/scan.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/conclusions.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/conclusions.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/detecter.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/detecter.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/generator.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/generator.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/middleware.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/middleware.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/signature.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/signature.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/variables.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/variables.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/collaborator.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/connect.go" beforeDir="false" afterPath="$PROJECT_DIR$/database/connect.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/dnsbin.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/models/collab.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/models/dummy.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/models/oob.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/banner.go" beforeDir="false" afterPath="$PROJECT_DIR$/libs/banner.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sender/sender.go" beforeDir="false" afterPath="$PROJECT_DIR$/sender/sender.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/helper.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/helper.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/log.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/log.go" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -209,6 +234,10 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="277" y="77" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1617787342932" />
+    <state width="498" height="446" key="SwitcherDM" timestamp="1618852236263">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="498" height="446" key="SwitcherDM/0.0.1536.864@0.0.1536.864" timestamp="1618852236263" />
     <state width="775" height="439" key="XDebugger.FullValuePopup" timestamp="1617632982142">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -222,11 +251,11 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="320" y="161" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1536.864/1920.0.1280.1024@0.0.1536.864" timestamp="1618224952228" />
-    <state x="257" y="54" width="1091" height="689" key="find.popup" timestamp="1618849781330">
+    <state x="257" y="54" width="1091" height="689" key="find.popup" timestamp="1618852356389">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="478" y="165" width="579" height="534" key="find.popup/0.0.1536.864/1920.0.1280.1024@0.0.1536.864" timestamp="1618223202815" />
-    <state x="257" y="54" width="1091" height="689" key="find.popup/0.0.1536.864@0.0.1536.864" timestamp="1618849781330" />
+    <state x="257" y="54" width="1091" height="689" key="find.popup/0.0.1536.864@0.0.1536.864" timestamp="1618852356389" />
     <state x="431" y="181" width="672" height="160" key="search.everywhere.popup" timestamp="1615286329009">
       <screen x="0" y="0" width="1536" height="864" />
     </state>

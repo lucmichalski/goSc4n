@@ -87,18 +87,6 @@ func JustSend(options libs.Options, req libs.Request) (res libs.Response, err er
 		WriteTimeout: time.Duration(timeout) * time.Second,
 		TLSConfig: tlsCfg,
 	}
-	//client.SetTransport(&http.Transport{
-	//	MaxIdleConns:          100,
-	//	MaxConnsPerHost:       1000,
-	//	IdleConnTimeout:       time.Duration(timeout) * time.Second,
-	//	ExpectContinueTimeout: time.Duration(timeout) * time.Second,
-	//	ResponseHeaderTimeout: time.Duration(timeout) * time.Second,
-	//	TLSHandshakeTimeout:   time.Duration(timeout) * time.Second,
-	//	DisableCompression:    disableCompress,
-	//	DisableKeepAlives:     true,
-	//	TLSClientConfig:       tlsCfg,
-	//})
-
 	if proxy != "" {
 		client.Dial = fasthttpproxy.FasthttpSocksDialer(proxy)
 	}
@@ -106,24 +94,11 @@ func JustSend(options libs.Options, req libs.Request) (res libs.Response, err er
 	for key,headerValue := range headers{
 		request.Header.Add(key,headerValue)
 	}
-	//client.SetHeaders(headers)
 	request.Header.Set("Connection","close")
-
-	//no need anymore because that Client supports automatic retry on idempotent requests' failure. until ReadTimeout end
-	//if options.Retry > 0 {
-	//	client.SetRetryCount(options.Retry)
-	//}
-	//client.SetTimeout(time.Duration(timeout) * time.Second)
-	//client.SetRetryWaitTime(time.Duration(timeout/2) * time.Second)
-	//client.SetRetryMaxWaitTime(time.Duration(timeout) * time.Second)
-	//timeStart := time.Now()
-	// redirect policyfalse
 
 
 	var requestTime time.Duration
 	response := fasthttp.AcquireResponse()
-	//var resp *resty.Response
-	// really sending things here
 	method = strings.ToLower(strings.TrimSpace(method))
 	switch method {
 	case "get":
@@ -134,9 +109,6 @@ func JustSend(options libs.Options, req libs.Request) (res libs.Response, err er
 		err = client.Do(request,response)
 		endTime := time.Now()
 		requestTime = startTime.Sub(endTime)
-		//resp, err = client.R().
-		//	SetBody([]byte(body)).
-		//	Get(url)
 		break
 	case "post":
 		request.SetBody([]byte(body))
@@ -146,9 +118,6 @@ func JustSend(options libs.Options, req libs.Request) (res libs.Response, err er
 		err = client.Do(request,response)
 		endTime := time.Now()
 		requestTime = startTime.Sub(endTime)
-		//resp, err = client.R().EnableTrace().
-		//	SetBody([]byte(body)).
-		//	Post(url)
 		break
 	case "head":
 		request.SetBody([]byte(body))
@@ -158,9 +127,6 @@ func JustSend(options libs.Options, req libs.Request) (res libs.Response, err er
 		err = client.Do(request,response)
 		endTime := time.Now()
 		requestTime = startTime.Sub(endTime)
-		//resp, err = client.R().
-		//	SetBody([]byte(body)).
-		//	Head(url)
 		break
 	case "options":
 		request.SetBody([]byte(body))
@@ -170,9 +136,6 @@ func JustSend(options libs.Options, req libs.Request) (res libs.Response, err er
 		err = client.Do(request,response)
 		endTime := time.Now()
 		requestTime = startTime.Sub(endTime)
-		//resp, err = client.R().
-		//	SetBody([]byte(body)).
-		//	Options(url)
 		break
 	case "patch":
 		request.SetBody([]byte(body))
@@ -182,9 +145,6 @@ func JustSend(options libs.Options, req libs.Request) (res libs.Response, err er
 		err = client.Do(request,response)
 		endTime := time.Now()
 		requestTime = startTime.Sub(endTime)
-		//resp, err = client.R().
-		//	SetBody([]byte(body)).
-		//	Patch(url)
 		break
 	case "put":
 		request.SetBody([]byte(body))
@@ -194,9 +154,6 @@ func JustSend(options libs.Options, req libs.Request) (res libs.Response, err er
 		err = client.Do(request,response)
 		endTime := time.Now()
 		requestTime = startTime.Sub(endTime)
-		//resp, err = client.R().
-		//	SetBody([]byte(body)).
-		//	Put(url)
 		break
 	case "delete":
 		request.SetBody([]byte(body))
@@ -206,9 +163,6 @@ func JustSend(options libs.Options, req libs.Request) (res libs.Response, err er
 		err = client.Do(request,response)
 		endTime := time.Now()
 		requestTime = startTime.Sub(endTime)
-		//resp, err = client.R().
-		//	SetBody([]byte(body)).
-		//	Delete(url)
 		break
 	}
 
@@ -241,13 +195,6 @@ func ParseResponse(resp1 *fasthttp.Response,requestTime time.Duration) (res libs
 		resLength += len(fmt.Sprintf("%s: %s\n", string(key), strings.Join(stringsValue, "")))
 		resHeaders = append(resHeaders, element)
 	})
-	//for k, v := range resp1.Header.String() {
-	//	element := make(map[string]string)
-	//	element[k] = strings.Join(v[:], "")
-	//	resLength += len(fmt.Sprintf("%s: %s\n", k, strings.Join(v[:], "")))
-	//	resHeaders = append(resHeaders, element)
-	//}
-	// response time in second
 	resTime := float64(requestTime) / float64(time.Second)
 	resHeaders = append(resHeaders,
 		map[string]string{"Total Length": strconv.Itoa(resLength)},

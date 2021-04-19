@@ -11,9 +11,6 @@ import (
 	"strings"
 )
 
-// @NOTE: Signatures allow execute command on your machine
-// So make sure you read the signature before you run it
-
 // SelectSign select signature by multiple selector
 func SelectSign(signName string) []string {
 	var Signs []string

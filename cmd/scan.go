@@ -98,7 +98,6 @@ func runScan(cmd *cobra.Command, _ []string) error {
 	}
 	utils.InforF("Input Loaded: %v", len(urls))
 
-	/* ---- Really start do something ---- */
 
 	// run background detector
 	if !options.NoBackGround {
@@ -167,7 +166,7 @@ func CreateRunner(j interface{}) {
 	}
 }
 
-/////////////////////// Chunk options (very experimental)
+// Chunk options (very experimental)
 
 func genChunkFiles(urlFile string, options libs.Options) []string {
 	utils.DebugF("Store tmp chunk data at: %v", options.ChunkDir)
