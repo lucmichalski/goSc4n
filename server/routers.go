@@ -54,6 +54,7 @@ func InitRouter(options libs.Options, result chan libs.Record) {
 	r.Use(static.Serve("/signatures",static.LocalFile(uiPath,true)))
 	r.Use(static.Serve("/listScan",static.LocalFile(uiPath,true)))
 	r.Use(static.Serve("/addScan",static.LocalFile(uiPath,true)))
+	r.Use(static.Serve("/teamDetail",static.LocalFile(uiPath,true)))
 
 
 	//allowOrigin := "*"
