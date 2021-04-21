@@ -36,7 +36,7 @@ func runServer(cmd *cobra.Command, _ []string) error {
 		fmt.Fprintf(os.Stderr, "Can't run goSc4n Server without DB\n")
 		os.Exit(-1)
 	}
-	SelectSign()
+	//SelectSign()
 	// prepare DB stuff
 	if options.Server.Username != "" {
 		database.CreateUser(options.Server.Username, options.Server.Password)

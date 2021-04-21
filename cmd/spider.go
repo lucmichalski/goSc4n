@@ -54,7 +54,7 @@ func genParamCmd(cmd *cobra.Command){
 func runParamSpider(cmd *cobra.Command, _ []string)  error{
 	cmdInput = ""
 	genParamCmd(cmd)
-	spiderCmd := exec.Command("bash", "-c", "./crawler/ParamSpider/paramspider.py "+cmdInput+" --output input/test.txt")
+	spiderCmd := exec.Command("bash", "-c", "./crawler/ParamSpider/paramspider.py "+cmdInput+" --output input/spiderOutput.txt")
 	out, err := spiderCmd.Output()
 	if err != nil {
 		fmt.Println("StdoutPipe: " + err.Error())

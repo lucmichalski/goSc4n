@@ -39,16 +39,6 @@ func runConfig(cmd *cobra.Command, args []string) error {
 	}
 	// turn on verbose by default
 	options.Verbose = true
-	//polling, _ := cmd.Flags().GetBool("poll")
-	// polling all oob
-	//if polling == true {
-	//	secret, _ := cmd.Flags().GetString("secret")
-	//	collabFile, _ := cmd.Flags().GetString("collab")
-	//	collabs := utils.ReadingLines(collabFile)
-	//	for _, collab := range collabs {
-	//		database.ImportCollab(secret, collab)
-	//	}
-	//}
 
 	action, _ := cmd.Flags().GetString("action")
 	// backward compatible

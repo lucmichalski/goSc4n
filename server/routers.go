@@ -156,16 +156,16 @@ func InitRouter(options libs.Options, result chan libs.Record) {
 		auth.Use(authMiddleware.MiddlewareFunc())
 	}
 	{
-		auth.GET("/ping", Ping)
-		auth.POST("/parse", ReceiveRequest(result))
-		auth.POST("/config/sign", UpdateDefaultSign)
+		auth.GET("/ping", Ping)//testing api
+		auth.POST("/parse", ReceiveRequest(result))//testing post api
+		//auth.POST("/config/sign", UpdateDefaultSign)
 		auth.GET("/stats/vuln", GetStats)
 		auth.GET("/stats/sign", GetSignSummary)
 		auth.GET("/signatures", GetSigns)
 		auth.GET("/scans", GetAllScan)
 		auth.GET("/scan/:sid/", GetRecords)
 		auth.GET("/record/:rid/", GetRecord)
-		auth.POST("/addScan",addScan(options))
+		auth.POST("/addScan",addScan(options))//in the process of development
 	}
 
 	if err := http.ListenAndServe(options.Server.Bind, r); err != nil {
