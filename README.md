@@ -19,27 +19,28 @@ If you have a Go environment, make sure you have **Go >= 1.13** with Go Modules 
 
 
 ## Usage
+![Architecture](https://raw.githubusercontent.com/goSc4n/goSc4n/main/scanusage1.png)
 
+![Architecture](https://raw.githubusercontent.com/goSc4n/goSc4n/main/scanusage2.PNG)
 
 # Scan Usage example:
-Ảnh Scan usage
+![Architecture](https://raw.githubusercontent.com/goSc4n/goSc4n/main/scanexample.PNG)
 
 
 # Examples:
 Ảnh example
  
-# Fuzz Usage example:
-Ảnh fuzz usage
+# Fuzz Usage:
+![Architecture](https://raw.githubusercontent.com/goSc4n/goSc4n/main/scanusage1.png)
 
 
-# Examples:
-Ảnh example
+
  
-# Spider Usage example:
-Ảnh spider usage
+# Spider Usage:
+![Architecture](https://raw.githubusercontent.com/goSc4n/goSc4n/main/spiderusage.png)
 
-# Examples:
-Ảnh example
+
+
 
 
 
