@@ -3,7 +3,9 @@ package cmd
 import (
 	"fmt"
 	"github.com/spf13/cobra"
+	"os"
 	"os/exec"
+	"strings"
 )
 
 
@@ -20,7 +22,6 @@ func init()  {
 	spiderCmd.Flags().StringVar(&SpiderOp.Output, "output", "", "Output file name [by default it is 'domain.txt]'")
 	spiderCmd.Flags().StringVar(&SpiderOp.Placeholder, "placeholder", "", "The string to add as a placeholder after the parameter name.")
 	spiderCmd.Flags().BoolVar(&SpiderOp.Quiet,"quiet",false,"Do not print the results to the screen")
-	spiderCmd.SetHelpFunc(SpiderHelp)
 	RootCmd.AddCommand(spiderCmd)
 }
 
@@ -52,6 +53,11 @@ func genParamCmd(cmd *cobra.Command){
 }
 
 func runParamSpider(cmd *cobra.Command, _ []string)  error{
+	helps, _ := cmd.Flags().GetBool("hh")
+	if helps == true {
+		SpiderHelp()
+		os.Exit(1)
+	}
 	cmdInput = ""
 	genParamCmd(cmd)
 	spiderCmd := exec.Command("bash", "-c", "./crawler/ParamSpider/paramspider.py "+cmdInput+" --output input/spiderOutput.txt")
@@ -59,6 +65,12 @@ func runParamSpider(cmd *cobra.Command, _ []string)  error{
 	if err != nil {
 		fmt.Println("StdoutPipe: " + err.Error())
 	}
-	fmt.Println(string(out))
+	formatString := strings.Split(string(out),"\n")
+	formatString[len(formatString)-4] = "Ouput is saved here: \t input/spiderOutput.txt"
+	var outNew = ""
+	for i := 0; i < len(formatString)  ; i++ {
+		outNew += formatString[i]+"\n"
+	}
+	fmt.Println(outNew)
 	return nil
 }

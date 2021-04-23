@@ -1,0 +1,64 @@
+id: CVE-2017-9248,CVE-2019-18935
+info:
+  name: Telerik
+  risk: Medium
+
+params:
+  - root: '{{.BaseURL}}'
+  
+variables:
+  - endpoint: |
+      /Telerik.Web.UI.WebResource.axd?type=rau
+      /DesktopModules/Admin/RadEditorProvider/DialogHandler.aspx
+      /app_master/telerik.web.ui.dialoghandler.aspx
+      /Providers/HtmlEditorProviders/Telerik/Telerik.Web.UI.DialogHandler.aspx
+      /common/admin/Jobs2/Telerik.Web.UI.DialogHandler.aspx
+      /dashboard/UserControl/CMS/Page/Telerik.Web.UI.DialogHandler.aspx
+      /DesktopModules/News/Telerik.Web.UI.DialogHandler.aspx
+      /desktopmodules/telerikwebui/radeditorprovider/telerik.web.ui.dialoghandler.aspx
+      /DesktopModules/dnnWerk.RadEditorProvider/DialogHandler.aspx
+      /DesktopModules/TNComments/Telerik.Web.UI.DialogHandler.aspx
+      /DesktopModules/YA.Controls/AngularMain/Telerik.Web.UI.DialogHandler.aspx
+      /DesktopModules/Base/EditControls/Telerik.Web.UI.DialogHandler.aspx
+      /DesktopModules/Admin/RadEditorProvider/DialogHandler.aspx
+      /providers/htmleditorproviders/telerik/telerik.web.ui.dialoghandler.aspx
+      /Telerik.Web.UI.DialogHandler.aspx
+      /common/admin/Jobs2/Telerik.Web.UI.DialogHandler.aspx
+      /common/admin/Calendar/Telerik.Web.UI.DialogHandler.aspx
+      /AsiCommon/Controls/ContentManagement/ContentDesigner/Telerik.Web.UI.DialogHandler.aspx
+      /Providers/HtmlEditorProviders/Telerik/Telerik.Web.UI.DialogHandler.aspx
+      /cms/portlets/Telerik.Web.UI.DialogHandler.aspx
+      /sitecore/shell/RadControls/Spell/Telerik.Spell.DialogHandler.aspx
+      /common/admin/PhotoGallery2/Telerik.Web.UI.DialogHandler.aspx
+      /_controls/responsive/Telerik.Web.UI.DialogHandler.aspx
+      /controls/events/v2/Telerik.Web.UI.DialogHandler.aspx
+      /_wpresources/RadEditorSharePoint/6.9.0.0__1f131a624888eeed/Resources/Telerik.Web.UI.DialogHandler.aspx
+      /app_master/telerik.web.ui.dialoghandler.aspx
+      /en/providers/htmleditorproviders/telerik/telerik.web.ui.dialoghandler.aspx
+      /desktopmodules/telerikwebui/radeditorprovider/telerik.web.ui.dialoghandler.aspx
+      /desktopmodules/dnnwerk.radeditorprovider/dialoghandler.aspx
+      /dashboard/UserControl/CMS/Page/Telerik.Web.UI.DialogHandler.aspx
+      /DesktopModules/Admin/RadEditorProvider/DialogHandler.aspx
+      /app_master/telerik.web.ui.dialoghandler.aspx
+      /Providers/HtmlEditorProviders/Telerik/Telerik.Web.UI.DialogHandler.aspx
+      /common/admin/Jobs2/Telerik.Web.UI.DialogHandler.aspx
+      /dashboard/UserControl/CMS/Page/Telerik.Web.UI.DialogHandler.aspx
+      /DesktopModules/News/Telerik.Web.UI.DialogHandler.aspx
+      /desktopmodules/telerikwebui/radeditorprovider/telerik.web.ui.dialoghandler.aspx
+      /DesktopModules/dnnWerk.RadEditorProvider/DialogHandler.aspx
+      /DesktopModules/TNComments/Telerik.Web.UI.DialogHandler.aspx
+      /DesktopModules/YA.Controls/AngularMain/Telerik.Web.UI.DialogHandler.aspx
+      /DesktopModules/Base/EditControls/Telerik.Web.UI.DialogHandler.aspx
+
+
+requests: 
+  - method: GET
+    url: >-
+      {{.root}}{{.endpoint}}
+    headers:
+      - User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3984.0 Safari/537.36
+    detections:
+      - >-
+        StatusCode() == 200 && RegexSearch("StringSearch", "Loading the dialog...") 
+      - >-
+        StatusCode() == 200 && RegexSearch("StringSearch", "RadAsyncUpload handler is registered succesfully, however, it may not be accessed directly") 

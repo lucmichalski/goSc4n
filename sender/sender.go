@@ -92,7 +92,11 @@ func JustSend(options libs.Options, req libs.Request) (res libs.Response, err er
 	}
 
 	for key,headerValue := range headers{
-		request.Header.Add(key,headerValue)
+		if key == "User-Agent" {
+			request.Header.SetUserAgent(headerValue)
+		}else{
+			request.Header.Add(key,headerValue)
+		}
 	}
 	request.Header.Set("Connection","close")
 
