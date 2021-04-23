@@ -1,6 +1,6 @@
 
 <p align="center">
-  Ảnh logo
+  <img alt="gosc4n" src="https://raw.githubusercontent.com/goSc4n/goSc4n/main/Logo_goSc4n.png" height="140"/>
   <p align="center">
   </p>
 </p>
@@ -8,8 +8,19 @@
 **gosc4n** is a powerful, flexible and easily extensible framework written in Go for building your own Web Application
 Scanner.
 
-<p align="center">Ảnh Mô hình</p>
+<p align="center">
+<img alt="gosc4n" src="https://raw.githubusercontent.com/goSc4n/goSc4n/main/Roadmap.png" height="500" />
+</p>
 
+## Painless integrate gosc4n into your recon workflow?
+
+<p align="center">
+  <img alt="paramSpider" src="https://raw.githubusercontent.com/devanshbatham/ParamSpider/master/static/banner.PNG" height="200" />
+  <p align="center">And</p>
+   <p align="center">
+    <img alt="huntersuite" src="https://user-images.githubusercontent.com/23289085/101143253-35ea6b80-3649-11eb-9130-d1fc306c9a76.png" height="200" />
+  </p> 
+</p>
 
 ## Installation
 
