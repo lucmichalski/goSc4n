@@ -38,8 +38,6 @@ If you have a Go environment, make sure you have **Go >= 1.13** with Go Modules 
 ![Architecture](https://raw.githubusercontent.com/goSc4n/goSc4n/main/scanexample.PNG)
 
 
-# Examples:
-Ảnh example
  
 # Fuzz Usage:
 ![Architecture](https://raw.githubusercontent.com/goSc4n/goSc4n/main/fuzzusage.png)
