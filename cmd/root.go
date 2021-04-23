@@ -76,7 +76,7 @@ func init() {
 	RootCmd.PersistentFlags().BoolVar(&options.NoBackGround, "no-background", true, "Do not run background task")
 	options.Refresh = 10
 	options.NoDB = false
-	RootCmd.PersistentFlags().BoolVar(&options.DisableParallel, "single", false, "Disable parallel mode (use this when you need logic in single signature")
+	RootCmd.PersistentFlags().BoolVar(&options.DisableParallel, "single", true, "Disable parallel mode (use this when you need logic in single signature")
 	options.QuietFormat = "{{.VulnURL}}"
 	RootCmd.PersistentFlags().BoolVarP(&options.Quiet, "quiet", "q", false, "Quiet Output")
 	RootCmd.PersistentFlags().BoolVarP(&options.Verbose, "verbose", "v", false, "Verbose output")

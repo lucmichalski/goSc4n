@@ -196,8 +196,8 @@ func RootMessage() {
 	h += "  goSc4n scan -c 50 -s <signature> -U <list_urls>\n"
 	h += "  goSc4n scan -v -c 50 -s <signature> -U list_target.txt -o /tmp/output\n"
 	h += "  goSc4n scan -s <signature> -s <another-selector> -u http://example.com\n"
-	h += "  goSc4n server -s <signature> -c -v"
-	h += "  goSc4n report -o <output directory> --report <Name File>"
+	h += "  goSc4n server -s <signature> -c -v\n"
+	h += "  goSc4n report -o <output directory> --report <Name File>n\n"
 	h += "  goSc4n fuzz --site <target> --concurrent <number of threads> --depth 10\n"
 	h += "  goSc4n spider --domain <target>\n"
 	fmt.Println(h)

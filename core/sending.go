@@ -14,7 +14,8 @@ func (r *Runner) Sending() {
 		r.SendingSerial()
 		break
 	case "parallels":
-		r.SendingParallels()
+		r.SendingSerial()
+		//r.SendingParallels()
 		break
 	default:
 		r.SendingParallels()
@@ -49,7 +50,10 @@ func (r *Runner) SendingParallels() {
 	// Submit tasks one by one.
 	for _, record := range r.Records {
 		wg.Add(1)
-		_ = p.Invoke(record)
+		err := p.Invoke(record)
+		if err != nil {
+
+		}
 	}
 	wg.Wait()
 }

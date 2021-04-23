@@ -59,6 +59,7 @@ func JustSend(options libs.Options, req libs.Request) (res libs.Response, err er
 	}
 
 	request := fasthttp.AcquireRequest()
+	defer fasthttp.ReleaseRequest(request)
 	//client := resty.New()
 	//client.SetLogger(logger)
 	tlsCfg := &tls.Config{
@@ -103,6 +104,7 @@ func JustSend(options libs.Options, req libs.Request) (res libs.Response, err er
 
 	var requestTime time.Duration
 	response := fasthttp.AcquireResponse()
+	defer fasthttp.ReleaseResponse(response)
 	method = strings.ToLower(strings.TrimSpace(method))
 	switch method {
 	case "get":
@@ -182,7 +184,8 @@ func JustSend(options libs.Options, req libs.Request) (res libs.Response, err er
 		}
 		return libs.Response{}, err
 	}
-
+	response.ConnectionClose()
+	request.ConnectionClose()
 	return ParseResponse(response,requestTime), nil
 }
 

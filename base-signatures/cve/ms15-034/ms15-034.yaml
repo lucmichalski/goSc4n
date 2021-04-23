@@ -1,0 +1,17 @@
+id: MS15-034
+info:
+  name: MS15-034
+  risk: High
+
+params:
+  - root: '{{.URL}}'
+
+requests: 
+  - method: GET
+    url: >-
+      {{.root}}
+    headers:
+      - Range: bytes=0-18446744073709551615
+    detections:
+      - >-
+        StatusCode() == 416 && StringSearch("Requested Range Not Satisfiable")
