@@ -1,4 +1,4 @@
-We are gosc4n team, students of FPT University <br/> <br/>
+We are **gosc4n** team, students of FPT University <br/> <br/>
 <p align="center">
   <img alt="gosc4n" src="https://raw.githubusercontent.com/goSc4n/goSc4n/main/Logo_goSc4n.png" height="140"/>
   <p align="center">
@@ -18,7 +18,7 @@ Scanner.
   <img alt="paramSpider" src="https://raw.githubusercontent.com/devanshbatham/ParamSpider/master/static/banner.PNG" height="200" />
   <p align="center">And</p>
    <p align="center">
-    <img alt="huntersuite" src="https://user-images.githubusercontent.com/23289085/101143253-35ea6b80-3649-11eb-9130-d1fc306c9a76.png" height="200" />
+    <img alt="spider" src="https://scontent.fhan4-1.fna.fbcdn.net/v/t1.15752-9/175196435_290930165907949_2318285834563835922_n.png?_nc_cat=105&ccb=1-3&_nc_sid=ae9488&_nc_ohc=r1GVSK8ExJAAX_pu78L&_nc_ht=scontent.fhan4-1.fna&oh=ec093fec8acb5b4e7a533aed68e45ded&oe=60A764BD" width="200" />
   </p> 
 </p>
 
@@ -43,12 +43,27 @@ If you have a Go environment, make sure you have **Go >= 1.13** with Go Modules 
 ![Architecture](https://raw.githubusercontent.com/goSc4n/goSc4n/main/fuzzusage.png)
 
 
-
+```shell
+# Fuzz Usage example:
+  
+  fuzz --quite --site "https://google.com/"
+  fuzz --site "https://google.com/" --output ouput --concurrent 10 --depth 10
+  fuzz --sites sites.txt --outpud output --concurrent 10 --depth 1
+  fuzz --sites sites.txt --outpud output --concurrent 10 --depth 1 --threads 20
+```
  
 # Spider Usage:
 ![Architecture](https://raw.githubusercontent.com/goSc4n/goSc4n/main/spiderusage.png)
 
 
+```shell
+# Spider Usage example:
+  
+  spider --domain hackerone.com
+  spider --domain hackerone.com --level high
+  spider --domain hackerone.com --exclude php,jpg --output hackerone.txt
+  spider --domain hackerone.com --quiet
+```
 
 
 
@@ -75,9 +90,7 @@ If you have some new idea about this project, issue, feedback or found some valu
 just DM me via @gosc4n. Feel free to submit new signature to
 this [repo](https://github.com/goSc4n/goSc4n/tree/main/base-signatures).
 
-### Credits
 
-* Special thanks to aupervisor ThuanPM for supporting to us for build the architecture.
 
 
 
