@@ -18,7 +18,7 @@ Scanner.
   <img alt="paramSpider" src="https://raw.githubusercontent.com/devanshbatham/ParamSpider/master/static/banner.PNG" height="200" />
   <p align="center">And</p>
    <p align="center">
-    <img alt="spider" src="https://scontent.fhan4-1.fna.fbcdn.net/v/t1.15752-9/175196435_290930165907949_2318285834563835922_n.png?_nc_cat=105&ccb=1-3&_nc_sid=ae9488&_nc_ohc=r1GVSK8ExJAAX_pu78L&_nc_ht=scontent.fhan4-1.fna&oh=ec093fec8acb5b4e7a533aed68e45ded&oe=60A764BD" width="200" />
+    <img alt="spider" src="https://raw.githubusercontent.com/goSc4n/goSc4n/main/parmspider.PNG" />
   </p> 
 </p>
 
