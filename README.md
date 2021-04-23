@@ -1,6 +1,6 @@
-
+We are **gosc4n** team, students of FPT University <br/> <br/>
 <p align="center">
-  Ảnh logo
+  <img alt="gosc4n" src="https://raw.githubusercontent.com/goSc4n/goSc4n/main/Logo_goSc4n.png" height="140"/>
   <p align="center">
   </p>
 </p>
@@ -8,8 +8,19 @@
 **gosc4n** is a powerful, flexible and easily extensible framework written in Go for building your own Web Application
 Scanner.
 
-<p align="center">Ảnh Mô hình</p>
+<p align="center">
+<img alt="gosc4n" src="https://raw.githubusercontent.com/goSc4n/goSc4n/main/Roadmap.png" height="500" />
+</p>
 
+## Painless integrate gosc4n into your recon workflow?
+
+<p align="center">
+  <img alt="paramSpider" src="https://raw.githubusercontent.com/devanshbatham/ParamSpider/master/static/banner.PNG" height="200" />
+  <p align="center"><br /></p>
+   <p align="center">
+    <img alt="spider" src="https://raw.githubusercontent.com/goSc4n/goSc4n/main/parmspider.PNG" />
+  </p> 
+</p>
 
 ## Installation
 
@@ -19,48 +30,49 @@ If you have a Go environment, make sure you have **Go >= 1.13** with Go Modules 
 
 
 ## Usage
+![Architecture](https://raw.githubusercontent.com/goSc4n/goSc4n/main/scanusage1.png)
 
+![Architecture](https://raw.githubusercontent.com/goSc4n/goSc4n/main/scanusage2.PNG)
 
 # Scan Usage example:
-Ảnh Scan usage
+![Architecture](https://raw.githubusercontent.com/goSc4n/goSc4n/main/scanexample.PNG)
 
 
-# Examples:
-Ảnh example
  
+# Fuzz Usage:
+![Architecture](https://raw.githubusercontent.com/goSc4n/goSc4n/main/fuzzusage.png)
+
+
+```shell
 # Fuzz Usage example:
-Ảnh fuzz usage
-
-
-# Examples:
-Ảnh example
+  
+  fuzz --quite --site "https://google.com/"
+  fuzz --site "https://google.com/" --output ouput --concurrent 10 --depth 10
+  fuzz --sites sites.txt --outpud output --concurrent 10 --depth 1
+  fuzz --sites sites.txt --outpud output --concurrent 10 --depth 1 --threads 20
+```
  
+# Spider Usage:
+![Architecture](https://raw.githubusercontent.com/goSc4n/goSc4n/main/spiderusage.png)
+
+
+```shell
 # Spider Usage example:
-Ảnh spider usage
+  
+  spider --domain hackerone.com
+  spider --domain hackerone.com --level high
+  spider --domain hackerone.com --exclude php,jpg --output hackerone.txt
+  spider --domain hackerone.com --quiet
+```
 
-# Examples:
-Ảnh example
 
 
 
-## Showcases
 
-|  [![asciicast](https://asciinema.org/a/392827.svg)](https://asciinema.org/a/392827) [**Jenkins Gitlab XSS
-CVE-2020-2096**](https://asciinema.org/a/392827)
-|  [![asciicast](https://asciinema.org/a/392822.svg)](https://asciinema.org/a/392822) [**
-Grafana DoS Probing CVE-2020-13379**](https://asciinema.org/a/392822) | |:----------:|:-------------:|
-| [![asciicast](https://asciinema.org/a/392824.svg)](https://asciinema.org/a/392824) [**SolarWindsOrion LFI
-CVE-2020-10148**](https://asciinema.org/a/392824)
-| [![asciicast](https://asciinema.org/a/392821.svg)](https://asciinema.org/a/392821) [**
-Nginx Vhost XSS**](https://asciinema.org/a/392821) |
-
-<h4 align='center'> More showcase can be found <a href="https://jaeles-project.github.io/showcases/">here</a></h4>
-
-***
 
 ### HTML Report summary
 
-Ảnh HTML Report summary
+![Architecture](https://raw.githubusercontent.com/goSc4n/goSc4n/main/summary.png)
 
 
 
@@ -78,9 +90,7 @@ If you have some new idea about this project, issue, feedback or found some valu
 just DM me via @gosc4n. Feel free to submit new signature to
 this [repo](https://github.com/goSc4n/goSc4n/tree/main/base-signatures).
 
-### Credits
 
-* Special thanks to aupervisor ThuanPM for supporting to us for build the architecture.
 
 
 
