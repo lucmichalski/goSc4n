@@ -1,4 +1,4 @@
-
+We are gosc4n team, students of FPT University <br/> <br/>
 <p align="center">
   <img alt="gosc4n" src="https://raw.githubusercontent.com/goSc4n/goSc4n/main/Logo_goSc4n.png" height="140"/>
   <p align="center">
