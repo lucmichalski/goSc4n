@@ -31,7 +31,7 @@ If you have a Go environment, make sure you have **Go >= 1.13** with Go Modules 
 Ảnh example
  
 # Fuzz Usage:
-![Architecture](https://raw.githubusercontent.com/goSc4n/goSc4n/main/scanusage1.png)
+![Architecture](https://raw.githubusercontent.com/goSc4n/goSc4n/main/fuzzusage.png)
 
 
 
@@ -61,7 +61,7 @@ Nginx Vhost XSS**](https://asciinema.org/a/392821) |
 
 ### HTML Report summary
 
-Ảnh HTML Report summary
+![Architecture](https://raw.githubusercontent.com/goSc4n/goSc4n/main/summary.png)
 
 
 
