@@ -16,7 +16,7 @@ Scanner.
 
 <p align="center">
   <img alt="paramSpider" src="https://raw.githubusercontent.com/devanshbatham/ParamSpider/master/static/banner.PNG" height="200" />
-  <p align="center">And</p>
+  <p align="center"><br /></p>
    <p align="center">
     <img alt="spider" src="https://raw.githubusercontent.com/goSc4n/goSc4n/main/parmspider.PNG" />
   </p> 
