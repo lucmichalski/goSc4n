@@ -1,6 +1,6 @@
 We are **gosc4n** team, students of FPT University <br/> <br/>
 <p align="center">
-  <img alt="gosc4n" src="https://raw.githubusercontent.com/goSc4n/goSc4n/main/Logo_goSc4n.png" height="140"/>
+  <img alt="gosc4n" src="https://raw.githubusercontent.com/goSc4n/goSc4n/main/picture/Logo_goSc4n.png" height="140"/>
   <p align="center">
   </p>
 </p>
@@ -9,7 +9,7 @@ We are **gosc4n** team, students of FPT University <br/> <br/>
 Scanner.
 
 <p align="center">
-<img alt="gosc4n" src="https://raw.githubusercontent.com/goSc4n/goSc4n/main/Roadmap.png" height="500" />
+<img alt="gosc4n" src="https://raw.githubusercontent.com/goSc4n/goSc4n/main/picture/Roadmap.png" height="500" />
 </p>
 
 ## Painless integrate gosc4n into your recon workflow?
@@ -18,7 +18,7 @@ Scanner.
   <img alt="paramSpider" src="https://raw.githubusercontent.com/devanshbatham/ParamSpider/master/static/banner.PNG" height="200" />
   <p align="center"><br /></p>
    <p align="center">
-    <img alt="spider" src="https://raw.githubusercontent.com/goSc4n/goSc4n/main/parmspider.PNG" />
+    <img alt="spider" src="https://raw.githubusercontent.com/goSc4n/goSc4n/main/picture/paramspider.PNG" />
   </p> 
 </p>
 
@@ -30,17 +30,17 @@ If you have a Go environment, make sure you have **Go >= 1.13** with Go Modules 
 
 
 ## Usage
-![Architecture](https://raw.githubusercontent.com/goSc4n/goSc4n/main/scanusage1.png)
+![Architecture](https://raw.githubusercontent.com/goSc4n/goSc4n/main/picture/scanusage1.png)
 
-![Architecture](https://raw.githubusercontent.com/goSc4n/goSc4n/main/scanusage2.PNG)
+![Architecture](https://raw.githubusercontent.com/goSc4n/goSc4n/main/picture/scanusage2.PNG)
 
 # Scan Usage example:
-![Architecture](https://raw.githubusercontent.com/goSc4n/goSc4n/main/scanexample.PNG)
+![Architecture](https://raw.githubusercontent.com/goSc4n/goSc4n/main/picture/scanexample.PNG)
 
 
  
 # Fuzz Usage:
-![Architecture](https://raw.githubusercontent.com/goSc4n/goSc4n/main/fuzzusage.png)
+![Architecture](https://raw.githubusercontent.com/goSc4n/goSc4n/main/picture/fuzzusage.png)
 
 
 ```shell
@@ -53,7 +53,7 @@ If you have a Go environment, make sure you have **Go >= 1.13** with Go Modules 
 ```
  
 # Spider Usage:
-![Architecture](https://raw.githubusercontent.com/goSc4n/goSc4n/main/spiderusage.png)
+![Architecture](https://raw.githubusercontent.com/goSc4n/goSc4n/main/picture/spiderusage.png)
 
 
 ```shell
@@ -72,7 +72,7 @@ If you have a Go environment, make sure you have **Go >= 1.13** with Go Modules 
 
 ### HTML Report summary
 
-![Architecture](https://raw.githubusercontent.com/goSc4n/goSc4n/main/summary.png)
+![Architecture](https://raw.githubusercontent.com/goSc4n/goSc4n/main/picture/summary.png)
 
 
 
