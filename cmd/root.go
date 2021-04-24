@@ -58,7 +58,7 @@ func init() {
 	RootCmd.PersistentFlags().StringVarP(&options.Report.ReportName, "report", "R", "", "Report name")
 	RootCmd.PersistentFlags().StringVar(&options.Report.Title, "title", "", "Report title name")
 	// core options
-	options.Level = 1
+	options.Level =3
 	RootCmd.PersistentFlags().IntVarP(&options.Concurrency, "concurrency", "c", 20, "Set the concurrency level")
 	RootCmd.PersistentFlags().IntVarP(&options.Threads, "threads", "t", 10, "Set the concurrency level inside single signature")
 	RootCmd.PersistentFlags().StringVarP(&options.Selectors, "selectorFile", "S", "", "Signature selector from file")
@@ -94,7 +94,7 @@ func init() {
 	options.Mics.BaseRoot = false
 	options.Mics.BurpProxy = false
 	options.Mics.AlwaysTrue = false
-	RootCmd.PersistentFlags().BoolVar(&options.Mics.FullHelp, "hh", false, "Show full help message")
+	RootCmd.PersistentFlags().BoolVar(&options.Mics.FullHelp, "guide", false, "Show full help message")
 	RootCmd.SetHelpFunc(rootHelp)
 }
 

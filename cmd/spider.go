@@ -47,13 +47,13 @@ func genParamCmd(cmd *cobra.Command){
 	}
 
 	if SpiderOp.Placeholder,_ = cmd.Flags().GetString("placeholder"); SpiderOp.Placeholder != ""{
-		cmdInput = cmdInput + " -o " + SpiderOp.Placeholder + " "
+		cmdInput = cmdInput + " -p " + SpiderOp.Placeholder + " "
 	}
 
 }
 
 func runParamSpider(cmd *cobra.Command, _ []string)  error{
-	helps, _ := cmd.Flags().GetBool("hh")
+	helps, _ := cmd.Flags().GetBool("guide")
 	if helps == true {
 		SpiderHelp()
 		os.Exit(1)

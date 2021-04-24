@@ -114,7 +114,7 @@ func JustSend(options libs.Options, req libs.Request) (res libs.Response, err er
 		startTime := time.Now()
 		err = client.Do(request,response)
 		endTime := time.Now()
-		requestTime = startTime.Sub(endTime)
+		requestTime = endTime.Sub(startTime)
 		break
 	case "post":
 		request.SetBody([]byte(body))
@@ -123,7 +123,7 @@ func JustSend(options libs.Options, req libs.Request) (res libs.Response, err er
 		startTime := time.Now()
 		err = client.Do(request,response)
 		endTime := time.Now()
-		requestTime = startTime.Sub(endTime)
+		requestTime = endTime.Sub(startTime)
 		break
 	case "head":
 		request.SetBody([]byte(body))
@@ -132,7 +132,7 @@ func JustSend(options libs.Options, req libs.Request) (res libs.Response, err er
 		startTime := time.Now()
 		err = client.Do(request,response)
 		endTime := time.Now()
-		requestTime = startTime.Sub(endTime)
+		requestTime = endTime.Sub(startTime)
 		break
 	case "options":
 		request.SetBody([]byte(body))
@@ -141,7 +141,7 @@ func JustSend(options libs.Options, req libs.Request) (res libs.Response, err er
 		startTime := time.Now()
 		err = client.Do(request,response)
 		endTime := time.Now()
-		requestTime = startTime.Sub(endTime)
+		requestTime = endTime.Sub(startTime)
 		break
 	case "patch":
 		request.SetBody([]byte(body))
@@ -150,7 +150,7 @@ func JustSend(options libs.Options, req libs.Request) (res libs.Response, err er
 		startTime := time.Now()
 		err = client.Do(request,response)
 		endTime := time.Now()
-		requestTime = startTime.Sub(endTime)
+		requestTime = endTime.Sub(startTime)
 		break
 	case "put":
 		request.SetBody([]byte(body))
@@ -159,7 +159,7 @@ func JustSend(options libs.Options, req libs.Request) (res libs.Response, err er
 		startTime := time.Now()
 		err = client.Do(request,response)
 		endTime := time.Now()
-		requestTime = startTime.Sub(endTime)
+		requestTime = endTime.Sub(startTime)
 		break
 	case "delete":
 		request.SetBody([]byte(body))
@@ -168,7 +168,7 @@ func JustSend(options libs.Options, req libs.Request) (res libs.Response, err er
 		startTime := time.Now()
 		err = client.Do(request,response)
 		endTime := time.Now()
-		requestTime = startTime.Sub(endTime)
+		requestTime = endTime.Sub(startTime)
 		break
 	}
 

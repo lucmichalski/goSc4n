@@ -32,7 +32,7 @@ func init() {
 func runConfig(cmd *cobra.Command, args []string) error {
 	sort.Strings(args)
 	// print more help
-	helps, _ := cmd.Flags().GetBool("hh")
+	helps, _ := cmd.Flags().GetBool("guide")
 	if helps == true {
 		HelpMessage()
 		os.Exit(1)
@@ -170,7 +170,7 @@ func configHelp(_ *cobra.Command, _ []string) {
 
 func rootHelp(cmd *cobra.Command, _ []string) {
 	fmt.Println(libs.Banner())
-	helps, _ := cmd.Flags().GetBool("hh")
+	helps, _ := cmd.Flags().GetBool("guide")
 	if helps {
 		fmt.Println(cmd.UsageString())
 		return
@@ -197,7 +197,7 @@ func RootMessage() {
 	h += "  goSc4n scan -v -c 50 -s <signature> -U list_target.txt -o /tmp/output\n"
 	h += "  goSc4n scan -s <signature> -s <another-selector> -u http://example.com\n"
 	h += "  goSc4n server -s <signature> -c -v\n"
-	h += "  goSc4n report -o <output directory> --report <Name File>n\n"
+	h += "  goSc4n report -o <output directory> --report <Name File>\n"
 	h += "  goSc4n fuzz --site <target> --concurrent <number of threads> --depth 10\n"
 	h += "  goSc4n spider --domain <target>\n"
 	fmt.Println(h)
@@ -250,7 +250,7 @@ func SpiderHelp()  {
 
 func SpiderMessage()  {
 	h := "\noptional arguments:\n"
-	h += "  --help            show this help message and exit\n"
+	h += "  --guide            show this help message and exit\n"
 	h += "  --domain DOMAIN\n"
 	h += "                        Domain name of the taget [ex : hackerone.com]\n"
 	h += "  --subs SUBS  Set False for no subs [ex : --subs False ]\n"
@@ -266,7 +266,7 @@ func SpiderMessage()  {
 	h += "  --quiet           Do not print the results to the screen\n"
 	h += "  --retries RETRIES\n"
 	h += "                        Specify number of retries for 4xx and 5xx errors\n"
-	h += "\n\nspider --domain http://testphp.vulnweb.com/\n"
+	h += "\n\nspider --domain http://testphp.vulnweb.com/ --placeholder=1\n"
 	fmt.Println(h)
 }
 

