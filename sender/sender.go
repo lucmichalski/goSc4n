@@ -93,6 +93,15 @@ func JustSend(options libs.Options, req libs.Request) (res libs.Response, err er
 	}
 
 	for key,headerValue := range headers{
+		if key == "Referer" {
+			request.Header.SetReferer(headerValue)
+		} else
+		if key == "Host" {
+			request.Header.SetHost(headerValue)
+		} else
+		if key == "Content-Type" {
+			request.Header.SetContentType(headerValue)
+		}else
 		if key == "User-Agent" {
 			request.Header.SetUserAgent(headerValue)
 		}else{
