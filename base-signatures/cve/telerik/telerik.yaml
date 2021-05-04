@@ -59,6 +59,6 @@ requests:
       - User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3984.0 Safari/537.36
     detections:
       - >-
-        StatusCode() == 200 && RegexSearch("StringSearch", "Loading the dialog...") 
+        StatusCode() == 200 && RegexSearch("response", "Loading the dialog...") 
       - >-
-        StatusCode() == 200 && RegexSearch("StringSearch", "RadAsyncUpload handler is registered succesfully, however, it may not be accessed directly") 
+        StatusCode() == 200 && RegexSearch("response", "RadAsyncUpload handler is registered succesfully, however, it may not be accessed directly") 

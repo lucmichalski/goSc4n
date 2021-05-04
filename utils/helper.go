@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
+	"log"
 	"os"
 	"path"
 	"path/filepath"
@@ -108,6 +109,8 @@ func ReadingLines(filename string) []string {
 	return result
 }
 
+
+
 // ReadingFileUnique Reading file and return content as []string
 func ReadingFileUnique(filename string) []string {
 	var result []string
@@ -122,6 +125,21 @@ func ReadingFileUnique(filename string) []string {
 
 	unique := true
 	seen := make(map[string]bool)
+
+	err = filepath.Walk(filename,
+		func(path string, info os.FileInfo, err error) error {
+			if err != nil {
+				return err
+			}
+			if strings.Contains(path,".yaml"){
+				result = append(result, path)
+			}
+			return nil
+		})
+	if err != nil {
+		log.Println(err)
+	}
+
 
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
